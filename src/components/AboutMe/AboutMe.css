@@ -1,0 +1,21 @@
+.about-me-container {
+    background-color: #E2E2E2;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .about-me-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .about-me-description {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .about-me-description:last-child {
+    margin-top: 1rem;
+  }
+  
