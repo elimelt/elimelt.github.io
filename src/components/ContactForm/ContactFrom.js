@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
-function ContactForm() {
+import './ContactForm.css'
+function ContactForm({ subject }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
