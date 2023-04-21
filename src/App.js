@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Projects from "./pages/Projects/Projects";
 import Info from "./pages/Info/Info";
 import Academics from "./pages/Academics/Academics";
+import ContactMe from "./pages/ContactMe/ContactMe"
 import NotFound from "./pages/NotFound/NotFound";
 import './App.css'
 
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/projects" element={<Projects />} />
           <Route path="/info" element={<Info />} />
           <Route path="/academics" element={<Academics />} />
+          <Route path="/contact" element={<ContactMe/>} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
