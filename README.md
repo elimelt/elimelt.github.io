@@ -1,4 +1,4 @@
-## Elijah's Personal Website
+# Elijah's Personal Website
 
 Welcome to my personal website's GitHub repository! This website serves as a portfolio and blog to showcase my projects, skills, and interests.
 
