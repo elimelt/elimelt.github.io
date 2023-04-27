@@ -4,8 +4,7 @@ import Title from '../components/Title/Title.js';
 
 const Projects = () => {
   return (
-    <div>
-      <Title title="Projects" />
+    <div className="page-container">
       <ProjectShowcase />
     </div>
   );

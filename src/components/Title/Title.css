@@ -1,13 +1,54 @@
 .title-container {
-    background-color: #5B5B5B;
-    color: white;
-    padding: 20px;
-    text-align: center;
-  }
-  
+  background-color: #5B5B5B;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.title .title-element, .title-link {
+  margin-left: 2rem;
+  margin-right: 4rem;
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.title .title-link {
+  color: #a4d1f1;
+}
+
+.title .title-link:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 1100px) {
   .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: 0;
+    font-size: 2rem;
   }
-  
+
+  .title .title-element {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
+}
+
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
