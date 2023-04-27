@@ -1,5 +1,6 @@
 .project-container {
   background-color: #fff;
+  width:80%;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -44,3 +45,14 @@
 .project-link i {
   margin-right: 5px;
 }
+
+.project-demo .project-gif {
+  height: 20rem;
+  width: 60%;
+  background-color: #ffffff;
+  object-fit: fill;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+

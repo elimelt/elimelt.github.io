@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import Info from "./pages/Info";
-import Academics from "./pages/Academics";
-import NotFound from "./pages/NotFound";
+import Home from "./pages/Home/Home";
+import Projects from "./pages/Projects/Projects";
+import Info from "./pages/Info/Info";
+import Academics from "./pages/Academics/Academics";
+import NotFound from "./pages/NotFound/NotFound";
+import './App.css'
 
 const App = () => {
   return (

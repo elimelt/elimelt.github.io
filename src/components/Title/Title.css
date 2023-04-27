@@ -36,12 +36,12 @@
   color: #ffffff;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 700px) {
   .title {
     font-size: 2rem;
   }
 
-  .title .title-element {
+  .title .title-element, .title-link {
     margin-left: 1rem;
     margin-right: 1rem;
     font-size: 1rem;
