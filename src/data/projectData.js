@@ -41,8 +41,25 @@ const projects = [
         name: 'Crypto List', 
         techStack: 'Vue, Express', 
         description: 
-        `This project was a weekend dive into Vue.js, as I wanted
-        `, 
+        (<>
+            <p>
+            This was a weekend long project that I undertook to familliarize myself
+            with another popular frontend framework, Vue.js. I found this alternative 
+            approach to front end development a challenging but rewarding experience to
+            have under my belt, and after having completed this project, I feel confident 
+            in my ability to pick up new technologies/frameworks when needed.
+            </p>
+            <p>
+            This project makes use of the CoinCap API to pull real time price data on various 
+            crypto currencies. I implemented a basic search and filter, as well as a switch to
+            toggle the theme between dark and light mode.
+            </p>
+            <p>
+            I don't care about crypto currencies at all, but this project seemed like a 
+            great way to learn Vue.js without having to register for an API token. I highly
+            reccomend CoinCap's API if you are ever looking for an API to experiment with!
+            </p>
+        </>), 
         githubURL: 'https://github.com/elimelt/CryptoList',
         demoURL:'https://elimelt.github.io/CryptoList/',
         demoGIF: require('./demo-gifs/crypto-list-demo.gif')
