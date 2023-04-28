@@ -43,17 +43,19 @@ const projects = [
         description: 
         (<>
             <p>
-            This was a weekend long project that I undertook to familliarize myself
+            CryptoList was a weekend long project that I undertook to familliarize myself
             with another popular frontend framework, Vue.js. I found this alternative 
             approach to front end development a challenging but rewarding experience to
             have under my belt, and after having completed this project, I feel confident 
             in my ability to pick up new technologies/frameworks when needed.
             </p>
+
             <p>
             This project makes use of the CoinCap API to pull real time price data on various 
             crypto currencies. I implemented a basic search and filter, as well as a switch to
             toggle the theme between dark and light mode.
             </p>
+
             <p>
             I don't care about crypto currencies at all, but this project seemed like a 
             great way to learn Vue.js without having to register for an API token. I highly
@@ -68,7 +70,28 @@ const projects = [
         id: 2,
         name: 'RecipeSearch', 
         techStack: 'Express, React', 
-        description: 'A website that lets users search for recipes by an ingredient', 
+        description: (<>
+            <p>
+            Recipe search was my first introduction to React.js, and I learned a LOT finishing 
+            this project. One of my main goals in completing this project was to focus on 
+            making the design and layout responsive to mobile layouts, and I achieved this through
+            a mixture of Bootstrap CSS classes, flexbox, and CSS media queries.           
+            </p>
+
+            <p>
+            I wanted to make something that seemed useful, so I decided on a website that allows
+            you to search for a particular ingredient, which then displays recipes that you can 
+            use it in. I was able to achieve this through TheFreeMealDB's API, although the 
+            limitations of their free version, as well as the format returned by the API was definitely
+            a challenge to overcome at the time.
+            </p>
+            
+            <p>
+            Not only did I gain a basic understanding of React and Express through this project, 
+            but I was able to deploy my website to the internet! After struggling with CSS for hours, 
+            I was VERY pleasently surprised with how easy Heroku made deploying this website.  
+            </p>
+        </>), 
         githubURL: 'https://github.com/elimelt/RecipeSearchProduction',
         demoURL:'https://elimelt.github.io/RecipeSearchProduction/',
         demoGIF: require('./demo-gifs/recipe-search-demo.gif')
