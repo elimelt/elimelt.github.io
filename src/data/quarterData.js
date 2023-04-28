@@ -5,7 +5,14 @@ const quarters = [
     content: [
       {
         title: 'Classes',
-        body: <></>
+        body: (
+        <>
+          <p>
+            Winter 2023 I petitioned into a CS majors-only discrete math/logic class, and took a database 
+            management systems class (MS SQL Server and Azure Cloud). I also just applied to my new major!
+          </p>
+        </>
+        )
       },
       {
         title: 'Projects',
