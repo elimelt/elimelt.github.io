@@ -1,6 +1,6 @@
 .project-container {
   background-color: #fff;
-  width:80%;
+  width: 60%;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -46,13 +46,66 @@
   margin-right: 5px;
 }
 
+.project-details {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+}
+
 .project-demo .project-gif {
-  height: 20rem;
-  width: 60%;
+  width: 100%;
   background-color: #ffffff;
   object-fit: fill;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin: 1rem 0;
+}
+
+.project-feedback {
+  display: inline;
+  width: 70%;
+  margin-left: 2rem;
+}
+
+.project-feedback label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.project-feedback input,
+.project-feedback textarea {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  display: block;
+  width: 100%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.project-feedback input:focus,
+.project-feedback textarea:focus {
+  outline: none;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.project-feedback textarea {
+  resize: none;
+  height: 100px;
+}
+
+.project-feedback button {
+  padding: 0.5rem 1rem;
+  border: none;
+  display: block;
+  border-radius: 0.25rem;
+  background-color: #0072C6;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.project-feedback button:hover {
+  background-color: #004D8C;
 }
 
