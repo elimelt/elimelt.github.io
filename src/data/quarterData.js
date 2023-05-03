@@ -33,25 +33,15 @@ const quarters = [
         body: (
         <>
           <p>
-            It was definitely a goal of mine to find an intnernship for this Summer, and I succeeded! I am very excited to announce
-            that I will be interning at <a href="StockCharts.com">StockCharts</a> this Summer as a backend Java developer!
+
           </p>
 
           <p>
-            Besides this, I want to really up my skills using Docker, and have started using it as a full-stack development enviornment 
-            for Syntext. There are quite a few configuration challenges that come along with Docker Compose, but after hooking 
-            everything up manually I understand very graularlly how all of our services communicate and interact. I've also gotten WAY 
-            better at debugging due to some erroneous errors I've had to solve. 
+
           </p>
 
           <p>
-            Another goal of mine is to practice test driven development as much as possible. As the complexity of the projects I'm working 
-            on continues to grow, I've found it more and more nessesary to test my code, and as a bonus, I save a lot of time by writing 
-            tests up front. Typically, when I start a large project, I like to make a sort of spec for all of the functions, classes, endpoints
-            etc. that I'm going to write, detailing all of the inputs, outputs, schemas and whathaveyou. I recently learned my first few testing 
-            frameworks (JUnit for Java, Jest for JavaScript), and with the verbosity of these frameworks, the tests practically write themselves,
-            or rather they are a spec in and of themselves. I'm hoping that this will boost my productivity, but am also just excited to become a 
-            more diciplined and methodical software engineer.
+            
           </p>
         </>
         )
