@@ -1,18 +1,15 @@
 const quarters = [
   {
-    quarterName: 'Winter Quarter 2023',
-    date: 'February 2023',
+    quarterName: 'Spring Quarter 2023',
+    date: 'June 2023',
     content: [
       {
+        // update before finals are upon us
         title: 'Classes',
         body: (
         <>
           <p>
-            Winter 2023 I petitioned into a CS majors-only discrete math/logic class, and took a database 
-            management systems class (MS SQL Server and Azure Cloud). I also just applied to my new major!
-            So far, my databases class has been super rewarding, and I feel very comfortable with SQL now.
-            I've already been able to apply much of what I've learned in SQL Server to my work with Syntext
-            using MySQL. I prefer MySQL by far though.
+
           </p>
         </>
         )
@@ -22,18 +19,11 @@ const quarters = [
         body: (
         <>
           <p>
-            I'm still spending most of my free time working on Syntext, but have also done a few side projects 
-            over the past couple weekends to learn about particular areas of frontend development. Most of the code  I write for 
-            Syntext is in the backend, since our team is comprised of mainly frontend developers, but I've still had
-            to oversee and architect much of our front end as well. Thus, I wanted practice both designing the codebase 
-            of a UI from a high level, as well as getting hands on experience implementing a few front ends by myself.  
+      
           </p>
 
           <p>
-            Although pretty generic, the projects that we are working on in my DBSM class have taught me some very useful
-            skills. I've gotten a lot of practice writing queries over very large datasets, and also got to work on a simple
-            Java CLI program that manages users stored in an Azure database using JDBC. Throughout this project I learned a bunch 
-            of interesting design patterns, including Builder and Model View Controller (granted the View was a simple CLI program).  
+              
           </p>
         </>
         )
