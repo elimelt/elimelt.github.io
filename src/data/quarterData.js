@@ -1,10 +1,10 @@
 const quarters = [
   {
+    // update before finals are upon us
     quarterName: 'Spring Quarter 2023',
     date: 'June 2023',
     content: [
       {
-        // update before finals are upon us
         title: 'Classes',
         body: (
         <>
