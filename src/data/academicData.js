@@ -9,7 +9,10 @@ const quarters = [
         body: (
         <>
           <p>
-
+            This quarter I took Data Structures and Parallelism (UW's fun twist on DSA),
+            The Hardware Software Interface, and a career seminar on succeeding in the tech 
+            industry. I've thoroughly enjoyed my data structures class so far, and will 
+            
           </p>
         </>
         )
