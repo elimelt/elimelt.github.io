@@ -11,8 +11,17 @@ const quarters = [
           <p>
             This quarter I took Data Structures and Parallelism (UW's fun twist on DSA),
             The Hardware Software Interface, and a career seminar on succeeding in the tech 
-            industry. I've thoroughly enjoyed my data structures class so far, and will 
-            
+            industry. So far I've done a few large projects where I implemented various 
+            data structures from the ground up (without using any classes in the java.util package). 
+            In the coming weeks we will be covering graph algorithms, as well as parallelism/multithreading.
+          </p>
+
+          <p>
+            Despite my wishes, I've also had to learn a fair bit of x86 Assembly, but luckily my growing 
+            understanding of computer hardware and architecure has been a guiding light at the end of this 
+            tunnel. This class (HSI) has really solidified my understanding of C. I can't imagine ever 
+            completing any large projects without at least using C++, but it's nice to learn more about the
+            perspective of programming from the hardware side of things. 
           </p>
         </>
         )
@@ -22,11 +31,30 @@ const quarters = [
         body: (
         <>
           <p>
-      
+            We finally finished our MVP for Syntext, and have deployed our site! Now we are working on the 
+            interesting parts of the backend which is super exciting. So far we've implemented user accounts
+            and authentication, and are currently working on a spec for our leaderboard API. 
           </p>
 
           <p>
-              
+            Implementing a leaderboard has posed to be a very interesting systems design question. Although I doubt 
+            we will ever have more than a few hundred people on the leaderboard, I still want to make the leaderboard
+            highly scalable and efficient. I've done a lot of research into different storage solutions for real-time 
+            updates, and am considering either maintaining a learboard in-memory with user-ids on the server, or using
+            a redis sorted set to automatically update based on new POST requests to the server. At the end of the day 
+            however, a big factor in this design desicion will be the price.
+          </p>
+
+          <p>
+            Besides my work with Syntext, I have also been coding for an RSO here at UW called Nexus. So far I've 
+            implemented a few features, such as email verification and an application summary page, and have also been
+            working on big-fixes between design feedback. Working in a group with a dedicated UX/design team is definitely
+            a new experience for me, but I am liking the fact that I don't have to come up with the style on my own, instead 
+            just trying to match whatever the Figma mock-ups look like.
+          </p>
+
+          <p>
+            
           </p>
         </>
         )
