@@ -46,15 +46,12 @@ const quarters = [
           </p>
 
           <p>
-            Besides my work with Syntext, I have also been coding for an RSO here at UW called Nexus. So far I've 
-            implemented a few features, such as email verification and an application summary page, and have also been
-            working on big-fixes between design feedback. Working in a group with a dedicated UX/design team is definitely
-            a new experience for me, but I am liking the fact that I don't have to come up with the style on my own, instead 
-            just trying to match whatever the Figma mock-ups look like.
-          </p>
-
-          <p>
-            
+            Besides my work with Syntext, I have also been coding for an RSO here at UW called <a href="https://nexusatuw.com/">Nexus</a>. 
+            I joined this group well after the MVP was finished, but I've found this has been good practice working on an already established
+            codebase (something that is nessesary in industry). So far I've implemented a few features, such as email verification and an 
+            application summary page, and have also been working on bug-fixes while waiting on more feedback/mockups from the design and UX teams. 
+            Working in a group with a dedicated UX/design team is definitely a new experience for me, but I am liking the fact that I don't have 
+            to come up with the style on my own, instead just trying to match whatever the Figma mock-ups look like.
           </p>
         </>
         )
