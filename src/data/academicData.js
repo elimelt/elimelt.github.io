@@ -61,15 +61,21 @@ const quarters = [
         body: (
         <>
           <p>
-
+            This quarter I wanted to improve my knowledge of software design patterns, and have been reading Effective Java 
+            by Joshua Bloch. So far I've learned about the following patterns: Singletons, Prototypes, Adapters, and Observers. 
+            Although I haven't had a chance to utilize all of these patters in my code, it is super interesting to read about how
+            frameworks like React and SpringBoot utilize them. The Observer pattern has been the most interesting to me so far.
           </p>
 
           <p>
-
-          </p>
-
-          <p>
-            
+            Additionally, I made it a goal of mine to start contributing to real open-source projects that I use. I recently made my first 
+            "real" contribution, in that I took on an issue in the node-mysql2 module's (which I've used extensively for Syntext) github repo,
+            forked, and opened a pull request with my new changes. Since the release of MySQL 8.0, there have been many new error codes 
+            introduced to MySQL server, but the mysql2 module still only implemented error codes from the latest release of 5.7. I was able to adapt 
+            the current error generator used in mysql2 to scrape the new source code for MySQL 8.0, and then submitted a pull request with the updated
+            error codes, as well as new integration tests that ensure the codes are thrown in the correct circumstance. Making my first contribution
+            was a little intimidating, as it involved by far the two largest codebases I've ever worked with. Still, the feeling of submitting my first 
+            pull request to a repo used by thousands of developers was exhillerating. 
           </p>
         </>
         )
