@@ -1,7 +1,148 @@
 
 
 
+.education-container {
+  background-color: #f6f6f6;
+  padding: 50px;
+  margin: 30px 0;
+}
 
+.section-heading {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.education-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.education-item {
+  flex-basis: 48%;
+}
+
+.institution-name {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.education-date,
+.degree,
+.gpa {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+
+
+
+.experience-container {
+  background-color: #f6f6f6;
+  padding: 50px;
+  margin: 30px 0;
+}
+
+.section-heading {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.experience-item {
+  margin-bottom: 30px;
+}
+
+.position {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.company {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.date {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+.responsibilities {
+  list-style: disc;
+  margin-left: 20px;
+  font-size: 1.1em;
+}
+
+.skills-container {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  }
+
+  
+  .skills-container ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .skills-container li {
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #e2e2e2;
+    border-radius: 5px;
+  }
+  
+  .organizations-container {
+    background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+    }
+    
+    .organization {
+    background-color: #f7f7f7;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 20px;
+    }
+    
+    .organization-header {
+    font-size: 18px;
+    margin-bottom: 10px;
+    }
+    
+    .organization-content {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    }
+    
+    .organization-content p {
+    margin: 0;
+    padding: 0;
+    }
+  
+
+    .contributions-container {
+      background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+      }
+    
+  
+  
 
 
 
