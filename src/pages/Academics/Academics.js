@@ -1,5 +1,5 @@
 import React from 'react';
-import quarters from '../../data/quarterData.js'
+import quarters from '../../data/academicData.js'
 import QuarterEntry from '../../components/QuarterEntry/QuarterEntry.js';
 import './Academics.css'
 
