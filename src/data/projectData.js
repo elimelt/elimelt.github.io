@@ -97,7 +97,6 @@ const projects = [
         demoGIF: require('./demo-gifs/recipe-search-demo.gif')
     },
 
-
 ];
 
 export default projects;
