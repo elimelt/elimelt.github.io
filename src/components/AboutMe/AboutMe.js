@@ -13,9 +13,7 @@ const AboutMe = () => {
               <p class='education-date'>Graduating June 2025</p>
             </div>
             <div class='education-item'>
-              <h4 class='degree'>
-                B.S. in Electrical and Computer Engineering
-              </h4>
+              <h4 class='degree'>B.S. in Computer Engineering</h4>
               <p class='gpa'>GPA: 3.94</p>
             </div>
           </div>
@@ -115,7 +113,7 @@ const AboutMe = () => {
         </div>
 
         <div class='skills-container'>
-        <h2 class='section-heading'>Skills &amp; Abilities</h2>
+          <h2 class='section-heading'>Skills &amp; Abilities</h2>
           <h4>Languages</h4>
           <ul>
             <li>Java</li>
@@ -135,27 +133,26 @@ const AboutMe = () => {
           </ul>
         </div>
 
-      <div className="contributions-container">
-      <h2 class='section-heading'>Contributions</h2>
-        <p class="company">
-          <a href="https://github.com/sidorares/node-mysql2">
-            node-mysql2
-          </a>
-        </p>
-        <ul>
-          <li>
-            Added over 800 new error codes to the latest release of mysql2 by
-            scraping the MySQL Server 8.0 source code. 
-          </li>
-          <li>  
-            Wrote tests for these new additions, adhering to the repository's standards. 
-          </li>
-          <li>
-            Active contributor to the issues section of this repository where I use my
-            knowledge of MySQL and Node.js to help users troubleshoot their code
-            to determine if a patch needs to be made to the module.
-          </li>
-        </ul>
+        <div className='contributions-container'>
+          <h2 class='section-heading'>Contributions</h2>
+          <p class='company'>
+            <a href='https://github.com/sidorares/node-mysql2'>node-mysql2</a>
+          </p>
+          <ul>
+            <li>
+              Added over 800 new error codes to the latest release of mysql2 by
+              scraping the MySQL Server 8.0 source code.
+            </li>
+            <li>
+              Wrote tests for these new additions, adhering to the repository's
+              standards.
+            </li>
+            <li>
+              Active contributor to the issues section of this repository where
+              I use my knowledge of MySQL and Node.js to help users troubleshoot
+              their code to determine if a patch needs to be made to the module.
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -163,26 +160,3 @@ const AboutMe = () => {
 }
 
 export default AboutMe
-
-/* <h3 className="about-me-header">About me</h3>
-      <p className="about-me-text">My name is Elijah Melton and I am an aspiring software engineer.</p>
-      <div className="about-me-info">
-        <div className="about-me-info-section">
-          <h4 className="about-me-info-section-header">Education</h4>
-          <p className="about-me-info-section-text">B.S. in Computer Engineering, University of Washington (expected graduation: 2023)</p>
-        </div>
-        <div className="about-me-info-section">
-          <h4 className="about-me-info-section-header">Work Experience</h4>
-          <p className="about-me-info-section-text">Software Development Intern, ABC Company, Summer 2022</p>
-        </div>
-        <div className="about-me-info-section">
-          <h4 className="about-me-info-section-header">Skills</h4>
-          <ul className="about-me-skills">
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node.js</li>
-            <li>Python</li>
-            <li>SQL</li>
-          </ul>
-        </div>
-      </div> */

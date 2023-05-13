@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Project.css'
 
 const Project = ({ info }) => {
   const { name, description, techStack, githubURL, demoURL, demoGIF } = info
+
+  const [feedback, setFeedback] = useState("");
+  const [feedbackName, setName] = useState("");
+  const [feedbackEmail, setFeedbackEmail] = useState("");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(feedback);
+    console.log(feedbackName);
+    console.log(feedbackEmail);
+  }
 
   return (
     <div className='project-container'>
