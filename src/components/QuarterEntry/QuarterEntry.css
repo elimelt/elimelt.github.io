@@ -46,3 +46,11 @@
     margin: 0;
   }
   
+
+  @media screen and (max-width: 600px) {
+    .quarter-entry-section-body {
+      font-size: 1.3rem;
+      line-height: 1.2;
+      margin: 0;
+    }
+  }

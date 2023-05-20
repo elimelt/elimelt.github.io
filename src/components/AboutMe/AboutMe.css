@@ -5,7 +5,7 @@
 .experience-container, 
 .contributions-container {
   background-color: #fff;
-  width: 80%;
+  width: 90%;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -17,21 +17,23 @@
   .education-container, 
   .experience-container, 
   .contributions-container {
-    width: 90%;
+    width: 95%;
   }
 }
 
 .section-heading {
+  margin-top: 5px;
   color: #333;
   font-size: 2em;
   text-align: left;
   padding-bottom: 15px;
-  border-bottom: 1px solid #a3cffc;
+  border-bottom: 1px solid #757575;
 }
 
 .education-details {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .education-item {
@@ -94,8 +96,19 @@
   border-radius: 5px;
 }
 
+.responsibilities li {
+  margin-bottom: 10px;
+}
+
 .contributions-container a {
   text-decoration: none;
+}
+
+@media (max-width: 800px) {
+  .responsibilities  {
+    padding: 0;
+  }
+
 }
 
 

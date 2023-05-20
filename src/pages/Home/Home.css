@@ -1,49 +1,64 @@
 .home-container {
-  position:relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
-  padding:40px;
-  padding-top: 10rem;
+  padding: 40px;
 }
-  
-  .home-heading {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 40px;
-  }
-  
+
+.home-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.home-description {
+  flex: 1;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.home-image-container {
+  flex: 1;
+  max-width: 400px; /* Limit the max width of the image container */
+}
+
+.home-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.home-text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+@media screen and (min-width: 900px) {
   .home-content {
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    width: 100%;
   }
-  
+
   .home-description {
-    flex: 1;
-    margin-right: 20px;
+    margin-right: 100px;
+    margin-bottom: 0;
   }
-  
+
   .home-image-container {
-    flex: 1;
-    margin-left: 20px;
+    margin-left: 100px;
+     /* Remove the max width for larger screens */
   }
-  
-  .home-image {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 10px;
-  }
-   
-  .home-text {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    text-align: justify;
-  }
-  
+}

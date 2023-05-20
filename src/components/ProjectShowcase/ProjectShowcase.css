@@ -1,12 +1,18 @@
 /* ProjectShowcase.css */
 
-.project-showcase-container {
+
+.project {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.project-showcase {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 50px;
-    padding: 50px;
+    width: 100%;
+    /* padding: 50px; */
     background-color: #f7f7f7;
   }
   

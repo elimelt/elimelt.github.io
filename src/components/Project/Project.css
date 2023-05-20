@@ -1,11 +1,10 @@
 .project-container {
   background-color: #fff;
-  width: 80%;
+  /* width: 80%; */
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin: 0 auto;
-  /* margin: 20px 0; */
+  /* margin: 0 auto; */
 }
 
 .project-name {
@@ -43,13 +42,9 @@
   background-color: #555;
 }
 
-.project-link i {
-  margin-right: 5px;
-}
-
 .project-details {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
@@ -63,9 +58,9 @@
 }
 
 .project-feedback {
-  display: inline;
-  width: 70%;
-  margin-left: 2rem;
+  width: 70%; 
+  padding-left: 30px;
+  margin-top: 2rem; 
 }
 
 .project-feedback label {
@@ -110,3 +105,15 @@
   background-color: #004D8C;
 }
 
+@media screen and (min-width: 600px) {
+
+  .project-details {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  .project-feedback {
+    width: 60%;
+    margin-top: 0;
+    
+  }
+}
