@@ -14,7 +14,7 @@ const QuarterEntry = ({ quarterData }) => {
         {content.map((section, index) => (
           <div key={index} className="quarter-entry-section">
             <h3 className="quarter-entry-section-title">{section.title}</h3>
-            <p className="quarter-entry-section-body">{section.body}</p>
+            <span className="quarter-entry-section-body">{section.body}</span>
           </div>
         ))}
       </div>

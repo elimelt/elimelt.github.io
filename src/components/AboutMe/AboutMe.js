@@ -1,31 +1,54 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './AboutMe.css'
+import { useState } from 'react'
+
+function getWindowSize() {
+  const {innerWidth, innerHeight} = window;
+  return {innerWidth, innerHeight};
+}
 
 const AboutMe = () => {
+
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize(getWindowSize())
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
+  console.log(windowSize)
+  
   return (
     <div className='about-me-container'>
-      <div class='resume'>
-        <div class='education-container'>
-          <h2 class='section-heading'>Education</h2>
-          <div class='education-details'>
-            <div class='education-item'>
-              <h3 class='institution-name'>University of Washington Seattle</h3>
-              <p class='education-date'>Graduating June 2025</p>
+      <div className='resume'>
+        <div className='education-container'>
+          <h2 className='section-heading'>Education</h2>
+          <div className='education-details'>
+            <div className='education-item'>
+              <h3 className='institution-name'>{window.innerWidth < 700 ? 'UW' : 'University of Washington'}</h3>
+              <p className='education-date'>Graduating June 2025</p>
             </div>
-            <div class='education-item'>
-              <h4 class='degree'>B.S. in Computer Engineering</h4>
-              <p class='gpa'>GPA: 3.94</p>
+            <div className='education-item'>
+              <h4 className='degree'>{window.innerWidth < 600 ? 'B.S. in Comp. Eng.' : 'B.S. in Computer Engineering'}</h4>
+              <p className='gpa'>GPA: 3.94</p>
             </div>
           </div>
         </div>
 
-        <div class='experience-container'>
-          <h2 class='section-heading'>Experience</h2>
-          <div class='experience-item'>
-            <h3 class='position'>Software Engineering Lead</h3>
-            <p class='company'>Nexus UW</p>
-            <p class='date'>Jan 2023 - Present</p>
-            <ul class='responsibilities'>
+        <div className='experience-container'>
+          <h2 className='section-heading'>Experience</h2>
+          <div className='experience-item'>
+            <h3 className='position'>Software Engineering Lead</h3>
+            <p className='company'>Nexus UW</p>
+            <p className='date'>Jan 2023 - Present</p>
+            <ul className='responsibilities'>
               <li>
                 Helped develop and launch a web app for pairing project leads
                 with developers. Built with Node.js using React, Express, and
@@ -41,11 +64,11 @@ const AboutMe = () => {
               </li>
             </ul>
           </div>
-          <div class='experience-item'>
-            <h3 class='position'>Team Lead/Project Manager</h3>
-            <p class='company'>Husky Coding Project</p>
-            <p class='date'>Sept 2022 - Present</p>
-            <ul class='responsibilities'>
+          <div className='experience-item'>
+            <h3 className='position'>Team Lead/Project Manager</h3>
+            <p className='company'>Husky Coding Project</p>
+            <p className='date'>Sept 2022 - Present</p>
+            <ul className='responsibilities'>
               <li>
                 Developing Syntext, a website for practicing and improving
                 typing speed with programming syntax
@@ -64,11 +87,11 @@ const AboutMe = () => {
               </li>
             </ul>
           </div>
-          <div class='experience-item'>
-            <h3 class='position'>Web Team Member</h3>
-            <p class='company'>Sensors Energy and Automation Laboratory</p>
-            <p class='date'>Aug 2022 - Jan 2023</p>
-            <ul class='responsibilities'>
+          <div className='experience-item'>
+            <h3 className='position'>Web Team Member</h3>
+            <p className='company'>Sensors Energy and Automation Laboratory</p>
+            <p className='date'>Aug 2022 - Jan 2023</p>
+            <ul className='responsibilities'>
               <li>
                 Leader of Efficiency Content and Style (ECoS) sub team, fixed
                 hosting and authentication issues with app’s API and AWS Elastic
@@ -82,11 +105,11 @@ const AboutMe = () => {
             </ul>
           </div>
 
-          <div class='experience-item'>
-            <h3 class='position'>Helpdesk Assistant</h3>
-            <p class='company'>Paul G. Allen School of Computer Science</p>
-            <p class='date'>Sept 2021 – Jan 2023</p>
-            <ul class='responsibilities'>
+          <div className='experience-item'>
+            <h3 className='position'>Helpdesk Assistant</h3>
+            <p className='company'>Paul G. Allen School of Computer Science</p>
+            <p className='date'>Sept 2021 – Jan 2023</p>
+            <ul className='responsibilities'>
               <li>
                 Troubleshot computer hardware/software issues, monitored
                 datacenters, managed computing equipment and inventory database.
@@ -95,11 +118,11 @@ const AboutMe = () => {
               </li>
             </ul>
           </div>
-          <div class='experience-item'>
-            <h3 class='position'>Financial Center Intern</h3>
-            <p class='company'>Bank of America</p>
-            <p class='date'>June 2021 – Aug 2021</p>
-            <ul class='responsibilities'>
+          <div className='experience-item'>
+            <h3 className='position'>Financial Center Intern</h3>
+            <p className='company'>Bank of America</p>
+            <p className='date'>June 2021 – Aug 2021</p>
+            <ul className='responsibilities'>
               <li>
                 Received formal training and education on project management,
                 professionalism, and various soft skills.
@@ -112,8 +135,8 @@ const AboutMe = () => {
           </div>
         </div>
 
-        <div class='skills-container'>
-          <h2 class='section-heading'>Skills &amp; Abilities</h2>
+        <div className='skills-container'>
+          <h2 className='section-heading'>Skills &amp; Abilities</h2>
           <h4>Languages</h4>
           <ul>
             <li>Java</li>
@@ -134,8 +157,8 @@ const AboutMe = () => {
         </div>
 
         <div className='contributions-container'>
-          <h2 class='section-heading'>Contributions</h2>
-          <p class='company'>
+          <h2 className='section-heading'>Contributions</h2>
+          <p className='company'>
             <a href='https://github.com/sidorares/node-mysql2'>node-mysql2</a>
           </p>
           <ul>
