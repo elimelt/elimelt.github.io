@@ -1,25 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 const NavBar = () => {
   return (
-    <div className='navbar'>
-      <div className='app-bar'>
-        <div className='toolbar'>
-          <ButtonLink to='/contact' className='nav-link'>
+    <div className="navbar">
+      <div className="app-bar">
+        <div className="toolbar">
+          <ButtonLink to="/contact" className="nav-link">
             Contact me
           </ButtonLink>
-          <ButtonLink to='/' className='nav-link'>
+          <ButtonLink to="/" className="nav-link">
             Home
           </ButtonLink>
-          <ButtonLink to='/projects' className='nav-link'>
+          <ButtonLink to="/projects" className="nav-link">
             Projects
           </ButtonLink>
-          <ButtonLink to='/info' className='nav-link'>
+          <ButtonLink to="/info" className="nav-link">
             Info
           </ButtonLink>
-          <ButtonLink to='/academics' className='nav-link'>
+          <ButtonLink to="/academics" className="nav-link">
             Academics
           </ButtonLink>
         </div>
@@ -35,6 +35,5 @@ const ButtonLink = ({ to, className, children }) => {
     </Link>
   );
 };
-
 
 export default NavBar;
