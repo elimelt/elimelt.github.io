@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
-import './ContactForm.css'
-import axios from 'axios'
+import React, { useState } from "react";
+import "./ContactForm.css";
+import axios from "axios";
 function ContactForm({ subject }) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const lastPostTimestamp = localStorage.getItem('lastEmailTimestamp');
+    const lastPostTimestamp = localStorage.getItem("lastEmailTimestamp");
     const now = Date.now();
 
     // Check if a post has been made within the last 24 hours
-    if (lastPostTimestamp && now - Number(lastPostTimestamp) < 24 * 60 * 60 * 1000) {
-      alert('You can only use contact me once per day!');
+    if (
+      lastPostTimestamp &&
+      now - Number(lastPostTimestamp) < 24 * 60 * 60 * 1000
+    ) {
+      alert("You can only use contact me once per day!");
       return;
     }
-    localStorage.setItem('lastEmailTimestamp', String(now));
+    localStorage.setItem("lastEmailTimestamp", String(now));
     console.log(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
-    axios.post('https://feedback-server.herokuapp.com/feedback/send', {
-      name: name, 
-      email: email,
-      feedback: message,
-      secret: 69 //process.env.SECRET
-    })
+    axios
+      .post("https://feedback-server.herokuapp.com/feedback/send", {
+        name: name,
+        email: email,
+        feedback: message,
+        secret: 69, //process.env.SECRET
+      })
+      .then(() => alert("Thank you for contacting me!"));
   };
 
   return (

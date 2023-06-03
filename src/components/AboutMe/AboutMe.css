@@ -1,8 +1,6 @@
-
-
-.skills-container, 
-.education-container, 
-.experience-container, 
+.skills-container,
+.education-container,
+.experience-container,
 .contributions-container {
   background-color: #fff;
   width: 90%;
@@ -13,20 +11,20 @@
 }
 
 @media (max-width: 1000px) {
-  .skills-container, 
-  .education-container, 
-  .experience-container, 
+  .skills-container,
+  .education-container,
+  .experience-container,
   .contributions-container {
     width: 95%;
   }
 }
 
-
 .about-me-container {
   width: 100%;
 }
 
-.section-heading, .section-heading-exp {
+.section-heading,
+.section-heading-exp {
   margin-top: 5px;
   color: #333;
   font-size: 2em;
@@ -44,8 +42,9 @@
   padding-bottom: 15px;
 }
 
-.section-heading:hover, .section-heading.exp:hover {
-  color:#757575;
+.section-heading:hover,
+.section-heading.exp:hover {
+  color: #757575;
 }
 
 .education-details {
@@ -67,7 +66,7 @@
 .education-date,
 .company,
 .degree,
-.date, 
+.date,
 .gpa {
   font-size: 1.2em;
   margin-bottom: 5px;
@@ -76,7 +75,6 @@
 .date {
   font-style: italic;
 }
-
 
 .experience-item {
   margin-bottom: 70px;
@@ -88,15 +86,11 @@
   margin-bottom: 10px;
 }
 
-
-
 .responsibilities {
   list-style: disc;
   margin-left: 20px;
   font-size: 1.1em;
 }
-
-
 
 .skills-container ul {
   display: flex;
@@ -123,10 +117,7 @@
 }
 
 @media (max-width: 800px) {
-  .responsibilities  {
+  .responsibilities {
     padding: 0;
   }
-
 }
-
-
