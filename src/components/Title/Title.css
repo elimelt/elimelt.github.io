@@ -1,5 +1,5 @@
 .title-container {
-  background-color: #5B5B5B;
+  background-color: #5b5b5b;
   color: white;
   text-align: center;
   display: flex;
@@ -20,7 +20,8 @@
   align-items: center;
 }
 
-.title .title-element, .title-link {
+.title .title-element,
+.title-link {
   margin-left: 2rem;
   margin-right: 4rem;
   text-decoration: none;
@@ -42,14 +43,14 @@
     font-size: 2rem;
   }
 
-  .title .title-element, .title-link {
+  .title .title-element,
+  .title-link {
     margin-left: 1rem;
     margin-right: 1rem;
     font-size: 1rem;
   }
 }
 
-
 body {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
