@@ -1,7 +1,7 @@
-import React from 'react';
-import Project from '../Project/Project.js';
-import projects from '../../data/projectData';
-import './ProjectShowcase.css';
+import React from "react";
+import Project from "../Project/Project.js";
+import projects from "../../data/projectData";
+import "./ProjectShowcase.css";
 
 const ProjectShowcase = () => {
   return (

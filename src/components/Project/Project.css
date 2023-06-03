@@ -42,7 +42,6 @@
   background-color: #555;
 }
 
-
 .project-demo .project-gif {
   width: 100%;
   background-color: #ffffff;
@@ -61,7 +60,7 @@
   padding: 10px 15px;
   text-decoration: none;
   transition: all 0.3s ease;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .expand-button:hover {
@@ -70,7 +69,6 @@
 }
 
 @media screen and (min-width: 600px) {
-
   .project-details {
     grid-template-columns: 3fr 2fr;
   }
@@ -78,6 +76,5 @@
   .project-feedback {
     width: 60%;
     margin-top: 0;
-    
   }
 }
