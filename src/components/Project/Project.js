@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import './Project.css';
+import "./Project.css";
 
 const Project = ({ info }) => {
   const { name, description, techStack, githubURL, demoURL, demoGIF } = info;
@@ -17,13 +17,10 @@ const Project = ({ info }) => {
         <h2 className="project-name">{name}</h2>
         <p className="project-tech-stack">Tech stack: {techStack}</p>
         <div className="project-description">
-          {isExpanded 
-            ? description
-            : description.props.children[0]
-          }
-        </div> 
+          {isExpanded ? description : description.props.children[0]}
+        </div>
       </div>
-      
+
       {isExpanded && (
         <div className="project-details">
           <div className="project-demo">
@@ -55,10 +52,9 @@ const Project = ({ info }) => {
         </a>
 
         <button className="expand-button" onClick={toggleExpansion}>
-          {isExpanded ? 'Show Less' : 'Show More'}
+          {isExpanded ? "Show Less" : "Show More"}
         </button>
       </div>
-
     </div>
   );
 };
