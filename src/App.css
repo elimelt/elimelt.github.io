@@ -1,5 +1,5 @@
 body {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .page-container {
@@ -9,6 +9,6 @@ body {
 
 @media (max-width: 768px) {
   .page-container {
-    padding: 2rem 1rem 0rem .5rem;
+    padding: 2rem 1rem 0rem 0.5rem;
   }
 }
