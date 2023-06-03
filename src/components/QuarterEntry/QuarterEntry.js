@@ -1,5 +1,5 @@
-import React from 'react';
-import './QuarterEntry.css';
+import React from "react";
+import "./QuarterEntry.css";
 
 const QuarterEntry = ({ quarterData }) => {
   const { quarter, date, content } = quarterData;
