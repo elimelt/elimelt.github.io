@@ -18,3 +18,6 @@ License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 Thank you for visiting my personal website's GitHub repository!
+
+### Deployment
+Run `npm run deploy`

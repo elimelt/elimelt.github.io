@@ -14,19 +14,20 @@ const quarters = [
               a career seminar on succeeding in the tech industry. In my Data
               Structures and Parallelism course, I completed several large
               projects where I implemented various data structures from scratch,
-              without using any classes in the java.util package. Over the next
-              few weeks, we will be covering graph algorithms, as well as
-              parallelism/multithreading.
+              all without using any classes in the java.util package. We also took
+              a deep dive on parallelism and concurrency, as well as graph algorithms
+              like Prim's, Kruskal's, Dijkstra's, and various others.
             </p>
 
             <p>
               Unfortunately, I also had to learn a fair bit of x86 Assembly, but
               my growing understanding of computer hardware and architecture has
               been a guiding light at the end of this tunnel. This class (HSI)
-              has really solidified my understanding of C. Although I can't
-              imagine completing any large projects without at least using C++,
-              it's been nice to learn more about the perspective of programming
-              from the hardware side of things.
+              has really solidified my understanding of C. Some of my favorite topics
+              from this course was learning cache aware programming to optimize 
+              array/matrix algorithms, and processes/scheduling and concurrency using
+              fork/exec in C. The class also wrapped up with a comparison between the 
+              implementation details of java and C, which was super interesting.
             </p>
           </>
         ),
