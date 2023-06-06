@@ -42,18 +42,19 @@ const projects = [
         techStack: 'Vue, Express', 
         description: 
         (<>
+
+            <p>
+            CryptoList makes use of the CoinCap API to pull real time price data on various 
+            crypto currencies, allowing users to search and filter the data with a responsive UI 
+            featuring both a light and dark mode.
+            </p>
+
             <p>
             CryptoList was a weekend long project that I undertook to familliarize myself
             with another popular frontend framework, Vue.js. I found this alternative 
             approach to front end development a challenging but rewarding experience to
             have under my belt, and after having completed this project, I feel confident 
             in my ability to pick up new technologies/frameworks when needed.
-            </p>
-
-            <p>
-            This project makes use of the CoinCap API to pull real time price data on various 
-            crypto currencies. I implemented a basic search and filter, as well as a switch to
-            toggle the theme between dark and light mode.
             </p>
 
             <p>
@@ -71,25 +72,30 @@ const projects = [
         name: 'RecipeSearch', 
         techStack: 'Express, React', 
         description: (<>
+            
+            <p>
+            RecipeSearch lets users search for a particular ingredient, which then displays recipes 
+            that you can use it in. I was able to achieve this through TheFreeMealDB's API, although the 
+            limitations of their free version make the reccomendation a little limited.
+            </p>
+
             <p>
             Recipe search was my first introduction to React.js, and I learned a LOT finishing 
             this project. One of my main goals in completing this project was to focus on 
             making the design and layout responsive to mobile layouts, and I achieved this through
             a mixture of Bootstrap CSS classes, flexbox, and CSS media queries.           
             </p>
-
-            <p>
-            I wanted to make something that seemed useful, so I decided on a website that allows
-            you to search for a particular ingredient, which then displays recipes that you can 
-            use it in. I was able to achieve this through TheFreeMealDB's API, although the 
-            limitations of their free version, as well as the format returned by the API was definitely
-            a challenge to overcome at the time.
-            </p>
             
             <p>
             Not only did I gain a basic understanding of React and Express through this project, 
             but I was able to deploy my website to the internet! After struggling with CSS for hours, 
             I was VERY pleasently surprised with how easy Heroku made deploying this website.  
+            </p>
+
+            <p>
+            Since I am hosting a proxy server to allow CORS for this site, there is a 30 second spin up
+            period after 30 minutes of inactivity for my API. This is by virtue of cutting costs, but is 
+            in no way representative of my skills as a developer.
             </p>
         </>), 
         githubURL: 'https://github.com/elimelt/RecipeSearchProduction',

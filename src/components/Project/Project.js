@@ -12,12 +12,29 @@ const Project = ({ info }) => {
   };
 
   return (
-    <div className="project-container">
+    <div className={"project-container"}>
       <div className="project-info">
         <h2 className="project-name">{name}</h2>
         <p className="project-tech-stack">Tech stack: {techStack}</p>
-        {isExpanded && <p className="project-description">{description}</p>}
+        <div className="project-description">
+          {isExpanded 
+            ? description
+            : description.props.children[0]
+          }
+        </div> 
       </div>
+      
+      {isExpanded && (
+        <div className="project-details">
+          <div className="project-demo">
+            <img
+              className="project-gif"
+              src={demoGIF}
+              alt={`Demo of ${name}`}
+            />
+          </div>
+        </div>
+      )}
 
       <div className="project-links">
         <a
@@ -36,23 +53,12 @@ const Project = ({ info }) => {
         >
           Demo
         </a>
+
+        <button className="expand-button" onClick={toggleExpansion}>
+          {isExpanded ? 'Show Less' : 'Show More'}
+        </button>
       </div>
 
-      {isExpanded && (
-        <div className="project-details">
-          <div className="project-demo">
-            <img
-              className="project-gif"
-              src={demoGIF}
-              alt={`Demo of ${name}`}
-            />
-          </div>
-        </div>
-      )}
-
-      <button onClick={toggleExpansion}>
-        {isExpanded ? 'Show Less' : 'Show More'}
-      </button>
     </div>
   );
 };

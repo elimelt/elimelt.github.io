@@ -42,11 +42,6 @@
   background-color: #555;
 }
 
-.project-details {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
 
 .project-demo .project-gif {
   width: 100%;
@@ -57,52 +52,15 @@
   margin: 1rem 0;
 }
 
-.project-feedback {
-  width: 70%; 
-  padding-left: 30px;
-  margin-top: 2rem; 
-}
-
-.project-feedback label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.project-feedback input,
-.project-feedback textarea {
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem;
-  border: none;
-  display: block;
-  width: 100%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.project-feedback input:focus,
-.project-feedback textarea:focus {
-  outline: none;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-}
-
-.project-feedback textarea {
-  resize: none;
-  height: 100px;
-}
-
-.project-feedback button {
-  padding: 0.5rem 1rem;
-  border: none;
-  display: block;
-  border-radius: 0.25rem;
-  background-color: #0072C6;
+.expand-button {
+  background-color: #333;
+  border-radius: 5px;
+  margin-right: 3rem;
   color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.project-feedback button:hover {
-  background-color: #004D8C;
+  display: inline-block;
+  padding: 10px 15px;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 @media screen and (min-width: 600px) {
