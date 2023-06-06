@@ -61,6 +61,12 @@
   padding: 10px 15px;
   text-decoration: none;
   transition: all 0.3s ease;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.expand-button:hover {
+  cursor: pointer;
+  background-color: #555;
 }
 
 @media screen and (min-width: 600px) {
