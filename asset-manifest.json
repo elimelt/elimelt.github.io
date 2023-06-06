@@ -1,18 +1,17 @@
 {
   "files": {
-    "main.css": "/elijah-dot-com/static/css/main.280c7ea9.css",
-    "main.js": "/elijah-dot-com/static/js/main.54717efc.js",
+    "main.css": "/elijah-dot-com/static/css/main.e63a0d40.css",
+    "main.js": "/elijah-dot-com/static/js/main.a7da4870.js",
     "static/media/recipe-search-demo.gif": "/elijah-dot-com/static/media/recipe-search-demo.d8e49bc965fa258e57d3.gif",
     "static/media/crypto-list-demo.gif": "/elijah-dot-com/static/media/crypto-list-demo.bfa9ce7a5c8b8866f068.gif",
     "static/media/syntext-demo.gif": "/elijah-dot-com/static/media/syntext-demo.0482e5e84f3826e085ad.gif",
-    "static/media/logo.png": "/elijah-dot-com/static/media/logo.2d66aa86d6698f379049.png",
     "static/media/portrait.JPG": "/elijah-dot-com/static/media/portrait.ff6e13f527707d228c94.JPG",
     "index.html": "/elijah-dot-com/index.html",
-    "main.280c7ea9.css.map": "/elijah-dot-com/static/css/main.280c7ea9.css.map",
-    "main.54717efc.js.map": "/elijah-dot-com/static/js/main.54717efc.js.map"
+    "main.e63a0d40.css.map": "/elijah-dot-com/static/css/main.e63a0d40.css.map",
+    "main.a7da4870.js.map": "/elijah-dot-com/static/js/main.a7da4870.js.map"
   },
   "entrypoints": [
-    "static/css/main.280c7ea9.css",
-    "static/js/main.54717efc.js"
+    "static/css/main.e63a0d40.css",
+    "static/js/main.a7da4870.js"
   ]
 }
