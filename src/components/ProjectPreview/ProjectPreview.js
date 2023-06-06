@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
-import './Project.css'
+import './ProjectPreview.css'
 
-const Project = ({ info }) => {
-  const { name, description, techStack, githubURL, demoURL, demoGIF } = info
+const ProjectPreview = ({ info, setIsExpanded }) => {
+  const { name, techStack, githubURL, demoURL } = info
 
-  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <div className='project-container'>
       <div className='project-info'>
         <h2 className='project-name'>{name}</h2>
         <p className='project-tech-stack'>Tech stack: {techStack}</p>
-        <p className='project-description'>{description}</p>
       </div>
 
       <div className='project-links'>
@@ -32,16 +30,12 @@ const Project = ({ info }) => {
           Demo
         </a>
       </div>
-      <div className='project-details'>
-        
-        <div className='project-demo'>
-          <img className='project-gif' src={demoGIF} alt={`Demo of ${name}`} />
-        </div>
-      </div>
 
-      
+      <button onClick={()=>setIsExpanded(true)}>
+        Show More
+      </button>
     </div>
   )
 }
 
-export default Project
+export default ProjectPreview
