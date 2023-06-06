@@ -9,9 +9,9 @@ function getWindowSize() {
 const AboutMe = () => {
   const [windowSize, setWindowSize] = useState(getWindowSize());
   const [isEducationExpanded, setIsEducationExpanded] = useState(true);
-  const [isExperienceExpanded, setIsExperienceExpanded] = useState(true);
-  const [isSkillsExpanded, setIsSkillsExpanded] = useState(true);
-  const [isContributionsExpanded, setIsContributionsExpanded] = useState(true);
+  const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
+  const [isSkillsExpanded, setIsSkillsExpanded] = useState(false);
+  const [isContributionsExpanded, setIsContributionsExpanded] = useState(false);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -27,18 +27,30 @@ const AboutMe = () => {
 
   const handleToggleEducation = () => {
     setIsEducationExpanded(!isEducationExpanded);
+    setIsExperienceExpanded(false);
+    setIsSkillsExpanded(false);
+    setIsContributionsExpanded(false);
   };
 
   const handleToggleExperience = () => {
     setIsExperienceExpanded(!isExperienceExpanded);
+    setIsEducationExpanded(false);
+    setIsSkillsExpanded(false);
+    setIsContributionsExpanded(false);
   };
 
   const handleToggleSkills = () => {
     setIsSkillsExpanded(!isSkillsExpanded);
+    setIsEducationExpanded(false);
+    setIsExperienceExpanded(false);
+    setIsContributionsExpanded(false);
   };
 
   const handleToggleContributions = () => {
     setIsContributionsExpanded(!isContributionsExpanded);
+    setIsEducationExpanded(false);
+    setIsExperienceExpanded(false);
+    setIsSkillsExpanded(false);
   };
 
   console.log(windowSize);
@@ -47,9 +59,16 @@ const AboutMe = () => {
     <div className="about-me-container">
       <div className="resume">
         <div className="education-container">
-          <h2 className="section-heading" onClick={handleToggleEducation}>
-            Education
-          </h2>
+          {isEducationExpanded ? (
+            <h2 className="section-heading-exp" onClick={handleToggleEducation}>
+              Education
+            </h2>
+          ): (
+            <h2 className="section-heading" onClick={handleToggleEducation}>
+              Click to view my education
+            </h2>
+          )
+          }
           {isEducationExpanded && (
             <div className="education-details">
               <div className="education-item">
@@ -69,9 +88,16 @@ const AboutMe = () => {
         </div>
 
         <div className="experience-container">
-          <h2 className="section-heading" onClick={handleToggleExperience}>
-            Experience
-          </h2>
+          {isExperienceExpanded ? (
+            <h2 className="section-heading-exp" onClick={handleToggleExperience}>
+              Experience
+            </h2>
+          ):(
+            <h2 className="section-heading" onClick={handleToggleExperience}>
+              Click to view my experience
+            </h2>
+          )}
+
           {isExperienceExpanded && (
             <>
               <div className="experience-item">
@@ -126,9 +152,15 @@ const AboutMe = () => {
         </div>
 
         <div className="skills-container">
-          <h2 className="section-heading" onClick={handleToggleSkills}>
-            Skills &amp; Abilities
-          </h2>
+          {isSkillsExpanded ? (
+            <h2 className="section-heading-exp" onClick={handleToggleSkills}>
+              Skills &amp; Abilities
+            </h2>
+          ) : (
+            <h2 className="section-heading" onClick={handleToggleSkills}>
+              Click to view my skills &amp; abilities
+            </h2>
+          )}
           {isSkillsExpanded && (
             <>
               <h4>Languages</h4>
@@ -153,9 +185,15 @@ const AboutMe = () => {
         </div>
 
         <div className="contributions-container">
-          <h2 className="section-heading" onClick={handleToggleContributions}>
-            Contributions
-          </h2>
+          {isContributionsExpanded ? (
+            <h2 className="section-heading-exp" onClick={handleToggleContributions}>
+              Contributions
+            </h2>
+          ) : (
+            <h2 className="section-heading" onClick={handleToggleContributions}>
+              Click to view my open source contributions
+            </h2>
+          )}
           {isContributionsExpanded && (
             <>
               <p className="company">

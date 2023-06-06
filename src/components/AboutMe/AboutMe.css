@@ -21,13 +21,31 @@
   }
 }
 
-.section-heading {
+
+.about-me-container {
+  width: 100%;
+}
+
+.section-heading, .section-heading-exp {
   margin-top: 5px;
   color: #333;
   font-size: 2em;
   text-align: left;
-  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.section-heading-exp {
+  margin-top: 5px;
+  color: #333;
+  font-size: 2em;
+  text-align: left;
+  cursor: pointer;
   border-bottom: 1px solid #757575;
+  padding-bottom: 15px;
+}
+
+.section-heading:hover, .section-heading.exp:hover {
+  color:#757575;
 }
 
 .education-details {
