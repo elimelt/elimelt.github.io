@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import './ContactForm.css'
+import axios from 'axios'
 function ContactForm({ subject }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
+    await axios.post('https://feedback-server.herokuapp.com/feedback/send', {
+      data: {
+        name: name, 
+        email: email,
+        feedback: message
+      }
+    })
   };
 
   return (
