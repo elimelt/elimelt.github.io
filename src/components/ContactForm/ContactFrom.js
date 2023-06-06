@@ -6,15 +6,23 @@ function ContactForm({ subject }) {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const lastPostTimestamp = localStorage.getItem('lastEmailTimestamp');
+    const now = Date.now();
+
+    // Check if a post has been made within the last 24 hours
+    if (lastPostTimestamp && now - Number(lastPostTimestamp) < 24 * 60 * 60 * 1000) {
+      alert('You can only use contact me once per day!');
+      return;
+    }
+    localStorage.setItem('lastEmailTimestamp', String(now));
     console.log(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
-    await axios.post('https://feedback-server.herokuapp.com/feedback/send', {
-      data: {
-        name: name, 
-        email: email,
-        feedback: message
-      }
+    axios.post('https://feedback-server.herokuapp.com/feedback/send', {
+      name: name, 
+      email: email,
+      feedback: message,
+      secret: 69 //process.env.SECRET
     })
   };
 
@@ -38,7 +46,7 @@ function ContactForm({ subject }) {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      
+
       <div>
         <label htmlFor="message">Message:</label>
         <textarea
