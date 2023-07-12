@@ -1,15 +1,3 @@
-/* 
-entry: {
-  entryName: str
-  date: str
-  content: [{
-    title: str
-    body: jsx
-  }]
-}
-*/
-
-
 const entries = [
   {
     // update before finals are upon us
@@ -304,5 +292,30 @@ const entries = [
     ],
   },
 ];
+
+/* 
+
+
+entry: {
+  entryName: str
+  date: str
+  content: [{
+    title: str
+    body: jsx
+  }]
+}
+
+ex:
+{
+  entryName: "test",
+  date: "today",
+  content: [
+    {
+      title: "Jingle Bells",
+      body: (<p>Hello again, world</p>)
+    }
+  ]
+}
+*/
 
 export default entries;

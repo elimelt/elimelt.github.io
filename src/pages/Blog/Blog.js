@@ -7,9 +7,8 @@ const Blog = () => {
   return (
     <div className="page-container">
       {entries.map((entry, i) => (
-        <div className="entry" key={i}>
-          <BlogEntry blogData={entry} />
-        </div>
+        <BlogEntry blogData={entry} key={i}/>
+        
       ))}
     </div>
   );
