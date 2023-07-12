@@ -1,18 +1,18 @@
 import React from "react";
 import quarters from "../../data/academicData.js";
-import QuarterEntry from "../../components/QuarterEntry/QuarterEntry.js";
-import "./Academics.css";
+import BlogEntry from "../../components/QuarterEntry/BlogEntry.js";
+import "./Blog.css";
 
-const Academics = () => {
+const Blog = () => {
   return (
     <div className="page-container">
       {quarters.map((quarter, i) => (
         <div className="quarter" key={i}>
-          <QuarterEntry quarterData={quarter} />
+          <BlogEntry quarterData={quarter} />
         </div>
       ))}
     </div>
   );
 };
 
-export default Academics;
+export default Blog;

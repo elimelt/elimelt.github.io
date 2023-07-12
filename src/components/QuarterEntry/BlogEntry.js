@@ -1,7 +1,7 @@
 import React from "react";
-import "./QuarterEntry.css";
+import "./BlogEntry.css";
 
-const QuarterEntry = ({ quarterData }) => {
+const BlogEntry = ({ quarterData }) => {
   const { quarter, date, content } = quarterData;
 
   return (
@@ -22,4 +22,4 @@ const QuarterEntry = ({ quarterData }) => {
   );
 };
 
-export default QuarterEntry;
+export default BlogEntry;
