@@ -14,7 +14,7 @@ const quarters = [
               a career seminar on succeeding in the tech industry. In my Data
               Structures and Parallelism course, I completed several large
               projects where I implemented various data structures from scratch,
-              all without using any classes in the java.util package. We also took
+              all without using any classes in the java.util library. We also took
               a deep dive on parallelism and concurrency, as well as graph algorithms
               like Prim's, Kruskal's, Dijkstra's, and various others.
             </p>
@@ -70,6 +70,21 @@ const quarters = [
               liking the fact that I don't have to come up with the style on my
               own, instead just trying to match whatever the Figma mock-ups look
               like.
+            </p>
+
+            <p>
+              I recently won my first hackathon (DevMatch June 2023), and am super happy 
+              I had the opportunity to participate. It was a little different from most
+              hackathons I've partaken in, as we were tasked with fixing bugs in an existing 
+              codebase. I ended up scoring the highest in terms of number of bugs fixed within
+              the time limit.
+            </p>
+
+            <p>
+              I also recently started my first SWE internship, and have really deepended my
+              understanding of the Java web ecosystem. Although server-side development
+              with core Java (Servlets API) has proven to be much slower, I've learned a ton due to the 
+              lack of abstracted complexity compared to using a framework like SpringBoot.
             </p>
           </>
         ),
