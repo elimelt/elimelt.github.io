@@ -12,6 +12,8 @@ import Navbar from "./components/Navbar/Navbar";
 import Blog from "./pages/Blog/Blog";
 
 const App = () => {
+  pingIfNeeded()  
+
   return (
     <>
       <Title />
@@ -27,5 +29,32 @@ const App = () => {
     </>
   );
 };
+
+const pingIfNeeded = () => {
+  let flag = localStorage.getItem('visited-elijah-dot-com');
+  let currentTime = new Date();
+  let hourAgo = new Date(currentTime.getTime() - (60 * 60 * 1000));
+  let flagTimestamp;
+  let needToPing = true
+  if (flag) {
+    let flagData = JSON.parse(flag);
+    flagTimestamp = new Date(flagData.timestamp);
+    if (flagTimestamp > hourAgo)
+      needToPing = false
+  } 
+
+  
+  if (!needToPing) {    
+    console.log('Flag item exists within the past hour.');
+  } else {
+    console.log("should ping server");
+  }
+
+  let newFlagData = {
+    timestamp: new Date().toISOString()
+  };
+
+  localStorage.setItem('visited-elijah-dot-com', JSON.stringify(newFlagData));
+}
 
 export default App;
