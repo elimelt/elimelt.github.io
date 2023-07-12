@@ -1,7 +1,19 @@
-const quarters = [
+/* 
+entry: {
+  entryName: str
+  date: str
+  content: [{
+    title: str
+    body: jsx
+  }]
+}
+*/
+
+
+const entries = [
   {
     // update before finals are upon us
-    quarterName: "Spring Quarter 2023",
+    entryName: "Spring Quarter 2023",
     date: "June 2023",
     content: [
       {
@@ -126,7 +138,7 @@ const quarters = [
     ],
   },
   {
-    quarterName: "Winter Quarter 2023",
+    entryName: "Winter Quarter 2023",
     date: "February 2023",
     content: [
       {
@@ -216,7 +228,7 @@ const quarters = [
     ],
   },
   {
-    quarterName: "Fall Quarter 2022",
+    entryName: "Fall Quarter 2022",
     date: "December 2022",
     content: [
       {
@@ -293,4 +305,4 @@ const quarters = [
   },
 ];
 
-export default quarters;
+export default entries;
