@@ -51,7 +51,7 @@ const pingIfNeeded = () => {
     let userData = gatherUserData();
     axios.post('https://feedback-server.herokuapp.com/log/write', {
         logName: 'users', 
-        content: JSON.stringify(userData),
+        content: userData,
         secret: 69
 
     })
