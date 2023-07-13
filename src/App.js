@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from 'axios';
 // import Layout from "./Layout";
 import Title from "./components/Title/Title";
 import Home from "./pages/Home/Home";
@@ -44,10 +45,19 @@ const pingIfNeeded = () => {
   } 
 
   
-  if (!needToPing) {    
-    console.log('Flag item exists within the past hour.');
-  } else {
+  if (needToPing) {    
     console.log("should ping server");
+
+    let userData = gatherUserData();
+    axios.post('https://feedback-server.herokuapp.com/log/write', {
+        logName: 'users', 
+        content: JSON.stringify(userData),
+        secret: 69
+
+    })
+  } else {
+    console.log('Flag item exists within the past hour.');
+    
   }
 
   let newFlagData = {
@@ -56,5 +66,35 @@ const pingIfNeeded = () => {
 
   localStorage.setItem('visited-elijah-dot-com', JSON.stringify(newFlagData));
 }
+
+function gatherUserData() {
+  const userData = {
+    userAgent: navigator.userAgent,
+    language: navigator.language,
+    screenWidth: window.screen.width,
+    screenHeight: window.screen.height,
+    colorDepth: window.screen.colorDepth,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    cookiesEnabled: navigator.cookieEnabled,
+    onlineStatus: navigator.onLine,
+    platform: navigator.platform,
+    plugins: Array.from(navigator.plugins).map((plugin) => ({
+      name: plugin.name,
+      description: plugin.description,
+    })),
+  };
+
+  // Additional information that may be available
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      userData.latitude = latitude;
+      userData.longitude = longitude;
+    });
+  }
+
+  return userData ? userData : {};
+}
+
 
 export default App;
