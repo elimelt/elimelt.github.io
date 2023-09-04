@@ -1,7 +1,104 @@
 const quarters = [
   {
+    name: "Summer Updates 2023",
+    date: "September 2023",
+    content: [
+      {
+        title: "Projects",
+        body: (
+        <>
+          <p>
+            This summer, I worked as a backend software engineering intern at 
+            &nbsp;<a href={'https://stockcharts.com'}>StockCharts.com</a>. StockCharts
+            is a small but established company that provides data visualization tools
+            and market analysis commentary for investors. Part of our buisness model
+            inclues partnering with market experts to create content that gets published
+            on our site worldwide. 
+          </p>
+
+          <p>
+            Throughout the last month and a half of my internship, I was tasked with fully
+            redesigning and architecting a new backend for our article publishing platform 
+            (called Composer), with the stipulation that I needed to do it all using only
+            Java HTTP Servlets and JDBC (C3P0 Driver). At StockCharts, we operate under the design philosophy of
+            simplicity, and this means avoiding complex dependencies and frameworks at all costs.
+            The previous version of Composer (composer-v2) was written using Jersy, a framework that
+            is no longer used anywhere else in our codebase. Composer-v2 was also written several years
+            ago, and was not designed with extensibility or maintainability in mind. 
+            Although these constraints posed a challenge, I believe it pushed me to become a better
+            developer and software architect, since I there were no shortcuts available or frameworks
+            to enforce good design practices. 
+          </p>
+
+          <p>
+            The first step in this process was admitting that I needed to learn a lot more about 
+            Java enterprise design patterns if I didn't want to create even more technical debt
+            for another developer to replace later on. I started by trying to fully understand the 
+            system requirements and use cases for Composer, and then I began to research different
+            architectural patterns that would fit our needs. After consulting countless resources, including 
+            &nbsp;<a href="https://www.martinfowler.com/books/eaa.html">
+              Martin Fowler's Patters of Enterprise Application Architecture
+            </a>, <a href="https://www.youtube.com/@GOTO-">
+              countless talks given at various conferences  
+            </a>, and many more blogs and articles. I eventually settled on a combination
+            of MVC and Domain Driven Design, with my own implementation of various components that would usually 
+            be provided by a framework (request routers, parameter/request body validation middleware, etc.).
+          </p>
+
+          <p>
+            After I had a solid understanding of the architecture I wanted to implement, I began drafting a specification
+            to propose to my manager. One of the most important aspects of the new system was the seperation of controller logic that handled 
+            requests from the buisness logic that operated on domain entities. This was a major issue with the previous version
+            of Composer, since the controller logic was tightly coupled with the buisness logic, and the controller was responsible
+            for almost everything that happend in the system outside of executing SQL queries (which were handled by a Data Access layer).
+            I also wanted to make sure that the new system was highly extensible, so I designed it to be modular, with each
+            service being independent of the others. This meant that I could easily add new services to the system without having to
+            worry about breaking existing functionality, while also being able to change existing services without fear of hidden dependencies.
+          </p>
+
+          <p>
+            Additionally, a robust and extensible data model was a major priority of mine, since Composer-v2 
+            had a very limited scope initially, but was added onto over time with many new edge cases and 
+            unforseen requirements. This made adding new features a complex task that required a deep understanding
+            of the codebase and implementation details of each and every controller that was downstream of the new feature.
+            To solve this, I considered various storage solutions, including NoSQL databases like MongoDB or DynamoDB,
+            but ultimately decided approaches like single-table design would make our schema too rigid in terms of the indexes
+            we had at our desposal for maintaining query efficiency. Ultimately, I decided to use a relational database, since
+            many of our existing services already used MySQL, and it allowed for the extensibility I was looking for.
+          </p>
+
+          <p>
+            Next, I began modeling the domain entities and their relationships, while also documenting the high-level 
+            interface of each service in my spec. After thorougly testing the current version of Composer to make sure I didn't
+            miss any use-cases, I proposed my new design to my manager and was given the green light to begin development.
+          </p>
+
+          <p>
+            There were countless challenges I faced during the implementation of this project, but I will highlight a few of the most
+            interesting ones here. The first major challenge I faced was the fact that I had to implement a custom router for the
+            system, since I was not using a framework like Spring or Jersy. I decided to use what was essentially a n-ary tree to store
+            the path segments of each endpoint, as well as a request processor that found the corresponding endpoint for a given request.
+            I made heavy use of the Command Handler Pattern, whereby each endpoint was represented by a Command object that contained
+            the corresponding behavior needed to validate a request and call a service method. This allowed me to easily add new endpoints
+            to the system without having to modify the router or request processor, since I could just add a new Command object to the
+            system and it would be automatically registered with the router. This had the added benefit of creating a centralized 
+            declarative API specification within the codebase where I registered each command.  
+          </p>
+
+          <p>
+            ...<br/>
+            Coming soon, the horrors of manual DEPENDENCY INJECTION....
+          </p>
+
+        
+        </>
+        )
+      }
+    ]
+  },
+  {
     // update before finals are upon us
-    quarterName: "Spring Quarter 2023",
+    name: "Spring Updates 2023",
     date: "June 2023",
     content: [
       {
@@ -111,7 +208,7 @@ const quarters = [
     ],
   },
   {
-    quarterName: "Winter Quarter 2023",
+    name: "Winter Updates 2023",
     date: "February 2023",
     content: [
       {
@@ -201,7 +298,7 @@ const quarters = [
     ],
   },
   {
-    quarterName: "Fall Quarter 2022",
+    name: "Fall Updates 2022",
     date: "December 2022",
     content: [
       {
@@ -276,6 +373,6 @@ const quarters = [
       },
     ],
   },
-];
+].map((entry, index) => ({ ...entry, id: index }));
 
 export default quarters;

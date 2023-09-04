@@ -1,10 +1,9 @@
 const projects = [
   {
-    id: 1,
     name: "Syntext",
     techStack: "Express, React, MySQL, Jest, Docker",
     description: (
-      <>
+      <div className="content">
         <p>
           A typing practice website for programmers to practice typing Java
           syntax. I work as a project manager and developer, leading a team of 6
@@ -27,7 +26,7 @@ const projects = [
           site exactly as it will run in deployment, something that has helped
           me catch numerous bugs before pushing to production.
         </p>
-      </>
+      </div>
     ),
     githubURL: "https://github.com/hcp-uw/syntext",
     demoURL: "https://syntext.herokuapp.com/",
@@ -35,11 +34,10 @@ const projects = [
   },
 
   {
-    id: 3,
     name: "Crypto List",
     techStack: "Vue, Express",
     description: (
-      <>
+      <div className="content">
         <p>
           CryptoList makes use of the CoinCap API to pull real time price data
           on various crypto currencies, allowing users to search and filter the
@@ -61,18 +59,17 @@ const projects = [
           token. I highly reccomend CoinCap's API if you are ever looking for an
           API to experiment with!
         </p>
-      </>
+      </div>
     ),
     githubURL: "https://github.com/elimelt/CryptoList",
     demoURL: "https://elimelt.github.io/CryptoList/",
     demoGIF: require("./demo-gifs/crypto-list-demo.gif"),
   },
   {
-    id: 2,
     name: "RecipeSearch",
     techStack: "Express, React",
     description: (
-      <>
+      <div className="content">
         <p>
           RecipeSearch lets users search for a particular ingredient, which then
           displays recipes that you can use it in. I was able to achieve this
@@ -101,12 +98,18 @@ const projects = [
           API. This is by virtue of cutting costs, but is in no way
           representative of my skills as a developer.
         </p>
-      </>
+      </div>
     ),
     githubURL: "https://github.com/elimelt/RecipeSearchProduction",
     demoURL: "https://elimelt.github.io/RecipeSearchProduction/",
     demoGIF: require("./demo-gifs/recipe-search-demo.gif"),
   },
-];
+].map((project, i) => {
+  
+
+    
+  return { ...project, id: i };
+
+});
 
 export default projects;
