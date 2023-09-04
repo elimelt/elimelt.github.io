@@ -2,13 +2,19 @@ import React, { useState } from "react";
 
 import "./Project.css";
 
-const Project = ({ info }) => {
+const Project = ({ info, setShowing, showing }) => {
   const { name, description, techStack, githubURL, demoURL, demoGIF } = info;
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const isExpanded = showing === info.id;
 
-  const toggleExpansion = () => {
-    setIsExpanded(!isExpanded);
+  console.log(showing)
+
+  const visitProject = () => {
+    if (isExpanded) {
+      setShowing(-1);
+    } else {
+      setShowing(info.id);
+    }
   };
 
   return (
@@ -51,7 +57,7 @@ const Project = ({ info }) => {
           Demo
         </a>
 
-        <button className="expand-button" onClick={toggleExpansion}>
+        <button className="expand-button" onClick={() => visitProject()}>
           {isExpanded ? "Show Less" : "Show More"}
         </button>
       </div>

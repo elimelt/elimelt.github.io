@@ -1,10 +1,8 @@
-.project-container {
+/* .project-container {
   background-color: #fff;
-  /* width: 80%; */
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  /* margin: 0 auto; */
 }
 
 .project-name {
@@ -77,4 +75,76 @@
     width: 60%;
     margin-top: 0;
   }
+} */
+
+
+/* Example CSS for styling Project component */
+.project-container {
+  /* border: 1px solid #ddd;
+  border-radius: 5px; */
+  margin: auto;
+  padding: 10px;
+  width: 70%;
+
+  
+  /* background-color: #f7f7f7; */
+}
+
+.project-name {
+  font-size: 24px;
+  color: #333;
+}
+
+.project-tech-stack {
+  font-size: 16px;
+  /* color: #666; */
+}
+
+.project-description {
+  font-size: 1rem;
+  /* color: #444; */
+  margin-top: 10px;
+}
+
+.project-details {
+  /* Styles for project details if expanded */
+}
+
+.project-demo {
+  /* Styles for project demo section */
+}
+
+.project-gif {
+  max-width: 100%;
+  height: auto;
+}
+
+.project-links {
+  margin-top: 10px;
+}
+
+.project-link {
+  text-decoration: none;
+  color: #0074cc;
+  margin-right: 10px;
+}
+
+.expand-button {
+  /* background-color: #587c98; */
+  /* color: white; */
+  /* border: none; */
+  /* padding: 5px 10px; */
+  /* border-radius: 3px; */
+  /* cursor: pointer; */
+  /* outline: none; */
+
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: #555;
+  cursor: pointer;
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  transition: all 0.2s ease-in-out;
 }
