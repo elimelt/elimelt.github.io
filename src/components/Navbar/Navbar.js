@@ -19,8 +19,8 @@ const NavBar = () => {
           <ButtonLink to="/info" className="nav-link">
             Info
           </ButtonLink>
-          <ButtonLink to="/academics" className="nav-link">
-            Academics
+          <ButtonLink to="/blog" className="nav-link">
+            What I've been up to
           </ButtonLink>
         </div>
       </div>
