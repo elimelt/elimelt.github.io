@@ -1,5 +1,91 @@
 const entries = [
   {
+    name: "Fall Updates 2021",
+    date: "December 2021",
+    content: [
+      {
+        title: "Some Personal Updates",
+        body: (
+          <>
+
+            <p>
+              I recently participated in DubHacks 2023, where my team and I created a web page that reccommends groupings
+              of people based on their responses to a Google Form. We used the Google Forms API to retrieve the responses
+              to any existing form, and allowed the user to rank the importance of each question. We then used a pretty crazy
+              algorithm to find the optimal groupings of people based on their responses to the form.
+            </p>
+
+            <p>
+            To summarize it briefly, we created clusters of people, one for each question (using K-means). We then created a
+            Matrix of the distances between each person in each cluster, and then used a greedy algorithm to find the most
+            balanced groupings of people by sorting each row of people.
+            </p>
+
+            <p>
+            First, we picked k individuals with the worst average rankings for each question relative to the other respondants as
+            representatives for each group. Then, we continued to assign the remaining respondents to their best group representative.
+            We referred to this as "balanced groupings" since it ensured that each person would be assigned to a group that they
+            were at least semi-compatible with.
+            </p>
+
+            <p>
+              Next, we selected the k "most popular" individuals as representatives, which were the people who had the highest average rankings
+              for each question, assigning the remaining n - k people to their most compatible group representative. We referred to this as
+              "selfish groupings", since it would lead to the less "popular" people being assigned to groups that they were barely compatible with.
+            </p>
+
+            <p>
+              This was hardly an optimal algorithm, and almost certainly wasn't the best possible way to group people, but it did prove
+              to be an interesting and effective heuristic.
+            </p>
+
+            <p>
+              As an officer of a few clubs, I've been pretty busy this quarter. As a leader of
+              HCP, I've been working on a few projects, including our <a href="https://hcp-uw.vercel.app/">new website</a>, and a
+              couple project starter templates for members to use. Check out the docs and starter app I created for <a href="https://github.com/hcp-uw/react-fastapi-starter-template/tree/main">fastapi and react</a>!
+            </p>
+
+            <p>
+              I'm also about to kick off a new technical mock interview program for SWECC in the next few weeks, which I'm super excited about.
+              Over 50 people have already signed up, so I definitely have my work cut out for me.
+            </p>
+          </>
+        )
+      },
+      {
+        title: "Some School Updates",
+        body: (
+          <>
+            <p>
+              As we speak, I'm writing this update instead of studying for my CSE 312 midterm.
+            </p>
+
+            <p>
+              This quarter, I'm taking CSE 312 (Foundations of Computing II) and CSE 333 (Systems Programming).
+              I'm really enjoying both classes so far, but especially CSE 333. I've always been interested in
+              low-level programming, and this class has been a great way to solidify my understanding of C++.
+            </p>
+
+            <p>
+              So far in 333, we've implemented the C file I/O library using POSIX system calls, created a file
+              indexer and search engine, and are currently working on implementing the IO portion of a simple
+              HTTP server in C++.
+            </p>
+
+            <p>
+              I <em>guess</em> I'm also enjoying CSE 312 (a probability and statistics class), but only because
+              a few of our assignments involve coding in python. It is a pretty unfortunate situation when you
+              are able to brute force a counting problem in python, but struggle to solve it using combinatorics.
+              Still definitely a great class though. We've gotten to create a spam detector using Naive Bayes classification,
+              and are currently working implementing a bloom filter for large dataset membership queries.
+            </p>
+          </>
+        )
+      }
+    ]
+  },
+
+  {
     name: "Summer Updates 2023",
     date: "September 2023",
     content: [
@@ -26,7 +112,7 @@ const entries = [
             is no longer used anywhere else in our codebase. Composer-v2 was also written several years
             ago, and was not designed with extensibility or maintainability in mind. 
             Although these constraints posed a challenge, I believe it pushed me to become a better
-            developer and software architect, since I there were no shortcuts available or frameworks
+            developer and software architect, since there were no shortcuts available or frameworks
             to enforce good design practices. 
           </p>
 
@@ -86,8 +172,24 @@ const entries = [
           </p>
 
           <p>
-            ...<br/>
-            Coming soon, the horrors of manual DEPENDENCY INJECTION....
+            Another major challenge throughout this project was remaining conformant with the original API functionality of Composer-v2.
+            Since I wasn't replacing the frontend, I had to make sure that the new backend was able to handle all of the requests that
+            the frontend was sending. This meant that I had to reengineer the API from the frontend, which was a very tedious process.
+            I ended up spending a lot of time using CURL to send requests to the old backend and then comparing the responses to the new
+            backend. There was a lot of deprecated and unused functionality in the old API, so I had to make sure that I was only
+            reimplementing the endpoints that were actually needed, something that complicated the process even further.
+          </p>
+
+          <p>
+            In order to break this process up into smaller chunks, I first created a detailed API specification for Composer-v2, and then
+            began implementing endpoints one-by-one after getting a high-level overview of the system. I started with the endpoints that
+            were most critical to the functionality of the frontend, and then worked my way down the list.
+          </p>
+
+          <p>
+            In retrospect, I am very proud of the finished product, but think it would have been much easier to implement, not to mention
+            more maintainable, if I had used a framework like SpringBoot. However, I am glad that I was able to learn so much about
+            Java enterprise design patterns, and software architecture more generally.
           </p>
 
         

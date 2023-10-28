@@ -48,14 +48,14 @@ const Project = ({ info, setShowing, showing }) => {
         >
           Github
         </a>
-        <a
+        {demoURL && demoURL != "" && <a
           className="project-link"
           href={demoURL}
           target="_blank"
           rel="noopener noreferrer"
         >
           Demo
-        </a>
+        </a>}
 
         <button className="expand-button" onClick={() => visitProject()}>
           {isExpanded ? "Show Less" : "Show More"}
