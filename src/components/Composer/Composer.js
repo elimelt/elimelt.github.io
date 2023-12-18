@@ -17,16 +17,7 @@ const Composer = () =>{
 
   // Create a Tone.js synth
 
-  const synths = [
-    new Tone.Synth().toDestination(),
-    new Tone.Synth().toDestination(),
-    new Tone.Synth().toDestination(),
-    new Tone.Synth().toDestination(),
-    new Tone.Synth().toDestination(),
-    new Tone.Synth().toDestination(),
-    new Tone.Synth().toDestination(),
-    new Tone.Synth().toDestination(),
-  ];
+  const synths = new Array(mode.notes.length).fill().map(() => new Tone.Synth().toDestination());
 
   // Create a Tone.js Transport
   const transport = Tone.Transport;
