@@ -1,8 +1,8 @@
 {
-  "name": "elijah-dot-com",
+  "name": "elimelt.github.io",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://elimelt.github.io/elijah-dot-com/",
+  "homepage": "https://elimelt.github.io/",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
