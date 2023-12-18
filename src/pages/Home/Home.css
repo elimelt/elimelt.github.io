@@ -9,10 +9,7 @@
 
 .composer-toggle-button {
   /* centered in parent div */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
   /* style */
   background-color: #fff;
   border: 1px solid #000;
