@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/elijah-dot-com/static/css/main.f6492862.css",
-    "main.js": "/elijah-dot-com/static/js/main.c1038cf1.js",
+    "main.js": "/elijah-dot-com/static/js/main.0d9db5f0.js",
     "static/media/recipe-search-demo.gif": "/elijah-dot-com/static/media/recipe-search-demo.d8e49bc965fa258e57d3.gif",
     "static/media/life-demo.gif": "/elijah-dot-com/static/media/life-demo.7f433974388a4114811b.gif",
     "static/media/crypto-list-demo.gif": "/elijah-dot-com/static/media/crypto-list-demo.bfa9ce7a5c8b8866f068.gif",
@@ -11,10 +11,10 @@
     "static/media/portrait.JPG": "/elijah-dot-com/static/media/portrait.ff6e13f527707d228c94.JPG",
     "index.html": "/elijah-dot-com/index.html",
     "main.f6492862.css.map": "/elijah-dot-com/static/css/main.f6492862.css.map",
-    "main.c1038cf1.js.map": "/elijah-dot-com/static/js/main.c1038cf1.js.map"
+    "main.0d9db5f0.js.map": "/elijah-dot-com/static/js/main.0d9db5f0.js.map"
   },
   "entrypoints": [
     "static/css/main.f6492862.css",
-    "static/js/main.c1038cf1.js"
+    "static/js/main.0d9db5f0.js"
   ]
 }
