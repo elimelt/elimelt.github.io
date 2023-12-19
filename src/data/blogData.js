@@ -1,7 +1,7 @@
 const entries = [
   {
-    name: "Fall Updates 2021",
-    date: "December 2021",
+    name: "Fall Updates 2023",
+    date: "December 2023",
     content: [
       {
         title: "Some Personal Updates",
