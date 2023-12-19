@@ -14,14 +14,21 @@ function EtchASketch() {
 
     // Drawing logic
     const draw = (e) => {
+      e.preventDefault();
       if (!isDrawingRef.current) return;
 
       ctx.strokeStyle = color;  // Update color
       ctx.lineWidth = size;     // Update size
 
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      let x, y;
+      if (e.type === 'touchmove') {
+        x = e.touches[0].clientX - rect.left;
+        y = e.touches[0].clientY - rect.top;
+      } else {
+        x = e.clientX - rect.left;
+        y = e.clientY - rect.top;
+      }
 
       ctx.lineTo(x, y);
       ctx.stroke();
@@ -39,6 +46,17 @@ function EtchASketch() {
 
     canvas.addEventListener('mousemove', draw);
 
+    canvas.addEventListener('touchstart', () => {
+      isDrawingRef.current = true;
+      ctx.beginPath();
+    });
+
+    canvas.addEventListener('touchend', () => {
+      isDrawingRef.current = false;
+    })
+
+    canvas.addEventListener('touchmove', draw);
+
     return () => {
       canvas.removeEventListener('mousedown', () => {
         isDrawingRef.current = true;
@@ -47,6 +65,16 @@ function EtchASketch() {
         isDrawingRef.current = false;
       });
       canvas.removeEventListener('mousemove', draw);
+
+      canvas.removeEventListener('touchstart', () => {
+        isDrawingRef.current = true;
+      });
+
+      canvas.removeEventListener('touchend', () => {
+        isDrawingRef.current = false;
+      });
+
+      canvas.removeEventListener('touchmove', draw);
     };
   }, [color, size]);  // Re-run the effect if color or size changes
 
