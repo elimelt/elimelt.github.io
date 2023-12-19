@@ -1,26 +1,22 @@
-/* Container styles */
 .etch-container {
   font-family: Arial, sans-serif;
   text-align: center;
   padding: 50px;
 }
 
-/* Canvas styles */
 .etch-canvas {
   display: block;
-  margin: 0 auto 20px; /* Center the canvas horizontally and add bottom margin */
+  margin: 0 auto 20px;
   border: 4px solid #333;
 }
 
-/* Adjust canvas size for mobile screens */
 @media (max-width: 600px) {
   .etch-canvas {
     width: 100%;
-    height: 200px; /* Adjust the height as needed for mobile view */
+    height: 200px;
   }
 }
 
-/* Color and size selector styles */
 .etch-color-selector,
 .etch-size-selector {
   display: flex;
@@ -29,10 +25,9 @@
   margin-bottom: 20px;
 }
 
-/* Clear and export button styles */
 .etch-clear-button {
   display: block;
-  margin: 0 auto 10px; /* Center the buttons horizontally and add bottom margin */
+  margin: 0 auto 10px;
   padding: 10px 20px;
   font-size: 16px;
   background-color: #f44336;
@@ -47,11 +42,10 @@
   background-color: #d32f2f;
 }
 
-/* Background checkbox styles */
 .etch-background-checkbox {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the children horizontally */
+  justify-content: center;
   margin-bottom: 20px;
 }
 
@@ -61,18 +55,18 @@
   cursor: pointer;
 }
 
-.etch-background-checkbox input[type="checkbox"] {
+.etch-background-checkbox input[type='checkbox'] {
   margin-right: 10px;
   height: 1.2em;
 }
 
-.etch-background-checkbox input[type="checkbox"]:checked + label::before {
+.etch-background-checkbox input[type='checkbox']:checked + label::before {
   content: '✓';
   font-size: 1.2em;
   margin-right: 5px;
 }
 
-.etch-background-checkbox input[type="checkbox"] + label::before {
+.etch-background-checkbox input[type='checkbox'] + label::before {
   content: '';
   display: inline-block;
   width: 1.2em;
