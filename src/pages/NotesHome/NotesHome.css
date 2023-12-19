@@ -1,33 +1,43 @@
 /* General Styles */
 
 .notes-container {
+    margin-top: 5%;
     font-family: Arial, sans-serif;
     padding: 20px;
-    background-color: #f4f4f4;
-    height: 100vh;
+    background-color: #fffefe;
+    height: 50vh;
+    font-size: 2vw;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: auto;
 }
 
 .dir-heading {
     margin-top: 0;
+    /* margin-bottom: 10%; */
     color: #333;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 5vw;
+
+    /* only wrap dir items contained in this div, don't break up text */
+    display: flex;
+    flex-wrap: wrap;
+
 }
 
-.back-button {
-    background-color: #ddd;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background-color 0.3s ease;
-}
-
-.back-button:hover {
-    background-color: #ccc;
+.dir-item {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 /* Directory Styles */
 
 .directory-list {
+    max-width: 80%;
     display: flex;
     flex-wrap: wrap;
 }
