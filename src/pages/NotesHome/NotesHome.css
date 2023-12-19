@@ -17,9 +17,10 @@
     margin-top: 0;
     /* margin-bottom: 10%; */
     color: #333;
-    font-style: italic;
-    font-weight: 500;
+    font-style: bold;
     font-size: 5vw;
+    font-weight: 700;
+
 
     /* only wrap dir items contained in this div, don't break up text */
     display: flex;
