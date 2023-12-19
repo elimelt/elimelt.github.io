@@ -22,6 +22,9 @@ const NavBar = () => {
           <ButtonLink to="/blog" className="nav-link">
             What I've been up to
           </ButtonLink>
+          <ButtonLink to="/notes" className="nav-link">
+            Notes
+          </ButtonLink>
         </div>
       </div>
     </div>

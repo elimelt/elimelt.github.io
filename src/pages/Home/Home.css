@@ -41,7 +41,7 @@
 
 .home-image-container {
   flex: 1;
-  max-width: 400px; /* Limit the max width of the image container */
+  max-width: 400px; 
 }
 
 .home-image {
@@ -71,6 +71,5 @@
 
   .home-image-container {
     margin-left: 100px;
-    /* Remove the max width for larger screens */
   }
 }

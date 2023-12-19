@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import axios from 'axios';
 // import Layout from "./Layout";
 import Title from "./components/Title/Title";
@@ -11,6 +11,7 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Blog from "./pages/Blog/Blog";
 import EtchASketch from "./components/EtchASketch/EtchASketch";
+import NotesHome from "./pages/NotesHome/NotesHome";
 
 const App = () => {
   pingIfNeeded()
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<ContactMe />} />
         <Route path="/draw" element={<EtchASketch />} />
+        <Route path="/notes/*" element={<NotesHome />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
