@@ -6,7 +6,7 @@ const Title = () => {
     <div className="title-container">
       <h1 className="title">
         <span className="title-element">
-          Elijah.<i>com</i>
+          elimelt.<i>com</i>
         </span>
         <a
           href="https://linkedin.com/in/elijah-melton"

@@ -5,15 +5,15 @@ import Title from "./components/Title/Title";
 import Home from "./pages/Home/Home";
 import Projects from "./pages/Projects/Projects";
 import Info from "./pages/Info/Info";
-import Academics from "./pages/Blog/Blog";
 import ContactMe from "./pages/ContactMe/ContactMe";
 import NotFound from "./pages/NotFound/NotFound";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Blog from "./pages/Blog/Blog";
+import EtchASketch from "./components/EtchASketch/EtchASketch";
 
 const App = () => {
-  pingIfNeeded()  
+  pingIfNeeded()
 
   return (
     <>
@@ -25,6 +25,7 @@ const App = () => {
         <Route path="/info" element={<Info />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<ContactMe />} />
+        <Route path="/draw" element={<EtchASketch />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
@@ -42,22 +43,22 @@ const pingIfNeeded = () => {
     flagTimestamp = new Date(flagData.timestamp);
     if (flagTimestamp > hourAgo)
       needToPing = false
-  } 
+  }
 
-  
-  if (needToPing) {    
+
+  if (needToPing) {
     console.log("should ping server");
 
     let userData = gatherUserData();
     axios.post('https://feedback-server.herokuapp.com/log/write', {
-        logName: 'users', 
+        logName: 'users',
         content: userData,
         secret: 69
 
     })
   } else {
     console.log('Flag item exists within the past hour.');
-    
+
   }
 
   let newFlagData = {
