@@ -51,7 +51,7 @@ const NotesDirectory = ({
     setDirectories(
       contents.filter(item => item.type === 'dir').map(item => item.name)
     )
-    setFiles(contents.filter(item => item.type === 'file'))
+    setFiles(contents.filter(item => item.type === 'file' && item.name.endsWith('.md')))
   }
 
   const handleDirectoryClick = dir => {
@@ -67,7 +67,11 @@ const NotesDirectory = ({
       )
       const data = await response.json()
       const decodedContent = atob(data.content)
-      setSelectedFileContent(decodedContent)
+
+      setSelectedFileContent(decodedContent
+        .split('\n')
+        .filter(line => line[0] !== '!')
+        .join('\n'))
       setOpenedFile(filePath)
     } catch (error) {
       console.error('Error fetching file content:', error)
