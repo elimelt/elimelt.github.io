@@ -1,6 +1,6 @@
 .markdown-file-viewer {
-  width: 80vw;
-  height: 80vh;
+  width: 95%;
+  height: 100%;
   overflow: auto;
   padding: 10px;
   border: 1px solid #ccc;

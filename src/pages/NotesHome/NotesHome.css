@@ -18,7 +18,7 @@
     /* margin-bottom: 10%; */
     color: #333;
     font-style: bold;
-    font-size: 5vw;
+    font-size: 4vw;
     font-weight: 700;
 
 
@@ -67,8 +67,17 @@
     color: #007bff;
 }
 
+.directory-button {
+    font-size: 30px;
+    color: blue;
+    font-weight: 900;
+}
+
 .file-name {
+    font-size: 30px;
     margin-left: 10px;
+    font-style: italic;
+    color: #000000;
 }
 
 /* Modal Styles */
@@ -90,18 +99,25 @@
     background-color: #fff;
     width: 80%;
     height: 80%;
-    max-width: 800px;
-    max-height: 600px;
+    max-width: 80%;
+    max-height: 70%;
     overflow-y: auto;
+    overflow-x:visible;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+
+    /* dont allow horizontal scroll but allow vertical scroll*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Responsive Styles */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .file-modal {
         width: 90%;
         height: 90%;
     }
-}
+} */

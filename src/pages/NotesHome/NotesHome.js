@@ -80,7 +80,9 @@ const NotesDirectory = ({
     }
     return (
       <div className='directory-item'>
-        <button onClick={handleBackButtonClick} className='directory-button'>
+        <button
+          onClick={handleBackButtonClick}
+          className='directory-button'>
           ..
         </button>
       </div>
