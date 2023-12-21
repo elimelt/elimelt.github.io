@@ -35,7 +35,7 @@ const NotesDirectory = ({
     const contents = await response.json()
 
     setDirectories(
-      contents.filter(item => item.type === 'dir').map(item => item.name)
+      contents.filter(item => item.type === 'dir' && item.name[0] !== '.').map(item => item.name)
     )
     setFiles(
       contents.filter(item => item.type === 'file' && item.name.endsWith('.md'))
