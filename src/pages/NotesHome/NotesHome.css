@@ -70,13 +70,13 @@
 }
 
 .directory-button {
-  font-size: 30px;
+  font-size: 25px;
   color: blue;
   font-weight: 900;
 }
 
 .file-name {
-  font-size: 30px;
+  font-size: 25px;
   /* margin-left: 10px; */
   font-style: italic;
   color: #000000;

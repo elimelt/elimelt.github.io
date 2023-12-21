@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
 import MarkdownFileViewer from '../../components/MarkdownFileViewer/MarkdownFileViewer'
+import CollectionView from '../../components/CollectionView/CollectionView'
 import './NotesHome.css'
+
+
 
 const NotesDirectory = ({
   path,
@@ -16,23 +19,6 @@ const NotesDirectory = ({
   useEffect(() => {
     fetchDirectoryContents(path)
   }, [path])
-
-  // const fetchDirectories = async () => {
-  //   const repoOwner = 'elimelt';
-  //   const repoName = 'notes';
-  //   const repoPath = path ? path : '';
-
-  //   const response = await fetch(
-  //     `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${repoPath}`
-  //   );
-  //   const data = await response.json();
-
-  //   console.log('data', data)
-  //   const dirs = data
-  //     .filter(item => item.type === 'dir')
-  //     .map(item => item.name);
-  //   setDirectories(dirs);
-  // };
 
   const handleBackButtonClick = () => {
     const pathArray = path.split('/')
@@ -51,27 +37,36 @@ const NotesDirectory = ({
     setDirectories(
       contents.filter(item => item.type === 'dir').map(item => item.name)
     )
-    setFiles(contents.filter(item => item.type === 'file' && item.name.endsWith('.md')))
+    setFiles(
+      contents.filter(item => item.type === 'file' && item.name.endsWith('.md'))
+    )
   }
 
   const handleDirectoryClick = dir => {
+    console.log('dirClick', dir)
     setPath(path => `${path}/${dir}`)
   }
 
-  const handleFileClick = async filePath => {
+  console.log('files', files)
+
+  const handleFileClick = async fileName => {
+    const filePath = `${path}/${fileName}`
+    console.log('fileClick', filePath)
     try {
       const repoOwner = 'elimelt'
       const repoName = 'notes'
       const response = await fetch(
-        `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`
+        `https://api.github.com/repos/${repoOwner}/${repoName}/contents${filePath}`
       )
       const data = await response.json()
       const decodedContent = atob(data.content)
 
-      setSelectedFileContent(decodedContent
-        .split('\n')
-        .filter(line => line[0] !== '!')
-        .join('\n'))
+      setSelectedFileContent(
+        decodedContent
+          .split('\n')
+          .filter(line => line[0] !== '!')
+          .join('\n')
+      )
       setOpenedFile(filePath)
     } catch (error) {
       console.error('Error fetching file content:', error)
@@ -93,27 +88,25 @@ const NotesDirectory = ({
 
   return (
     <div className='directory-list'>
-      <BackButton />
-      {directories.map((dir, index) => (
-        <div key={index} className='directory-item'>
-          <button
-            onClick={() => handleDirectoryClick(dir)}
-            className='directory-button'
-          >
-            {dir}
-          </button>
-        </div>
-      ))}
-      {files.map((file, index) => (
-        <div key={index} className='file-item'>
-          <button
-            onClick={() => handleFileClick(file.path)}
-            className='file-button'
-          >
-            <span className='file-name'>{file.name}</span>
-          </button>
-        </div>
-      ))}
+      <CollectionView
+        collection={directories}
+        classNames={{
+          div: 'directory-item',
+          button: 'directory-button',
+          span: 'directory-button'
+        }}
+        clickHandler={handleDirectoryClick}
+        BackButton={BackButton}
+      />
+      <CollectionView
+        collection={files.map(file => file.name)}
+        classNames={{
+          div: 'file-item',
+          button: 'file-button',
+          span: 'file-name'
+        }}
+        clickHandler={handleFileClick}
+      />
     </div>
   )
 }
@@ -148,9 +141,8 @@ const NotesHome = () => {
         </div>
       )
     }
-    console.log('path', path)
+
     const pathArray = ['notes', ...path.substring(1).split('/')]
-    console.log('pathArray', pathArray)
     return (
       <div className='dir-heading'>
         {pathArray.map((dir, index) => (
