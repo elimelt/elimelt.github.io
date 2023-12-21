@@ -137,7 +137,7 @@ const NotesHome = () => {
     if (path === '') {
       return (
         <div className='dir-heading'>
-          <span className='dir-item'>notes/</span>
+          <span className='dir-item'><a style={{textDecoration: "none", color: 'black'}} href="https://github.com/elimelt/notes">notes/</a></span>
         </div>
       )
     }
