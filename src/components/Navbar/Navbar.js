@@ -8,7 +8,7 @@ const NavBar = () => {
       <div className="app-bar">
         <div className="toolbar">
           <ButtonLink to="/contact" className="nav-link">
-            Contact me
+            Contact
           </ButtonLink>
           <ButtonLink to="/" className="nav-link">
             Home
@@ -20,7 +20,7 @@ const NavBar = () => {
             Info
           </ButtonLink>
           <ButtonLink to="/blog" className="nav-link">
-            What I've been up to
+            Blog
           </ButtonLink>
           <ButtonLink to="/notes" className="nav-link">
             Notes
