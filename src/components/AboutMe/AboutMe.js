@@ -53,8 +53,6 @@ const AboutMe = () => {
     setIsSkillsExpanded(false);
   };
 
-  console.log(windowSize);
-
   return (
     <div className="about-me-container">
       <div className="resume">

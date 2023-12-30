@@ -7,7 +7,6 @@ const Project = ({ info, setShowing, showing }) => {
 
   const isExpanded = showing === info.id;
 
-  console.log(showing)
 
   const visitProject = () => {
     if (isExpanded) {

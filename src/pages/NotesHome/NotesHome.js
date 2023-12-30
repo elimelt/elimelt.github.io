@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import MarkdownFileViewer from '../../components/MarkdownFileViewer/MarkdownFileViewer'
+import FileViewer from '../../components/FileViewer/FileViewer'
 import CollectionView from '../../components/CollectionView/CollectionView'
 import './NotesHome.css'
 
@@ -38,20 +38,16 @@ const NotesDirectory = ({
       contents.filter(item => item.type === 'dir' && item.name[0] !== '.').map(item => item.name)
     )
     setFiles(
-      contents.filter(item => item.type === 'file' && item.name.endsWith('.md'))
+      contents.filter(item => item.type === 'file' && item.name[0] !== '.')
     )
   }
 
   const handleDirectoryClick = dir => {
-    console.log('dirClick', dir)
     setPath(path => `${path}/${dir}`)
   }
 
-  console.log('files', files)
-
   const handleFileClick = async fileName => {
     const filePath = `${path}/${fileName}`
-    console.log('fileClick', filePath)
     try {
       const repoOwner = 'elimelt'
       const repoName = 'notes'
@@ -169,7 +165,7 @@ const NotesHome = () => {
       {openedFile && (
         <div className='modal-overlay'>
           <div ref={fileViewerRef} className='file-modal'>
-            <MarkdownFileViewer content={selectedFileContent} />
+            <FileViewer fileName={openedFile} fileContents={selectedFileContent} />
           </div>
         </div>
       )}

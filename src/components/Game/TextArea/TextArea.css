@@ -1,0 +1,64 @@
+/* @font-face {
+  font-family: cascadia-mono;
+  src: url('../../public/fonts/CascadiaMono-Regular.ttf') format("truetype");
+} */
+
+.text-area-container {
+  font-family: Consolas, monospace;
+  font-size: 65%;
+  color: #ffffff;
+  white-space: pre;
+
+  /* width: fit-content;
+  height: fit-content; */
+  /* margin-left: 10%; */
+  background-color: #2f2f2f;
+}
+
+.line-container {
+  max-width:80%
+}
+
+.user-input {
+  position:absolute;
+  width: 90%;
+  height: 10rem;
+  opacity: 0%;
+}
+
+.line-number {
+  margin-right: 4%;
+  color:#366fff;
+}
+
+.line {
+  padding-bottom: 5px;
+}
+
+.word {
+  padding-right: 0.4em;
+  tab-size: 3;
+}
+
+.letter {
+  display: inline-block;
+  user-select: none;
+}
+
+.correct {
+  color: #0eb037;
+}
+
+.visited {
+  color: #0eb037;
+}
+
+.incorrect {
+  text-decoration: underline red;
+  color: red;
+}
+
+.active {
+  background-color: #ffce0948;
+}
+

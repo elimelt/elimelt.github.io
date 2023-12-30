@@ -3,7 +3,6 @@ import "./BlogEntry.css";
 
 const BlogEntry = ({ blogData }) => {
   const { entryName, date, content } = blogData;
-  console.log(blogData)
   return (
     <div className="blog-entry-container">
       <div className="blog-entry-header">

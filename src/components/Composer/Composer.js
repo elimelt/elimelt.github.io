@@ -10,9 +10,7 @@ const Composer = () =>{
   const [matrix, setMatrix] = useState(Array.from({ length: mode.notes.length }, () => Array(8).fill(false)));
 
   const handleMatrixChange = (newMatrix) => {
-    console.log(cols)
     setMatrix(newMatrix);
-    console.log(matrix)
   };
 
   // Create a Tone.js synth
@@ -43,7 +41,6 @@ const Composer = () =>{
   };
 
   const handleModeChange = (event) => {
-    console.log(event.target.value)
     setMode(modes[event.target.value]);
     setMatrix(Array.from({ length: modes[event.target.value].notes.length }, () => Array(cols).fill(false)));
   }

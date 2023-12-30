@@ -1,0 +1,6 @@
+.file-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 99%;
+  width: 99%;
+}
