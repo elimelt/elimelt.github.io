@@ -16,9 +16,9 @@ const NavBar = () => {
           <ButtonLink to="/projects" className="nav-link">
             Projects
           </ButtonLink>
-          <ButtonLink to="/info" className="nav-link">
+          {/* <ButtonLink to="/info" className="nav-link">
             Info
-          </ButtonLink>
+          </ButtonLink> */}
           <ButtonLink to="/blog" className="nav-link">
             Blog
           </ButtonLink>

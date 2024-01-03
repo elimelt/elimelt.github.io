@@ -51,7 +51,7 @@ const pingIfNeeded = () => {
 
 
   if (needToPing) {
-    console.log("should ping server");
+    // console.log("should ping server");
 
     let userData = gatherUserData();
     axios.post('https://feedback-server.herokuapp.com/log/write', {
@@ -61,7 +61,7 @@ const pingIfNeeded = () => {
 
     })
   } else {
-    console.log('Flag item exists within the past hour.');
+    // console.log('Flag item exists within the past hour.');
 
   }
 

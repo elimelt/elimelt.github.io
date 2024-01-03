@@ -20,7 +20,7 @@ function ContactForm({ subject }) {
       return;
     }
     localStorage.setItem("lastEmailTimestamp", String(now));
-    console.log(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
+    // console.log(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
     axios
       .post("https://feedback-server.herokuapp.com/feedback/send", {
         name: name,

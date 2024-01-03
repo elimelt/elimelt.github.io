@@ -98,6 +98,8 @@
 .project-tech-stack {
   font-size: 16px;
   /* color: #666; */
+  color: #b9b9b9;
+  box-shadow: 0 4px 6px black;
 }
 
 .project-description {

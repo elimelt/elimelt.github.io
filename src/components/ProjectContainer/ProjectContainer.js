@@ -1,25 +1,24 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import projects from '../../data/projectData'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import projects from '../../data/projectData';
 
 const SkillsContainer = styled.div`
-  padding: 50px;
-  background-color: #f4f4f4;
-`
+  background-color: #ffffff;
+`;
 
 const ProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
-`
+`;
 
 const ProjectCard = styled.div`
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px 2px  rgba(110, 110, 110, .5);
   cursor: pointer;
-  transition: all 3s ease; // Transition for smooth animation
+  transition: all 3s ease;
 
   h3 {
     margin-top: 0;
@@ -27,15 +26,10 @@ const ProjectCard = styled.div`
 
   p {
     margin-bottom: 15px;
-    overflow: visible; // Ensures text isn't truncated
-    display: block; // Ensures text wraps within its container
+    overflow: visible;
+    display: block;
   }
-
-  &.expanded {
-    grid-column: 1 / -1; // Span across all columns
-    transition: all 3s ease;
-  }
-`
+`;
 
 const ProjectLinks = styled.div`
   display: flex;
@@ -48,96 +42,127 @@ const ProjectLinks = styled.div`
       text-decoration: underline;
     }
   }
-`
+`;
 
 const DemoGIF = styled.img`
   width: 100%;
+  margin-top: 20px;
   border-radius: 8px;
-`
+`;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContent = styled.div`
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  width: 75%;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+`;
 
 const ProjectContainer = () => {
-  const [expandedProject, setExpandedProject] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  const toggleExpand = id => {
-    if (expandedProject === id) {
-      setExpandedProject(null)
-    } else {
-      setExpandedProject(id)
-    }
-  }
+  const openModal = (id) => {
+    setIsModalOpen(true);
+    setSelectedProject(id);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   return (
     <SkillsContainer>
       <h2>Projects</h2>
       <ProjectsGrid>
-        {projects.map(project => (
+        {projects.map((project) => (
           <ProjectCard
             key={project.id}
-            onClick={() => toggleExpand(project.id)}
-            className={expandedProject === project.id ? 'expanded' : ''}
+            onClick={() => openModal(project.id)}
           >
             <h3>{project.name}</h3>
-            {expandedProject === project.id ? (
-              <>
-                <p>
-                  <strong>Tech Stack:</strong> {project.techStack}
-                </p>
-                <p>{project.description}</p>
-                <ProjectLinks>
-                  {project.githubURL && (
-                    <a
-                      href={project.githubURL}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      GitHub
-                    </a>
-                  )}
-                  {project.demoURL && (
-                    <a
-                      href={project.demoURL}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      Demo
-                    </a>
-                  )}
-                </ProjectLinks>
-                {project.demoGIF && (
-                  <DemoGIF src={project.demoGIF} alt={`${project.name} Demo`} />
-                )}
-              </>
-            ) : (
-              <>
-                <ProjectLinks>
-                  {project.githubURL && (
-                    <a
-                      href={project.githubURL}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      GitHub
-                    </a>
-                  )}
-                  {project.demoURL && (
-                    <a
-                      href={project.demoURL}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      Demo
-                    </a>
-                  )}
-                </ProjectLinks>
-
-                <p>{project.description.props.children[0]}</p>
-              </>
-            )}
+            <ProjectLinks>
+              {project.githubURL && (
+                <a
+                  href={project.githubURL}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  GitHub
+                </a>
+              )}
+              {project.demoURL && (
+                <a
+                  href={project.demoURL}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  Demo
+                </a>
+              )}
+            </ProjectLinks>
+            {project.description.props.children[0]}
           </ProjectCard>
         ))}
       </ProjectsGrid>
-    </SkillsContainer>
-  )
-}
 
-export default ProjectContainer
+      {isModalOpen && (
+        <ModalOverlay onClick={closeModal}>
+          <ModalContent onClick={(e) => e.stopPropagation()}>
+            {selectedProject !== null && (
+              <>
+                <h3>{projects.find((p) => p.id === selectedProject)?.name}</h3>
+                  <strong>Tech Stack:</strong>{' '}
+                  {projects.find((p) => p.id === selectedProject)?.techStack}
+                  {projects.find((p) => p.id === selectedProject)?.description}
+                <ProjectLinks>
+                  {projects.find((p) => p.id === selectedProject)?.githubURL && (
+                    <a
+                      href={projects.find((p) => p.id === selectedProject)?.githubURL}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      GitHub
+                    </a>
+                  )}
+                  {projects.find((p) => p.id === selectedProject)?.demoURL && (
+                    <a
+                      href={projects.find((p) => p.id === selectedProject)?.demoURL}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      Demo
+                    </a>
+                  )}
+                </ProjectLinks>
+                {projects.find((p) => p.id === selectedProject)?.demoGIF && (
+                  <DemoGIF
+                    src={projects.find((p) => p.id === selectedProject)?.demoGIF}
+                    alt={`${projects.find((p) => p.id === selectedProject)?.name} Demo`}
+                  />
+                )}
+              </>
+            )}
+          </ModalContent>
+        </ModalOverlay>
+      )}
+    </SkillsContainer>
+  );
+};
+
+export default ProjectContainer;
