@@ -45,6 +45,14 @@ const FileViewer = ({ fileName, fileContents }) => {
             </div>
         )
 
+    return (
+        <div className='file-viewer'>
+            <h2 style={headingStyle}>{fileName}</h2>
+            <p stye={{ color: 'red' }}>Warning: unsupported file</p>
+            <p>{fileContents}</p>
+        </div>
+    )
+
 }
 
 export default FileViewer
