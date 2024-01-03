@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Blog from "./pages/Blog/Blog";
 import EtchASketch from "./components/EtchASketch/EtchASketch";
 import NotesHome from "./pages/NotesHome/NotesHome";
+import NewsfeedPage from "./pages/NewsfeedPage/NewsfeedPage";
 
 const App = () => {
   pingIfNeeded()
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/contact" element={<ContactMe />} />
         <Route path="/draw" element={<EtchASketch />} />
         <Route path="/notes/*" element={<NotesHome />} />
+        <Route path="/newsfeed" element={<NewsfeedPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

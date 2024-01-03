@@ -35,6 +35,16 @@ const FileViewer = ({ fileName, fileContents }) => {
             </div>
         )
 
+    const isHTML = extension === 'html'
+
+    if (isHTML)
+        return (
+            <div className='file-viewer'>
+                <h2 style={headingStyle}>{fileName}</h2>
+                <div dangerouslySetInnerHTML={{ __html: fileContents }} />
+            </div>
+        )
+
 }
 
 export default FileViewer
