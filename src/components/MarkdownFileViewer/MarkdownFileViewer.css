@@ -3,9 +3,9 @@
   height: 100%;
   overflow: auto;
   padding: 10px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc;*/
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   font-family: 'Arial', sans-serif;
   font-size: 14px;
   display: flex;
