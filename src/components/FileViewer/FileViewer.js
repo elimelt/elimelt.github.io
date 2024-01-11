@@ -12,6 +12,7 @@ const FileViewer = ({ fileName, fileContents }) => {
         margin: '1rem 0',
     }
 
+
     if (isImage)
         return (
             <div className='file-viewer'>
