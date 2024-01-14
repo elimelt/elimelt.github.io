@@ -6,7 +6,6 @@ import {
 } from './inputValidation'
 // import Cursor from '../../Cursor/Cursor'
 import './TextArea.css'
-import { useState } from 'react'
 
 const Letter = ({
   letterActual,
@@ -80,7 +79,7 @@ const Word = (props) => {
 
 const Line = (props) => {
   const { line, typingState, cursor, lineIsActive, lineIndex } = props;
-  const { currWord, userInput } = typingState;
+  const { userInput } = typingState;
 
   const words = line.split(' ').map((word, index) => (
     <Word
@@ -169,14 +168,10 @@ export default function TextArea (props) {
           if (linesDisplayed.length === lineIndex.current + 1) {
             setGameFinished(true); //this is never called. functionality in handleChange
           } else {
-            let offset;
-            // console.log(lineIndex.current + " < " + LINES_DISPLAYED/2 + " or " +  lineIndex.current + " > " +  lines.length + " - " + LINES_DISPLAYED + " - 1")
-            // console.log(lineIndex.current < LINES_DISPLAYED/2, " or ", lineIndex.current > lines.length - LINES_DISPLAYED - 1)
             
             lineIndex.current++;
             wordIndex.current = 0;
             letterIndex.current = -1;
-            // typingProgress.current += '\n';
             const nextLine = linesDisplayed[cursor.lineIndex.current].text.split(' ');
             setTypingState((oldState) => ({
               ...oldState,
@@ -196,7 +191,6 @@ export default function TextArea (props) {
             userInput: '\t' + userInput,
           }));
           letterIndex.current = userInput.length;
-          // typingProgress.current += '\t';
         }
         event.preventDefault();
         break;
@@ -208,7 +202,6 @@ export default function TextArea (props) {
             ...oldState,
             userInput: userInput.substring(0, userInput.length - 1),
           }));
-          // numDel.current++;
         }
         event.preventDefault();
         break;
@@ -220,14 +213,8 @@ export default function TextArea (props) {
 
   // handles all characters that are displayed
   function handleChange (event) {
-    // if (!recording) startGame()
-
     const keyTyped = event.target.value.charAt(event.target.value.length - 1)
     const typedCorrectKey = currWord[letterIndex.current + 1] === keyTyped
-      // typingTarget.charAt(typingProgress.current.length) === keyTyped
-
-    // if (typedCorrectKey && !madeMistake)
-    //   typingProgress.current += keyTyped
 
     if (allowedToOverflow(currWord, event.target.value)) {
       letterIndex.current = userInput.length
@@ -271,10 +258,6 @@ export default function TextArea (props) {
           onBlur={() => setTypingStatus(false)}
         />
         {renderedlinesDisplayed}
-        {/* <Cursor
-          typingState={typingState}
-          setTypingStatus={setTypingStatus}
-        /> */}
       </div>
     </>
   )

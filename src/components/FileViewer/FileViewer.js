@@ -6,7 +6,7 @@ const FileViewer = ({ fileName, fileContents }) => {
     const parts = fileName.split('.')
     const extension = parts[parts.length - 1]
     const isImage = ['png', 'jpg', 'jpeg', 'gif'].includes(extension)
-
+    console.log(fileContents)
     const headingStyle = {
         fontSize: '1.5rem',
         margin: '1rem 0',
@@ -17,13 +17,13 @@ const FileViewer = ({ fileName, fileContents }) => {
         return (
             <div className='file-viewer'>
                 <h2 style={headingStyle}>{fileName}</h2>
-                <img src={fileContents} alt='file' />
+                <img src={'data:image/png;charset=utf-8;base64,' + fileContents} alt='file' />
             </div>
         )
 
     const isMarkdown = extension === 'md'
     if (isMarkdown)
-        return  <MarkdownFileViewer content={fileContents} />
+        return  <MarkdownFileViewer children={fileContents} />
 
 
     const isCode = ['js', 'java', 'py', 'c', 'cpp', 'kt'].includes(extension)

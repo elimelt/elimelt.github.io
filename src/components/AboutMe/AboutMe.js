@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "./AboutMe.css";
 
-function getWindowSize() {
-  const { innerWidth, innerHeight } = window;
-  return { innerWidth, innerHeight };
-}
 
 const AboutMe = () => {
-  const [windowSize, setWindowSize] = useState(getWindowSize());
   const [isEducationExpanded, setIsEducationExpanded] = useState(true);
   const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
   const [isSkillsExpanded, setIsSkillsExpanded] = useState(false);
   const [isContributionsExpanded, setIsContributionsExpanded] = useState(false);
-
-  useEffect(() => {
-    const handleWindowResize = () => {
-      setWindowSize(getWindowSize());
-    };
-
-    window.addEventListener("resize", handleWindowResize);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
 
   const handleToggleEducation = () => {
     setIsEducationExpanded(!isEducationExpanded);

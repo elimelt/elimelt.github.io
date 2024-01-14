@@ -12,7 +12,7 @@ const Title = () => {
           href="https://linkedin.com/in/elijah-melton"
           className="title-link"
           target="_blank"
-          rel="nonreferer"
+          rel="noreferrer"
         >
           LinkedIn
         </a>
@@ -20,7 +20,7 @@ const Title = () => {
           href="https://github.com/elimelt"
           className="title-link"
           target="_blank"
-          rel="nonreferer"
+          rel="noreferrer"
         >
           GitHub
         </a>

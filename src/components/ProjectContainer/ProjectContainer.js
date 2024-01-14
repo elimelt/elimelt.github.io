@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import projects from '../../data/projectData';
 
-const SkillsContainer = styled.div`
+const ProjectsContainer = styled.div`
   background-color: #ffffff;
+  padding: 10%;
+  padding-top: 2%;
 `;
 
 const ProjectsGrid = styled.div`
@@ -85,9 +87,8 @@ const ProjectContainer = () => {
     setIsModalOpen(false);
     setSelectedProject(null);
   };
-
   return (
-    <SkillsContainer>
+    <ProjectsContainer>
       <h2>Projects</h2>
       <ProjectsGrid>
         {projects.map((project) => (
@@ -161,7 +162,7 @@ const ProjectContainer = () => {
           </ModalContent>
         </ModalOverlay>
       )}
-    </SkillsContainer>
+    </ProjectsContainer>
   );
 };
 

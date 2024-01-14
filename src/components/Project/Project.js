@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import "./Project.css";
 
 const Project = ({ info, setShowing, showing }) => {
@@ -47,7 +45,7 @@ const Project = ({ info, setShowing, showing }) => {
         >
           Github
         </a>
-        {demoURL && demoURL != "" && <a
+        {demoURL && demoURL !== "" && <a
           className="project-link"
           href={demoURL}
           target="_blank"

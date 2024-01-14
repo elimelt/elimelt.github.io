@@ -84,17 +84,24 @@ const NotesDirectory = ({
     try {
       const repoOwner = 'elimelt'
       const repoName = 'notes'
+      const oldUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents${filePath}`
       const response = await fetch(
-        `https://api.github.com/repos/${repoOwner}/${repoName}/contents${filePath}`
+        oldUrl
       )
       const data = await response.json()
-      const decodedContent = atob(data.content)
+
+      const imgExt = ['png', 'jpg', 'jpeg', 'gif', 'svg']
+      const parts = fileName.split('.')
+      const extension = parts[parts.length - 1]
+      const decodedContent = imgExt.includes(extension)
+        ? data.content
+        : atob(data.content)
 
       setSelectedFileContent(
         decodedContent
-          .split('\n')
-          .filter(line => line[0] !== '!')
-          .join('\n')
+          // .split('\n')
+          // .filter(line => line[0] !== '!')
+          // .join('\n')
       )
       setOpenedFile(filePath)
     } catch (error) {

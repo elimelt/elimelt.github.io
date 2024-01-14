@@ -1,5 +1,4 @@
 import React from "react";
-import ProjectShowcase from "../../components/ProjectShowcase/ProjectShowcase.js";
 import ProjectContainer from "../../components/ProjectContainer/ProjectContainer.js";
 
 import "./Projects.css";
