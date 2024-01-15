@@ -20,13 +20,15 @@ function useEscapeKey(handleClose) {
   }, [handleEscKey]);
 }
 
-const NotesDirectory = ({
+const RepoDirectory = ({
   path,
   setPath,
   openedFile,
   setOpenedFile,
   selectedFileContent,
-  setSelectedFileContent
+  setSelectedFileContent,
+  repoOwner="elimelt",
+  repoName="notes",
 }) => {
   const [directories, setDirectories] = useState([])
   const [files, setFiles] = useState([])
@@ -46,9 +48,6 @@ const NotesDirectory = ({
   }
 
   const fetchDirectoryContents = async dir => {
-    const repoOwner = 'elimelt'
-    const repoName = 'notes'
-
     if (dirCache.has(dir)) {
       const { directories, files } = dirCache.get(dir)
       setDirectories(directories)
@@ -82,8 +81,6 @@ const NotesDirectory = ({
   const handleFileClick = async fileName => {
     const filePath = `${path}/${fileName}`
     try {
-      const repoOwner = 'elimelt'
-      const repoName = 'notes'
       const oldUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents${filePath}`
       const response = await fetch(
         oldUrl
@@ -147,4 +144,4 @@ const NotesDirectory = ({
   )
 }
 
-export default NotesDirectory;
+export default RepoDirectory;

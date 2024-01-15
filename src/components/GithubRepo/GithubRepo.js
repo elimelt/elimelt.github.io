@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
 import FileViewer from '../../components/FileViewer/FileViewer'
-import './NotesHome.css'
-import RepoDirectory from '../../components/RepoDirectory/RepoDirectory'
+import './GithubRepo.css'
+import RepoDirectory from '../RepoDirectory/RepoDirectory'
 
-const NotesHome = () => {
+const GithubRepo = ({ repoOwner, repoName }) => {
   const [path, setPath] = useState('')
   const [selectedFileContent, setSelectedFileContent] = useState(null)
   const [openedFile, setOpenedFile] = useState(null)
@@ -29,12 +29,12 @@ const NotesHome = () => {
     if (path === '') {
       return (
         <div className='dir-heading'>
-          <span className='dir-item'><a style={{textDecoration: "none", color: 'black'}} href="https://github.com/elimelt/notes">notes/</a></span>
+          <span className='dir-item'><a style={{textDecoration: "none", color: 'black'}} href={`https://github.com/${repoOwner}/${repoName}`}>{repoName}/</a></span>
         </div>
       )
     }
 
-    const pathArray = ['notes', ...path.substring(1).split('/')]
+    const pathArray = [repoName, ...path.substring(1).split('/')]
     return (
       <div className='dir-heading'>
         {pathArray.map((dir, index) => (
@@ -47,7 +47,7 @@ const NotesHome = () => {
   }
 
   return (
-    <div className='notes-container'>
+    <div className='repo-container'>
       <PathHeading />
 
       <RepoDirectory
@@ -57,6 +57,8 @@ const NotesHome = () => {
         selectedFileContent={selectedFileContent}
         setOpenedFile={setOpenedFile}
         setSelectedFileContent={setSelectedFileContent}
+        repoOwner={repoOwner}
+        repoName={repoName}
       />
       {openedFile && (
         <div className='modal-overlay'>
@@ -69,4 +71,4 @@ const NotesHome = () => {
   )
 }
 
-export default NotesHome
+export default GithubRepo

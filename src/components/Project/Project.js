@@ -1,4 +1,5 @@
 import "./Project.css";
+import GithubRepo from '../GithubRepo/GithubRepo';
 
 const Project = ({ info, setShowing, showing }) => {
   const { name, description, techStack, githubURL, demoURL, demoGIF } = info;

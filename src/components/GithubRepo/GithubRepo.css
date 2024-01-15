@@ -1,0 +1,135 @@
+/* General Styles */
+
+.repo-container {
+    margin-top: 5%;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #fffefe;
+    height: 30vh;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: auto;
+  }
+  
+  .dir-heading {
+    margin-top: 0;
+    /* margin-bottom: 10%; */
+    color: #333;
+    font-style: bold;
+    font-size: 50px;
+    font-weight: 700;
+  
+    /* only wrap dir items contained in this div, don't break up text */
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .dir-item {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Directory Styles */
+  
+  .directory-list {
+    max-width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .directory-item,
+  .file-item {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .directory-item:hover,
+  .file-item:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+  }
+  
+  .directory-button,
+  .file-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .directory-button:hover,
+  .file-button:hover {
+    color: #007bff;
+  }
+  
+  .directory-button {
+    font-size: 25px;
+    color: blue;
+    font-weight: 900;
+  }
+  
+  .file-name {
+    font-size: 25px;
+    /* margin-left: 10px; */
+    font-style: italic;
+    color: #000000;
+  }
+  
+  /* Modal Styles */
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .file-modal {
+    background-color: #fff;
+    width: 80%;
+    height: 80%;
+    max-width: 80%;
+    max-height: 70%;
+    overflow-y: auto;
+    overflow-x: visible;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    /* dont allow horizontal scroll but allow vertical scroll*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .dir-heading {
+      font-size: 10vw;
+    }
+  
+    .file-name,
+    .directory-button {
+      font-size: 3vw;
+      white-space: nowrap;
+    }
+  
+    .directory-item,
+    .file-item {
+      margin: 1px;
+      padding: 1px;
+    }
+  }
+  

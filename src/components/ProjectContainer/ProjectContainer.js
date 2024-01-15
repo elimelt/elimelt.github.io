@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import projects from '../../data/projectData';
+import GithubRepo from '../GithubRepo/GithubRepo';
 
 const ProjectsContainer = styled.div`
   background-color: #ffffff;
@@ -77,6 +78,15 @@ const ModalContent = styled.div`
 const ProjectContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  let githubRepo;
+  let githubOwner;
+  if (selectedProject !== null) {
+    const githubUrl = projects[selectedProject].githubURL.split('/');
+    githubRepo = githubUrl[githubUrl.length - 1];
+    githubOwner = githubUrl[githubUrl.length - 2];
+  }
+
+  console.log(githubRepo, githubOwner);
 
   const openModal = (id) => {
     setIsModalOpen(true);
@@ -127,23 +137,23 @@ const ProjectContainer = () => {
           <ModalContent onClick={(e) => e.stopPropagation()}>
             {selectedProject !== null && (
               <>
-                <h3>{projects.find((p) => p.id === selectedProject)?.name}</h3>
+                <h3>{projects[selectedProject].name}</h3>
                   <strong>Tech Stack:</strong>{' '}
-                  {projects.find((p) => p.id === selectedProject)?.techStack}
-                  {projects.find((p) => p.id === selectedProject)?.description}
+                  {projects[selectedProject].techStack}
+                  {projects[selectedProject].description}
                 <ProjectLinks>
-                  {projects.find((p) => p.id === selectedProject)?.githubURL && (
+                  {projects[selectedProject].githubURL && (
                     <a
-                      href={projects.find((p) => p.id === selectedProject)?.githubURL}
+                      href={projects[selectedProject].githubURL}
                       target='_blank'
                       rel='noopener noreferrer'
                     >
                       GitHub
                     </a>
                   )}
-                  {projects.find((p) => p.id === selectedProject)?.demoURL && (
+                  {projects[selectedProject].demoURL && (
                     <a
-                      href={projects.find((p) => p.id === selectedProject)?.demoURL}
+                      href={projects[selectedProject].demoURL}
                       target='_blank'
                       rel='noopener noreferrer'
                     >
@@ -151,10 +161,16 @@ const ProjectContainer = () => {
                     </a>
                   )}
                 </ProjectLinks>
-                {projects.find((p) => p.id === selectedProject)?.demoGIF && (
+                {projects[selectedProject].demoGIF && (
                   <DemoGIF
-                    src={projects.find((p) => p.id === selectedProject)?.demoGIF}
-                    alt={`${projects.find((p) => p.id === selectedProject)?.name} Demo`}
+                    src={projects[selectedProject].demoGIF}
+                    alt={`${projects[selectedProject].name} Demo`}
+                  />
+                )}
+                {projects[selectedProject].githubURL && (
+                  <GithubRepo
+                    repoOwner={githubOwner}
+                    repoName={githubRepo}
                   />
                 )}
               </>
