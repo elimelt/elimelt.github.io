@@ -15,9 +15,11 @@ const Blog = () => {
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   }
+  console.log('blog entries')
 
   return (
     <div className="page-container">
+      <div className="entry-container">
       {collapsed ? (
         <>
         <CollectionView
@@ -37,6 +39,7 @@ const Blog = () => {
         <span onClick={toggleCollapsed} style={{ cursor: "pointer", fontSize: '40px'}}>{"..."}</span>
         </>
         )}
+        </div>
       {entryModal && (
           <BlogEntry
             blogData={entries.find(entry => entry.name === entryModal)}
