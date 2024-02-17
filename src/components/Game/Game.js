@@ -38,10 +38,8 @@ const Game = ({ defaultSnippet }) => {
         lines={currSnippet}
         setGameFinished={() => console.log('setGameFinished')}
       />
-
     </div>
   )
 }
-
 
 export default Game

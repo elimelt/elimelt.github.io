@@ -1,29 +1,26 @@
-import React from 'react'
+import { useState } from 'react'
 import './Home.css'
 import Composer from '../../components/Composer/Composer'
 import image from '../../portrait.JPG'
 import EtchASketch from '../../components/EtchASketch/EtchASketch'
+import Everything from '../../components/Everything/Everything'
+import Tools from '../Tools/Tools'
 
-const Home = () => {
-  const [showComposer, setShowComposer] = React.useState(0)
-  const numGames = 3
-  const toggleComposer = () => {
-    setShowComposer(showComposer => (showComposer + 1) % numGames)
-  }
-
-  const HomeContent = () => (
+const WelcomeMessage = () => (
+  <>
+    <h2 className='home-heading'>Welcome to my personal website!</h2>
     <div className='home-content'>
       <div className='home-description'>
         <p className='home-text'>
-          I'm a computer engineering student at UW Seattle, with a strong
-          interest in back-end and full-stack development. I'm particularly
-          interested in distributed systems and hope to specialize in this
-          field.
+          I'm a computer engineering student at UW Seattle, where I mainly study
+          systems and databases. Outside of my academics, I enjoy using
+          technology to enrich various student organizations at UW.
         </p>
         <p className='home-text'>
-          On this website, you can learn more about my projects, academic
-          background, and contact information. Feel free to browse around and
-          get in touch with me if you have any questions or inquiries!
+          This website is a blend of personal, professional, and academic
+          pursuits of mine. I also enjoy experimenting with web development, and
+          use this website as a hobby project/sandbox. Feel free to explore the
+          website and reach out to me if you have any questions!
         </p>
       </div>
       <div className='home-image-container'>
@@ -34,28 +31,47 @@ const Home = () => {
         />
       </div>
     </div>
-  )
+  </>
+)
 
-  const GetGame = () => {
-    switch (showComposer) {
-      case 0:
-        return <HomeContent />
-      case 1:
-        return <Composer />
-      case 2:
-        return <EtchASketch />
-      default:
-        return <HomeContent />
-    }
+const Home = () => {
+  const [idx, setIdx] = useState(0)
+  const numGames = 3
+
+  const prevSlide = () => {
+    setIdx((idx - 1 + numGames) % numGames)
+  }
+
+  const nextSlide = () => {
+    setIdx((idx + 1) % numGames)
   }
 
   return (
     <div className='home-container'>
-      <h2 className='home-heading'>Welcome to my personal website!</h2>
-      <button className='composer-toggle-button' onClick={toggleComposer}>
-        Click Me!
-      </button>
-      <GetGame />
+      <div className='carousel-container'>
+        <div className={'carousel-buttons'}>
+          <button className='carousel-button' onClick={prevSlide}>
+            Previous
+          </button>
+          <button className='carousel-button' onClick={nextSlide}>
+            Next
+          </button>
+        </div>
+        <div
+          className='carousel'
+          style={{ transform: `translateX(-${idx * 100}%)` }}
+        >
+          <div className='carousel-item'>
+            <WelcomeMessage />
+          </div>
+          <div className='carousel-item'>
+            <Everything />
+          </div>
+          <div className='carousel-item'>
+            <Tools />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

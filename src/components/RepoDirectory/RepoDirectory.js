@@ -1,47 +1,64 @@
-import { useEffect, useState, useMemo, useCallback } from 'react';
-import CollectionView from '../CollectionView/CollectionView';
+import { useEffect, useState, useMemo, useCallback } from 'react'
+import Directory from '../Directory/Directory'
 
-const KEY_NAME_ESC = 'Escape';
-const KEY_EVENT_TYPE = 'keyup';
+const KEY_NAME_ESC = 'Escape'
+const KEY_EVENT_TYPE = 'keyup'
 
-function useEscapeKey(handleClose) {
-    const handleEscKey = useCallback((event) => {
-    if (event.key === KEY_NAME_ESC) {
-      handleClose();
-    }
-  }, [handleClose]);
+function useEscapeKey (handleClose) {
+  const handleEscKey = useCallback(
+    event => {
+      if (event.key === KEY_NAME_ESC) {
+        handleClose()
+      }
+    },
+    [handleClose]
+  )
 
   useEffect(() => {
-    document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+    document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false)
 
     return () => {
-      document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
-    };
-  }, [handleEscKey]);
+      document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false)
+    }
+  }, [handleEscKey])
 }
 
-const RepoDirectory = ({
-  path,
-  setPath,
-  openedFile,
-  setOpenedFile,
-  selectedFileContent,
-  setSelectedFileContent,
-  repoOwner="elimelt",
-  repoName="notes",
-}) => {
+const RepoDirectory = props => {
+  const {
+    path,
+    setPath,
+    openedFile,
+    setOpenedFile,
+    setSelectedFileContent,
+    repoOwner = 'elimelt',
+    repoName = 'notes'
+  } = props
+
+  let returnHome = props.returnHome
+
   const [directories, setDirectories] = useState([])
   const [files, setFiles] = useState([])
 
   const dirCache = useMemo(() => new Map(), [])
 
-  useEscapeKey(() => openedFile === null ? handleBackButtonClick() : setOpenedFile(null));
+  useEscapeKey(() =>
+    openedFile === null ? handleBackButtonClick() : setOpenedFile(null)
+  )
+
+  const filePath = path.split('/').slice(2).join('/') || ''
 
   useEffect(() => {
-    fetchDirectoryContents(path)
+    fetchDirectoryContents(filePath)
   }, [path])
 
   const handleBackButtonClick = () => {
+    if (path === '~/' + repoName) {
+      returnHome()
+      return
+    } else if (path === './' + repoName) {
+      alert('You should not be able to go back from here')
+      return
+    }
     const pathArray = path.split('/')
     pathArray.pop()
     setPath(pathArray.join('/'))
@@ -62,30 +79,38 @@ const RepoDirectory = ({
     const contents = await response.json()
 
     dirCache.set(dir, {
-      directories: contents.filter(item => item.type === 'dir' && item.name[0] !== '.').map(item => item.name),
-      files: contents.filter(item => item.type === 'file' && item.name[0] !== '.')
+      directories: contents
+        .filter(item => item.type === 'dir' && item.name[0] !== '.')
+        .map(item => item.name),
+      files: contents.filter(
+        item => item.type === 'file' && item.name[0] !== '.'
+      )
     })
 
     setDirectories(
-      contents.filter(item => item.type === 'dir' && item.name[0] !== '.').map(item => item.name)
+      contents
+        .filter(item => item.type === 'dir' && item.name[0] !== '.')
+        .map(item => item.name)
     )
     setFiles(
       contents.filter(item => item.type === 'file' && item.name[0] !== '.')
     )
   }
 
+  if (path === '~/' && !returnHome)
+    return <div>You've got a bug in GithubRepo</div>
+
   const handleDirectoryClick = dir => {
     setPath(path => `${path}/${dir}`)
   }
 
   const handleFileClick = async fileName => {
-    const filePath = `${path}/${fileName}`
+    const filePath = `${path.split('/').slice(2).join('/') || ''}/${fileName}`
     try {
       const oldUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents${filePath}`
-      const response = await fetch(
-        oldUrl
-      )
+      const response = await fetch(oldUrl)
       const data = await response.json()
+      console.log('data:', data)
 
       const imgExt = ['png', 'jpg', 'jpeg', 'gif', 'svg']
       const parts = fileName.split('.')
@@ -96,9 +121,9 @@ const RepoDirectory = ({
 
       setSelectedFileContent(
         decodedContent
-          // .split('\n')
-          // .filter(line => line[0] !== '!')
-          // .join('\n')
+        // .split('\n')                       // removes "escaped" newlines
+        // .filter(line => line[0] !== '!')
+        // .join('\n')
       )
       setOpenedFile(filePath)
     } catch (error) {
@@ -106,42 +131,17 @@ const RepoDirectory = ({
     }
   }
 
-  const BackButton = () => {
-    if (path === '') {
-      return <></>
-    }
-    return (
-      <div className='directory-item'>
-        <button onClick={handleBackButtonClick} className='directory-button'>
-          ..
-        </button>
-      </div>
-    )
-  }
-
   return (
-    <div className='directory-list'>
-      <CollectionView
-        collection={directories}
-        classNames={{
-          div: 'directory-item',
-          button: 'directory-button',
-          span: 'directory-button'
-        }}
-        clickHandler={handleDirectoryClick}
-        BackButton={BackButton}
-      />
-      <CollectionView
-        collection={files.map(file => file.name)}
-        classNames={{
-          div: 'file-item',
-          button: 'file-button',
-          span: 'file-name'
-        }}
-        clickHandler={handleFileClick}
-      />
-    </div>
+    <Directory
+      path={path}
+      files={files}
+      directories={directories}
+      handleDirectoryClick={handleDirectoryClick}
+      handleFileClick={handleFileClick}
+      handleBackButtonClick={handleBackButtonClick}
+      returnHome={returnHome}
+    />
   )
 }
 
-export default RepoDirectory;
+export default RepoDirectory

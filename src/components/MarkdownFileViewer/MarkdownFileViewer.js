@@ -18,19 +18,19 @@ import remarkMathPlugin from 'remark-math'
 import remarkGfmPlugin from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeKatex from 'rehype-katex'
-import 'katex/dist/katex.min.css';
+import 'katex/dist/katex.min.css'
 // import rehypeRaw from 'rehype-raw'
 
 function MarkdownFileViewer (props) {
   const newProps = {
     ...props,
-    remarkPlugins: [remarkMathPlugin, remarkGfmPlugin, ],
-    rehypePlugins: [rehypeHighlight, rehypeKatex, ],
+    remarkPlugins: [remarkMathPlugin, remarkGfmPlugin],
+    rehypePlugins: [rehypeHighlight, rehypeKatex]
   }
   return (
     <div className='markdown-file-viewer'>
       <pre className='md-content'>
-          <ReactMarkdown {...newProps} />
+        <ReactMarkdown {...newProps} />
       </pre>
     </div>
   )

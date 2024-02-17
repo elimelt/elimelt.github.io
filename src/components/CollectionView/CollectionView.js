@@ -1,4 +1,4 @@
-import './CollectionViewDefaults.css';
+import './CollectionViewDefaults.css'
 
 /* collection: [
  *  itemName, ...

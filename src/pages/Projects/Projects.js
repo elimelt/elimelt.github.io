@@ -1,14 +1,14 @@
-import React from "react";
-import ProjectContainer from "../../components/ProjectContainer/ProjectContainer.js";
+import React from 'react'
+import ProjectContainer from '../../components/ProjectContainer/ProjectContainer.js'
 
-import "./Projects.css";
+import './Projects.css'
 const Projects = () => {
   return (
-    <div className="page-container">
+    <div className='page-container'>
       <ProjectContainer />
       {/* <ProjectShowcase /> */}
     </div>
-  );
-};
+  )
+}
 
-export default Projects;
+export default Projects

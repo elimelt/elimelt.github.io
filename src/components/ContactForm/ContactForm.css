@@ -56,7 +56,7 @@ textarea {
   resize: vertical;
 }
 
-button[type="submit"] {
+button[type='submit'] {
   display: block;
   width: 100%;
   margin: 0.5rem 0;
@@ -70,12 +70,12 @@ button[type="submit"] {
   max-width: 400px;
 }
 
-button[type="submit"]:hover,
-button[type="submit"]:focus {
+button[type='submit']:hover,
+button[type='submit']:focus {
   background-color: #0069d9;
 }
 
-button[type="submit"]:focus {
+button[type='submit']:focus {
   outline: none;
   box-shadow: 0 0 0 0.125rem rgba(76, 154, 255, 0.25);
 }

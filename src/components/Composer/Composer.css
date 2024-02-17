@@ -1,3 +1,12 @@
+.composer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 5%;
+  width: 100%;
+}
+
 .start-button {
   background-color: #baf5bc;
   color: rgb(30, 28, 28);
@@ -5,9 +14,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-    font-size: 16px;
-    margin: 10px;
-
+  font-size: 16px;
+  margin: 10px;
 }
 
 .scale-dropdown {

@@ -1,6 +1,4 @@
-/* General Styles */
-
-.notes-container {
+General Styles .notes-container {
   margin-top: 5%;
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -76,7 +74,7 @@
 }
 
 .file-name {
-  font-size: 25px;
+  font-size: 250px;
   /* margin-left: 10px; */
   font-style: italic;
   color: #000000;

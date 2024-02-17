@@ -1,34 +1,70 @@
 .home-container {
+  width: 80%;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
+  margin: auto;
+  padding-top: 40px;
 }
 
-.composer-toggle-button {
-  /* centered in parent div */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px; /* Adjust as needed */
+}
 
-  /* style */
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 10%;
-  padding: 10px;
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease; /* Animation for sliding */
+}
+
+.carousel-item {
+  flex: 0 0 100%; /* Each item takes up full width */
+  align-items: center;
+}
+
+.carousel-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px; /* Adjust as needed */
+  border-bottom: solid #000;
+  padding-bottom: 30px;
+}
+
+.carousel-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+  background-color: #0056b3;
 }
 
 .home-heading {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 40px;
+  text-align: center;
 }
 
 .home-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 10%;
   text-align: center;
   width: 100%;
 }
@@ -41,7 +77,7 @@
 
 .home-image-container {
   flex: 1;
-  max-width: 400px; 
+  max-width: 400px;
 }
 
 .home-image {
@@ -57,19 +93,37 @@
   text-align: justify;
 }
 
-@media screen and (min-width: 900px) {
-  .home-content {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+@media screen and (max-width: 900px) {
+  .carousel-container {
+    width: 90%;
   }
 
   .home-description {
-    margin-right: 100px;
-    margin-bottom: 0;
+    max-width: 100%;
   }
 
   .home-image-container {
-    margin-left: 100px;
+    max-width: 100%;
+  }
+
+  .home-image {
+    max-width: 100%;
+  }
+
+  .carousel-buttons {
+    margin-bottom: 10px;
+  }
+
+  .carousel-button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .home-heading {
+    font-size: 1.5rem;
+  }
+
+  .home-content {
+    display: block;
   }
 }

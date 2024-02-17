@@ -1,7 +1,9 @@
 .etch-container {
   font-family: Arial, sans-serif;
   text-align: center;
-  padding: 50px;
+  /* padding: 50px; */
+  width: 100%;
+  margin-top: 5%;
 }
 
 .etch-canvas {

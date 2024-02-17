@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import projects from '../../data/projectData';
-import GithubRepo from '../GithubRepo/GithubRepo';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import projects from '../../data/projectData'
+import GithubRepo from '../GithubRepo/GithubRepo'
 
 const ProjectsContainer = styled.div`
   background-color: #ffffff;
   padding: 10%;
   padding-top: 2%;
-`;
+`
 
 const ProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
-`;
+`
 
 const ProjectCard = styled.div`
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 2px 2px  rgba(110, 110, 110, .5);
+  box-shadow: 0 2px 2px 2px rgba(110, 110, 110, 0.5);
   cursor: pointer;
   transition: all 3s ease;
 
@@ -32,7 +32,7 @@ const ProjectCard = styled.div`
     overflow: visible;
     display: block;
   }
-`;
+`
 
 const ProjectLinks = styled.div`
   display: flex;
@@ -45,13 +45,13 @@ const ProjectLinks = styled.div`
       text-decoration: underline;
     }
   }
-`;
+`
 
 const DemoGIF = styled.img`
   width: 100%;
   margin-top: 20px;
   border-radius: 8px;
-`;
+`
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -63,7 +63,7 @@ const ModalOverlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const ModalContent = styled.div`
   background-color: #ffffff;
@@ -73,39 +73,36 @@ const ModalContent = styled.div`
   max-width: 80%;
   max-height: 80%;
   overflow: auto;
-`;
+`
 
 const ProjectContainer = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
-  let githubRepo;
-  let githubOwner;
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedProject, setSelectedProject] = useState(null)
+  let githubRepo
+  let githubOwner
   if (selectedProject !== null) {
-    const githubUrl = projects[selectedProject].githubURL.split('/');
-    githubRepo = githubUrl[githubUrl.length - 1];
-    githubOwner = githubUrl[githubUrl.length - 2];
+    const githubUrl = projects[selectedProject].githubURL.split('/')
+    githubRepo = githubUrl[githubUrl.length - 1]
+    githubOwner = githubUrl[githubUrl.length - 2]
   }
 
-  console.log(githubRepo, githubOwner);
+  console.log(githubRepo, githubOwner)
 
-  const openModal = (id) => {
-    setIsModalOpen(true);
-    setSelectedProject(id);
-  };
+  const openModal = id => {
+    setIsModalOpen(true)
+    setSelectedProject(id)
+  }
 
   const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-  };
+    setIsModalOpen(false)
+    setSelectedProject(null)
+  }
   return (
     <ProjectsContainer>
       <h2>Projects</h2>
       <ProjectsGrid>
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.id}
-            onClick={() => openModal(project.id)}
-          >
+        {projects.map(project => (
+          <ProjectCard key={project.id} onClick={() => openModal(project.id)}>
             <h3>{project.name}</h3>
             <ProjectLinks>
               {project.githubURL && (
@@ -134,13 +131,13 @@ const ProjectContainer = () => {
 
       {isModalOpen && (
         <ModalOverlay onClick={closeModal}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
+          <ModalContent onClick={e => e.stopPropagation()}>
             {selectedProject !== null && (
               <>
                 <h3>{projects[selectedProject].name}</h3>
-                  <strong>Tech Stack:</strong>{' '}
-                  {projects[selectedProject].techStack}
-                  {projects[selectedProject].description}
+                <strong>Tech Stack:</strong>{' '}
+                {projects[selectedProject].techStack}
+                {projects[selectedProject].description}
                 <ProjectLinks>
                   {projects[selectedProject].githubURL && (
                     <a
@@ -168,10 +165,7 @@ const ProjectContainer = () => {
                   />
                 )}
                 {projects[selectedProject].githubURL && (
-                  <GithubRepo
-                    repoOwner={githubOwner}
-                    repoName={githubRepo}
-                  />
+                  <GithubRepo repoOwner={githubOwner} repoName={githubRepo} />
                 )}
               </>
             )}
@@ -179,7 +173,7 @@ const ProjectContainer = () => {
         </ModalOverlay>
       )}
     </ProjectsContainer>
-  );
-};
+  )
+}
 
-export default ProjectContainer;
+export default ProjectContainer

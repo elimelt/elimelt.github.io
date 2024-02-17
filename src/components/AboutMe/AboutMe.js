@@ -1,95 +1,94 @@
-import { useState } from "react";
-import "./AboutMe.css";
-
+import { useState } from 'react'
+import './AboutMe.css'
 
 const AboutMe = () => {
-  const [isEducationExpanded, setIsEducationExpanded] = useState(true);
-  const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
-  const [isSkillsExpanded, setIsSkillsExpanded] = useState(false);
-  const [isContributionsExpanded, setIsContributionsExpanded] = useState(false);
+  const [isEducationExpanded, setIsEducationExpanded] = useState(true)
+  const [isExperienceExpanded, setIsExperienceExpanded] = useState(false)
+  const [isSkillsExpanded, setIsSkillsExpanded] = useState(false)
+  const [isContributionsExpanded, setIsContributionsExpanded] = useState(false)
 
   const handleToggleEducation = () => {
-    setIsEducationExpanded(!isEducationExpanded);
-    setIsExperienceExpanded(false);
-    setIsSkillsExpanded(false);
-    setIsContributionsExpanded(false);
-  };
+    setIsEducationExpanded(!isEducationExpanded)
+    setIsExperienceExpanded(false)
+    setIsSkillsExpanded(false)
+    setIsContributionsExpanded(false)
+  }
 
   const handleToggleExperience = () => {
-    setIsExperienceExpanded(!isExperienceExpanded);
-    setIsEducationExpanded(false);
-    setIsSkillsExpanded(false);
-    setIsContributionsExpanded(false);
-  };
+    setIsExperienceExpanded(!isExperienceExpanded)
+    setIsEducationExpanded(false)
+    setIsSkillsExpanded(false)
+    setIsContributionsExpanded(false)
+  }
 
   const handleToggleSkills = () => {
-    setIsSkillsExpanded(!isSkillsExpanded);
-    setIsEducationExpanded(false);
-    setIsExperienceExpanded(false);
-    setIsContributionsExpanded(false);
-  };
+    setIsSkillsExpanded(!isSkillsExpanded)
+    setIsEducationExpanded(false)
+    setIsExperienceExpanded(false)
+    setIsContributionsExpanded(false)
+  }
 
   const handleToggleContributions = () => {
-    setIsContributionsExpanded(!isContributionsExpanded);
-    setIsEducationExpanded(false);
-    setIsExperienceExpanded(false);
-    setIsSkillsExpanded(false);
-  };
+    setIsContributionsExpanded(!isContributionsExpanded)
+    setIsEducationExpanded(false)
+    setIsExperienceExpanded(false)
+    setIsSkillsExpanded(false)
+  }
 
   return (
-    <div className="about-me-container">
-      <div className="resume">
-        <div className="education-container">
+    <div className='about-me-container'>
+      <div className='resume'>
+        <div className='education-container'>
           {isEducationExpanded ? (
-            <h2 className="section-heading-exp" onClick={handleToggleEducation}>
+            <h2 className='section-heading-exp' onClick={handleToggleEducation}>
               Education
             </h2>
           ) : (
-            <h2 className="section-heading" onClick={handleToggleEducation}>
+            <h2 className='section-heading' onClick={handleToggleEducation}>
               Click to view my education
             </h2>
           )}
           {isEducationExpanded && (
-            <div className="education-details">
-              <div className="education-item">
-                <h3 className="institution-name">
-                  {window.innerWidth < 700 ? "UW" : "University of Washington"}
+            <div className='education-details'>
+              <div className='education-item'>
+                <h3 className='institution-name'>
+                  {window.innerWidth < 700 ? 'UW' : 'University of Washington'}
                 </h3>
-                <p className="education-date">Graduating June 2025</p>
+                <p className='education-date'>Graduating June 2025</p>
               </div>
-              <div className="education-item">
-                <h4 className="degree">
+              <div className='education-item'>
+                <h4 className='degree'>
                   {window.innerWidth < 600
-                    ? "B.S. in Comp. Eng."
-                    : "B.S. in Computer Engineering"}
+                    ? 'B.S. in Comp. Eng.'
+                    : 'B.S. in Computer Engineering'}
                 </h4>
-                <p className="gpa">GPA: 3.94</p>
+                <p className='gpa'>GPA: 3.94</p>
               </div>
             </div>
           )}
         </div>
 
-        <div className="experience-container">
+        <div className='experience-container'>
           {isExperienceExpanded ? (
             <h2
-              className="section-heading-exp"
+              className='section-heading-exp'
               onClick={handleToggleExperience}
             >
               Experience
             </h2>
           ) : (
-            <h2 className="section-heading" onClick={handleToggleExperience}>
+            <h2 className='section-heading' onClick={handleToggleExperience}>
               Click to view my experience
             </h2>
           )}
 
           {isExperienceExpanded && (
             <>
-              <div className="experience-item">
-                <h3 className="position">Software Engineering Lead</h3>
-                <p className="company">Nexus UW</p>
-                <p className="date">Jan 2023 - Present</p>
-                <ul className="responsibilities">
+              <div className='experience-item'>
+                <h3 className='position'>Software Engineering Lead</h3>
+                <p className='company'>Nexus UW</p>
+                <p className='date'>Jan 2023 - Present</p>
+                <ul className='responsibilities'>
                   <li>
                     Helped develop and launch a web app for pairing project
                     leads with developers. Built with Node.js using React,
@@ -105,11 +104,11 @@ const AboutMe = () => {
                   </li>
                 </ul>
               </div>
-              <div className="experience-item">
-                <h3 className="position">Team Lead/Project Manager</h3>
-                <p className="company">Husky Coding Project</p>
-                <p className="date">Sept 2022 - Present</p>
-                <ul className="responsibilities">
+              <div className='experience-item'>
+                <h3 className='position'>Team Lead/Project Manager</h3>
+                <p className='company'>Husky Coding Project</p>
+                <p className='date'>Sept 2022 - Present</p>
+                <ul className='responsibilities'>
                   <li>
                     Developing Syntext, a website for practicing and improving
                     typing speed with programming syntax
@@ -128,13 +127,13 @@ const AboutMe = () => {
                   </li>
                 </ul>
               </div>
-              <div className="experience-item">
-                <h3 className="position">Web Team Member</h3>
-                <p className="company">
+              <div className='experience-item'>
+                <h3 className='position'>Web Team Member</h3>
+                <p className='company'>
                   Sensors Energy and Automation Laboratory
                 </p>
-                <p className="date">Aug 2022 - Jan 2023</p>
-                <ul className="responsibilities">
+                <p className='date'>Aug 2022 - Jan 2023</p>
+                <ul className='responsibilities'>
                   <li>
                     Leader of Efficiency Content and Style (ECoS) sub team,
                     fixed hosting and authentication issues with app’s API and
@@ -147,13 +146,13 @@ const AboutMe = () => {
                   </li>
                 </ul>
               </div>
-              <div className="experience-item">
-                <h3 className="position">Helpdesk Assistant</h3>
-                <p className="company">
+              <div className='experience-item'>
+                <h3 className='position'>Helpdesk Assistant</h3>
+                <p className='company'>
                   Paul G. Allen School of Computer Science
                 </p>
-                <p className="date">Sept 2021 – Jan 2023</p>
-                <ul className="responsibilities">
+                <p className='date'>Sept 2021 – Jan 2023</p>
+                <ul className='responsibilities'>
                   <li>
                     Troubleshot computer hardware/software issues, monitored
                     datacenters, managed computing equipment and inventory
@@ -162,11 +161,11 @@ const AboutMe = () => {
                   </li>
                 </ul>
               </div>
-              <div className="experience-item">
-                <h3 className="position">Financial Center Intern</h3>
-                <p className="company">Bank of America</p>
-                <p className="date">June 2021 – Aug 2021</p>
-                <ul className="responsibilities">
+              <div className='experience-item'>
+                <h3 className='position'>Financial Center Intern</h3>
+                <p className='company'>Bank of America</p>
+                <p className='date'>June 2021 – Aug 2021</p>
+                <ul className='responsibilities'>
                   <li>
                     Received formal training and education on project
                     management, professionalism, and various soft skills.
@@ -181,13 +180,13 @@ const AboutMe = () => {
           )}
         </div>
 
-        <div className="skills-container">
+        <div className='skills-container'>
           {isSkillsExpanded ? (
-            <h2 className="section-heading-exp" onClick={handleToggleSkills}>
+            <h2 className='section-heading-exp' onClick={handleToggleSkills}>
               Skills &amp; Abilities
             </h2>
           ) : (
-            <h2 className="section-heading" onClick={handleToggleSkills}>
+            <h2 className='section-heading' onClick={handleToggleSkills}>
               Click to view my skills &amp; abilities
             </h2>
           )}
@@ -214,23 +213,23 @@ const AboutMe = () => {
           )}
         </div>
 
-        <div className="contributions-container">
+        <div className='contributions-container'>
           {isContributionsExpanded ? (
             <h2
-              className="section-heading-exp"
+              className='section-heading-exp'
               onClick={handleToggleContributions}
             >
               Contributions
             </h2>
           ) : (
-            <h2 className="section-heading" onClick={handleToggleContributions}>
+            <h2 className='section-heading' onClick={handleToggleContributions}>
               Click to view my open source contributions
             </h2>
           )}
           {isContributionsExpanded && (
             <>
-              <p className="company">
-                <a href="https://github.com/sidorares/node-mysql2">
+              <p className='company'>
+                <a href='https://github.com/sidorares/node-mysql2'>
                   node-mysql2
                 </a>
               </p>
@@ -255,7 +254,7 @@ const AboutMe = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AboutMe;
+export default AboutMe

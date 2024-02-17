@@ -4,11 +4,9 @@ Welcome to my personal website's GitHub repository! This website serves as a por
 
 This is just a simple React.js app that I am making as a landing page for anyone interested in my work
 
-
- ### How to Run Locally
+### How to Run Locally
 
 Good old fashioned `npm start`
-
 
 ### Contributions
 
@@ -20,4 +18,5 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 Thank you for visiting my personal website's GitHub repository!
 
 ### Deployment
+
 Run `npm run deploy`
