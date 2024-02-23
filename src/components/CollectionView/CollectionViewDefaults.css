@@ -14,7 +14,6 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 16px;
   transition: color 0.3s ease;
 }
 
@@ -30,16 +29,6 @@
 }
 
 @media (max-width: 768px) {
-  .dir-heading {
-    font-size: 10vw;
-  }
-
-  .file-name,
-  .directory-button {
-    font-size: 3vw;
-    /* white-space: nowrap; */
-  }
-
   .directory-item,
   .file-item {
     margin: 1px;

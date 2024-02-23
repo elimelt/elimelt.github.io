@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState } from 'react'
 import FileViewer from '../../components/FileViewer/FileViewer'
 import './GithubRepo.css'
 import RepoDirectory from '../RepoDirectory/RepoDirectory'
@@ -84,7 +84,7 @@ const GithubRepo = props => {
     return (
       <div className='repo-container'>
         <button className='close-file' onClick={closeFile}>
-          Close
+          x
         </button>
         {openedFile && (
           <div className='file-viewer-container'>

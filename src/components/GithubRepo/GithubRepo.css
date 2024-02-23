@@ -5,7 +5,7 @@
   font-family: Arial, sans-serif;
   /* padding: 20px; */
   background-color: #fffefe;
-  height: auto;
+  /* height: auto; */
   font-size: 40px;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
   /* margin-bottom: 10%; */
   color: #333;
   font-style: bold;
-  font-size: 50px;
+  font-size: 3rem;
   font-weight: 700;
   /* only wrap dir items contained in this div, don't break up text */
   display: flex;
@@ -59,7 +59,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.8rem;
   transition: color 0.3s ease;
 }
 
@@ -69,31 +69,25 @@
 }
 
 .directory-button {
-  font-size: 25px;
   color: blue;
   font-weight: 900;
 }
 
 .file-name {
-  font-size: 25px;
   /* margin-left: 10px; */
   font-style: italic;
   color: #000000;
 }
 
 .close-file {
-  /* position: absolute;
-  top: 10px;
-  right: 10px; */
-  left: 0;
-  width: 10%;
-  background-color: #f44545;
+  width:max-content;
+  background-color: #767676;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: .5rem .75rem;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 2%;
+  margin-bottom: 4%;
 }
 
 .close-file:hover {
@@ -136,7 +130,7 @@
 
   .file-name,
   .directory-button {
-    font-size: 4vw;
+    font-size: 5vw;
     /* white-space: nowrap; */
   }
 

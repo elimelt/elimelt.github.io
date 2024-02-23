@@ -61,13 +61,10 @@ const Composer = () => {
     const newCols = parseInt(event.target.value, 10)
     setCols(newCols)
     setMatrix(prevMatrix => {
-      // Update matrix based on the new number of columns
       return prevMatrix.map(row => {
-        // If the new number of columns is greater, add new elements
         if (newCols > row.length) {
           return [...row, ...Array(newCols - row.length).fill(false)]
         }
-        // If the new number of columns is smaller, trim the row
         return row.slice(0, newCols)
       })
     })
@@ -102,7 +99,7 @@ const Composer = () => {
       <button className='start-button' onClick={startLoop}>
         Play
       </button>
-      {/* <input className="num-col-input" type="number" value={cols} onChange={handleColsChange} /> */}
+      <input className="num-col-input" type="number" value={cols} onChange={handleColsChange} />
       <select
         className='scale-dropdown'
         value={Object.keys(modes).find(key => modes[key] === mode)}

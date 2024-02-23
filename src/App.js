@@ -1,21 +1,20 @@
 import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
-// import Layout from "./Layout";
 import Title from './components/Title/Title'
 import Home from './pages/Home/Home'
 import Projects from './pages/Projects/Projects'
 import Info from './pages/Info/Info'
 import ContactMe from './pages/ContactMe/ContactMe'
 import NotFound from './pages/NotFound/NotFound'
-import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import Blog from './pages/Blog/Blog'
 import EtchASketch from './components/EtchASketch/EtchASketch'
-import NotesHome from './pages/NotesHome/NotesHome'
 import NewsfeedPage from './pages/NewsfeedPage/NewsfeedPage'
 import Everthing from './components/Everything/Everything'
 import Tools from './pages/Tools/Tools'
 import Composer from './components/Composer/Composer'
+import PNGProcessor from './pages/PNGProcessor/PNGProcessor'
+import './App.css'
 
 const App = () => {
   pingIfNeeded()
@@ -32,10 +31,10 @@ const App = () => {
         <Route path='/contact' element={<ContactMe />} />
         <Route path='/draw' element={<EtchASketch />} />
         <Route path='/composer' element={<Composer />} />
-        <Route path='/notes/*' element={<NotesHome />} />
         <Route path='/newsfeed' element={<NewsfeedPage />} />
         <Route path='/content' element={<Everthing />} />
         <Route path='/tools' element={<Tools />} />
+        <Route path='/image-processor' element={<PNGProcessor/>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
@@ -55,8 +54,6 @@ const pingIfNeeded = () => {
   }
 
   if (needToPing) {
-    // console.log("should ping server");
-
     let userData = gatherUserData()
     axios.post('https://feedback-server.herokuapp.com/log/write', {
       logName: 'users',

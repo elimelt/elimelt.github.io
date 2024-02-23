@@ -16,6 +16,11 @@ const Tools = () => {
             Sounds
           </Link>
         </li>
+        <li className='tools-item'>
+          <Link to='/png-processor' className='tools-link'>
+            PNG Processing
+          </Link>
+        </li>
       </ul>
     </div>
   )
