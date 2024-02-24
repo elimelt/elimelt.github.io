@@ -1,8 +1,8 @@
 .markdown-file-viewer {
-  width: 95%;
-  height: 150vh;
-  overflow: auto;
-  padding: 10px;
+
+  /* height: 150vh; */
+  /* overflow: auto; */
+
   /* border: 1px solid #ccc;*/
   border-radius: 5px;
   background-color: #ffffff;
@@ -14,10 +14,12 @@
 }
 
 .md-content {
+  position: block;
   white-space: pre-wrap;
   overflow-x: auto;
   margin: 0;
-  width: 100%;
+  width: 90%;
+  padding: 0 5%;
   height: 100%;
 }
 

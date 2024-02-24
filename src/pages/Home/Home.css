@@ -23,8 +23,14 @@
 
 .carousel-item {
   flex: 0 0 100%; /* Each item takes up full width */
+  /* padding: 0 5%; */
   align-items: center;
+  max-width: 100%;
 }
+
+/* .inactive {
+  visibility: hidden;
+} */
 
 .carousel-buttons {
   display: flex;

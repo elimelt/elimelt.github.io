@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import './Home.css'
-import Composer from '../../components/Composer/Composer'
 import image from '../../portrait.JPG'
-import EtchASketch from '../../components/EtchASketch/EtchASketch'
-import Everything from '../../components/Everything/Everything'
 import Tools from '../Tools/Tools'
+import GitHubCalendar from 'react-github-calendar'
 
 const WelcomeMessage = () => (
   <>
@@ -34,6 +32,19 @@ const WelcomeMessage = () => (
   </>
 )
 
+const GHCal = ({ username }) => {
+  const centered = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+  return (
+    <div style={centered}>
+      <GitHubCalendar username={username} colorScheme='light' />
+    </div>
+  )
+}
+
 const Home = () => {
   const [idx, setIdx] = useState(0)
   const numGames = 3
@@ -45,6 +56,11 @@ const Home = () => {
   const nextSlide = () => {
     setIdx((idx + 1) % numGames)
   }
+
+  const slides = [<WelcomeMessage />, <GHCal username='elimelt' />, <Tools />]
+  const cName = index =>
+    idx === index ? 'carousel-item' : 'carousel-item inactive'
+  console.log(idx, slides[idx], cName(0), cName(1), cName(2))
 
   return (
     <div className='home-container'>
@@ -61,15 +77,11 @@ const Home = () => {
           className='carousel'
           style={{ transform: `translateX(-${idx * 100}%)` }}
         >
-          <div className='carousel-item'>
-            <WelcomeMessage />
-          </div>
-          <div className='carousel-item'>
-            <Everything />
-          </div>
-          <div className='carousel-item'>
-            <Tools />
-          </div>
+          {slides.map((slide, index) => (
+            <div key={index} className={cName(index)}>
+              {slide}
+            </div>
+          ))}
         </div>
       </div>
     </div>

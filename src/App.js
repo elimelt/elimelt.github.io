@@ -10,7 +10,7 @@ import Navbar from './components/Navbar/Navbar'
 import Blog from './pages/Blog/Blog'
 import EtchASketch from './components/EtchASketch/EtchASketch'
 import NewsfeedPage from './pages/NewsfeedPage/NewsfeedPage'
-import Everthing from './components/Everything/Everything'
+import Content from './pages/Content/Content'
 import Tools from './pages/Tools/Tools'
 import Composer from './components/Composer/Composer'
 import PNGProcessor from './pages/PNGProcessor/PNGProcessor'
@@ -32,7 +32,7 @@ const App = () => {
         <Route path='/draw' element={<EtchASketch />} />
         <Route path='/composer' element={<Composer />} />
         <Route path='/newsfeed' element={<NewsfeedPage />} />
-        <Route path='/content' element={<Everthing />} />
+        <Route path='/content' element={<Content />} />
         <Route path='/tools' element={<Tools />} />
         <Route path='/image-processor' element={<PNGProcessor/>} />
         <Route path='*' element={<NotFound />} />
