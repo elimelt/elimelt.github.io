@@ -7,25 +7,25 @@
     background-color: #f9f9f9;
   }
   
-  .title {
+  .png-title {
     margin-bottom: 20px;
   }
 
-  .form {
+  .png-form {
     margin-bottom: 20px;
   }
 
-  .form-group {
+  .png-form-group {
     margin-bottom: 15px;
   }
   
-  .label {
+  .png-label {
     display: block;
     font-weight: bold;
   }
   
-  .select,
-  .file-input {
+  .png-select,
+  .png-file-input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;

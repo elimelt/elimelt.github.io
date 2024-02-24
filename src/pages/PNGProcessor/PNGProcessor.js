@@ -64,11 +64,11 @@ const PNGProcessor = () => {
 
   return (
     <div className="image-processing-container">
-      <h1 className="title">PNG Processing Tool</h1>
-      <form onSubmit={handleSubmit} className="form">
-        <div className="form-group">
-          <label htmlFor="transformation" className="label">Select Transformation:</label>
-          <select id="transformation" value={selectedTransformation} onChange={handleTransformationSelect} className="select">
+      <h1 className="png-title">PNG Processing Tool</h1>
+      <form onSubmit={handleSubmit} className="pngform">
+        <div className="png-form-group">
+          <label htmlFor="transformation" className="png-label">Select Transformation:</label>
+          <select id="transformation" value={selectedTransformation} onChange={handleTransformationSelect} className="png-select">
             <option value="">Select...</option>
             {Object.keys(ImageUtils.transformations).map((transformation) => (
               <option key={transformation} value={transformation}>{transformation}</option>
@@ -76,20 +76,20 @@ const PNGProcessor = () => {
           </select>
         </div>
         {selectedTransformation && ImageUtils.transformations[selectedTransformation].map((param) => (
-          <div key={param.name} className="form-group">
-            <label htmlFor={param.name} className="label">{param.label}:</label>
+          <div key={param.name} className="png-form-group">
+            <label htmlFor={param.name} className="png-label">{param.label}:</label>
             <input
               type={param.type}
               id={param.name}
               name={param.name}
               value={transformationParams[param.name] || param.defaultValue || ''}
               onChange={handleParameterChange}
-              className="input"
+              className="png-input"
             />
           </div>
         ))}
-        <div className="form-group">
-          <label htmlFor="imageInput" className="label">Upload PNG Image:</label>
+        <div className="png-form-group">
+          <label htmlFor="imageInput" className="png-label">Upload PNG Image:</label>
           <input
             type="file"
             id="imageInput"
