@@ -13,23 +13,6 @@ const GithubRepo = props => {
   const [path, setPath] = useState(basePath + repoName)
   const [selectedFileContent, setSelectedFileContent] = useState(null)
   const [openedFile, setOpenedFile] = useState(null)
-  // const fileViewerRef = useRef(null)
-
-  // const handleModalClickOutside = event => {
-  //   if (
-  //     fileViewerRef.current &&
-  //     !fileViewerRef.current.contains(event.target)
-  //   ) {
-  //     setOpenedFile(null)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   document.addEventListener('mousedown', handleModalClickOutside)
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleModalClickOutside)
-  //   }
-  // }, [])
 
   if (basePath === '~/' && !returnHome)
     return <div>You've got a bug in GithubRepo</div>

@@ -86,8 +86,6 @@ const ProjectContainer = () => {
     githubOwner = githubUrl[githubUrl.length - 2]
   }
 
-  console.log(githubRepo, githubOwner)
-
   const openModal = id => {
     setIsModalOpen(true)
     setSelectedProject(id)

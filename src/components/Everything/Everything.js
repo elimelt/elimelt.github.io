@@ -3,9 +3,9 @@ import './Everything.css'
 import GithubRepo from '../GithubRepo/GithubRepo'
 import Directory from '../Directory/Directory'
 
-const Everything = () => {
+const Everything = ({ initialRepo, initialPath }) => {
   const repos = ['notes', 'blog']
-  const [repo, setRepo] = useState('')
+  const [repo, setRepo] = useState(initialRepo || '')
 
   const back = () => {
     setRepo('')

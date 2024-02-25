@@ -110,8 +110,6 @@ const RepoDirectory = props => {
       const oldUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents${filePath}`
       const response = await fetch(oldUrl)
       const data = await response.json()
-      console.log('data:', data)
-
       const imgExt = ['png', 'jpg', 'jpeg', 'gif', 'svg']
       const parts = fileName.split('.')
       const extension = parts[parts.length - 1]

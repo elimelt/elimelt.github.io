@@ -32,7 +32,7 @@ const App = () => {
         <Route path='/draw' element={<EtchASketch />} />
         <Route path='/composer' element={<Composer />} />
         <Route path='/newsfeed' element={<NewsfeedPage />} />
-        <Route path='/content' element={<Content />} />
+        <Route path='/content/*' element={<Content />} />
         <Route path='/tools' element={<Tools />} />
         <Route path='/image-processor' element={<PNGProcessor/>} />
         <Route path='*' element={<NotFound />} />

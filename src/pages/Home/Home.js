@@ -60,7 +60,6 @@ const Home = () => {
   const slides = [<WelcomeMessage />, <GHCal username='elimelt' />, <Tools />]
   const cName = index =>
     idx === index ? 'carousel-item' : 'carousel-item inactive'
-  console.log(idx, slides[idx], cName(0), cName(1), cName(2))
 
   return (
     <div className='home-container'>

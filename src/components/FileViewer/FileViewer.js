@@ -6,7 +6,6 @@ const FileViewer = ({ fileName, fileContents }) => {
   const parts = fileName.split('.')
   const extension = parts[parts.length - 1]
   const isImage = ['png', 'jpg', 'jpeg', 'gif'].includes(extension)
-  console.log(fileContents)
   const headingStyle = {
     fontSize: '1.5rem',
     margin: '1rem 0'
