@@ -17,7 +17,7 @@ import PNGProcessor from './pages/PNGProcessor/PNGProcessor'
 import './App.css'
 
 const App = () => {
-  pingIfNeeded()
+  // pingIfNeeded()
 
   return (
     <>
