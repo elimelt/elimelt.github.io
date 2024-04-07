@@ -50,6 +50,27 @@ const FileViewer = ({ fileName, fileContents }) => {
       </div>
     )
 
+  const isPDF = extension === 'pdf'
+
+  if (isPDF) {
+    var URL = 'data:application/pdf;base64,'+ fileContents;
+    var blobUrl;
+    fetch(URL)
+     .then(res => res.blob())
+     .then(URL.createObjectURL)
+     .then((ret) => {blobUrl=ret; return blobUrl;})
+     .then(console.log)
+
+    return (
+      <div className='file-viewer'>
+        <h2 style={headingStyle}>{fileName}</h2>
+        <iframe src={blobUrl} width="100%" height="100%"></iframe>
+      </div>
+    )
+
+  }
+
+
   return (
     <div className='file-viewer'>
       <h2 style={headingStyle}>{fileName}</h2>
