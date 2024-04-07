@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3746b797.css",
-    "main.js": "/static/js/main.66c2315d.js",
+    "main.css": "/static/css/main.b3f3ab92.css",
+    "main.js": "/static/js/main.aff5f744.js",
     "static/media/recipe-search-demo.gif": "/static/media/recipe-search-demo.d8e49bc965fa258e57d3.gif",
     "static/media/life-demo.gif": "/static/media/life-demo.7f433974388a4114811b.gif",
     "static/media/crypto-list-demo.gif": "/static/media/crypto-list-demo.bfa9ce7a5c8b8866f068.gif",
@@ -70,11 +70,11 @@
     "static/media/KaTeX_Size3-Regular.woff": "/static/media/KaTeX_Size3-Regular.7947224e8a9914fa332b.woff",
     "static/media/KaTeX_Size3-Regular.woff2": "/static/media/KaTeX_Size3-Regular.e1951519f6f0596f7356.woff2",
     "index.html": "/index.html",
-    "main.3746b797.css.map": "/static/css/main.3746b797.css.map",
-    "main.66c2315d.js.map": "/static/js/main.66c2315d.js.map"
+    "main.b3f3ab92.css.map": "/static/css/main.b3f3ab92.css.map",
+    "main.aff5f744.js.map": "/static/js/main.aff5f744.js.map"
   },
   "entrypoints": [
-    "static/css/main.3746b797.css",
-    "static/js/main.66c2315d.js"
+    "static/css/main.b3f3ab92.css",
+    "static/js/main.aff5f744.js"
   ]
 }
