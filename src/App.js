@@ -15,6 +15,7 @@ import Tools from './pages/Tools/Tools'
 import Composer from './components/Composer/Composer'
 import PNGProcessor from './pages/PNGProcessor/PNGProcessor'
 import './App.css'
+import NotesHome from './pages/NotesHome/NotesHome'
 
 const App = () => {
   // pingIfNeeded()
@@ -32,7 +33,8 @@ const App = () => {
         <Route path='/draw' element={<EtchASketch />} />
         <Route path='/composer' element={<Composer />} />
         <Route path='/newsfeed' element={<NewsfeedPage />} />
-        <Route path='/content/*' element={<Content />} />
+        {/* <Route path='/content/*' element={<Content />} /> */}
+        <Route path='/notes/*' element={<NotesHome />} />
         <Route path='/tools' element={<Tools />} />
         <Route path='/image-processor' element={<PNGProcessor/>} />
         <Route path='*' element={<NotFound />} />
