@@ -13,6 +13,12 @@
   align-items: auto;
 }
 
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+
 .dir-heading {
   margin-top: 0;
   /* margin-bottom: 10%; */

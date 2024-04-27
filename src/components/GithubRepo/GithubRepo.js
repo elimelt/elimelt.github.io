@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import FileViewer from '../../components/FileViewer/FileViewer'
 import './GithubRepo.css'
 import RepoDirectory from '../RepoDirectory/RepoDirectory'
+import PrintButton from '../PrintButton/PrintButton'
 
 const GithubRepo = props => {
   const { repoOwner, repoName } = props
@@ -66,11 +67,14 @@ const GithubRepo = props => {
   if (openedFile) {
     return (
       <div className='repo-container'>
-        <button className='close-file' onClick={closeFile}>
-          x
-        </button>
+        <div className='button-container'>
+          <button className='close-file' onClick={closeFile}>
+            x
+          </button>
+          <PrintButton id='file-html' documentName={openedFile} />
+        </div>
         {openedFile && (
-          <div className='file-viewer-container'>
+          <div id="file-html" className='file-viewer-container'>
             <FileViewer
               fileName={openedFile}
               fileContents={selectedFileContent}
