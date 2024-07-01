@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.168f4e97.css",
-    "main.js": "/static/js/main.25e5eba8.js",
+    "main.js": "/static/js/main.de864893.js",
     "static/media/recipe-search-demo.gif": "/static/media/recipe-search-demo.d8e49bc965fa258e57d3.gif",
     "static/media/life-demo.gif": "/static/media/life-demo.7f433974388a4114811b.gif",
     "static/media/crypto-list-demo.gif": "/static/media/crypto-list-demo.bfa9ce7a5c8b8866f068.gif",
@@ -71,10 +71,10 @@
     "static/media/KaTeX_Size3-Regular.woff2": "/static/media/KaTeX_Size3-Regular.e1951519f6f0596f7356.woff2",
     "index.html": "/index.html",
     "main.168f4e97.css.map": "/static/css/main.168f4e97.css.map",
-    "main.25e5eba8.js.map": "/static/js/main.25e5eba8.js.map"
+    "main.de864893.js.map": "/static/js/main.de864893.js.map"
   },
   "entrypoints": [
     "static/css/main.168f4e97.css",
-    "static/js/main.25e5eba8.js"
+    "static/js/main.de864893.js"
   ]
 }
