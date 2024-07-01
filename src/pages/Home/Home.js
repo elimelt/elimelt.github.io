@@ -14,12 +14,6 @@ const WelcomeMessage = () => (
           systems and databases. Outside of my academics, I enjoy using
           technology to enrich various student organizations at UW.
         </p>
-        <p className='home-text'>
-          This website is a blend of personal, professional, and academic
-          pursuits of mine. I also enjoy experimenting with web development, and
-          use this website as a hobby project/sandbox. Feel free to explore the
-          website and reach out to me if you have any questions!
-        </p>
       </div>
       <div className='home-image-container'>
         <img
