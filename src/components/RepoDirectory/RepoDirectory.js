@@ -23,6 +23,8 @@ function useEscapeKey (handleClose) {
   }, [handleEscKey])
 }
 
+
+
 const RepoDirectory = props => {
   const {
     path,
@@ -47,9 +49,43 @@ const RepoDirectory = props => {
 
   const filePath = path.split('/').slice(2).join('/') || ''
 
+
+
   useEffect(() => {
+    const fetchDirectoryContents = async dir => {
+      if (dirCache.has(dir)) {
+        const { directories, files } = dirCache.get(dir)
+        setDirectories(directories)
+        setFiles(files)
+        return
+      }
+
+      const response = await fetch(
+        `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${dir}`
+      )
+
+      const contents = await response.json()
+
+      dirCache.set(dir, {
+        directories: contents
+          .filter(item => item.type === 'dir' && item.name[0] !== '.')
+          .map(item => item.name),
+        files: contents.filter(
+          item => item.type === 'file' && item.name[0] !== '.'
+        )
+      })
+
+      setDirectories(
+        contents
+          .filter(item => item.type === 'dir' && item.name[0] !== '.')
+          .map(item => item.name)
+      )
+      setFiles(
+        contents.filter(item => item.type === 'file' && item.name[0] !== '.')
+      )
+    }
     fetchDirectoryContents(filePath)
-  }, [path])
+  }, [dirCache, filePath, path, repoName, repoOwner])
 
   const handleBackButtonClick = () => {
     if (path === '~/' + repoName) {
@@ -64,38 +100,6 @@ const RepoDirectory = props => {
     setPath(pathArray.join('/'))
   }
 
-  const fetchDirectoryContents = async dir => {
-    if (dirCache.has(dir)) {
-      const { directories, files } = dirCache.get(dir)
-      setDirectories(directories)
-      setFiles(files)
-      return
-    }
-
-    const response = await fetch(
-      `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${dir}`
-    )
-
-    const contents = await response.json()
-
-    dirCache.set(dir, {
-      directories: contents
-        .filter(item => item.type === 'dir' && item.name[0] !== '.')
-        .map(item => item.name),
-      files: contents.filter(
-        item => item.type === 'file' && item.name[0] !== '.'
-      )
-    })
-
-    setDirectories(
-      contents
-        .filter(item => item.type === 'dir' && item.name[0] !== '.')
-        .map(item => item.name)
-    )
-    setFiles(
-      contents.filter(item => item.type === 'file' && item.name[0] !== '.')
-    )
-  }
 
   if (path === '~/' && !returnHome)
     return <div>You've got a bug in GithubRepo</div>

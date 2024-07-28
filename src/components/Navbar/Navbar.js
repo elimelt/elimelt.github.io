@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
-import { Button } from '@mui/material'
 
-const NavBar = () => {
+function NavBar() {
   return (
     <div className='navbar'>
       <div className='app-bar'>
@@ -20,10 +19,8 @@ const NavBar = () => {
           <ButtonLink to='/projects' className='nav-link'>
             Projects
           </ButtonLink>
-          {/* <ButtonLink to='/content' className='nav-link'>
-            Content
-          </ButtonLink> */}
-         <ButtonLink to='/notes' className='nav-link'>
+
+          <ButtonLink to='/notes' className='nav-link'>
             Notes
           </ButtonLink>
 

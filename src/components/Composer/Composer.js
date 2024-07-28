@@ -70,6 +70,7 @@ const Composer = () => {
     })
   }
 
+  // eslint-disable-next-line no-unused-vars
   const stopLoop = () => {
     // Stop the Transport to end the loop
     transport.stop()
@@ -91,7 +92,7 @@ const Composer = () => {
         synths[i].dispose()
       }
     }
-  }, [])
+  }, [synths])
 
   return (
     <div className={'composer-container'}>

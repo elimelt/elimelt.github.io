@@ -10,17 +10,19 @@ import Navbar from './components/Navbar/Navbar'
 import Blog from './pages/Blog/Blog'
 import EtchASketch from './components/EtchASketch/EtchASketch'
 import NewsfeedPage from './pages/NewsfeedPage/NewsfeedPage'
-import Content from './pages/Content/Content'
 import Tools from './pages/Tools/Tools'
 import Composer from './components/Composer/Composer'
 import PNGProcessor from './pages/PNGProcessor/PNGProcessor'
-import Gist from 'super-react-gist'
 import './App.css'
 import NotesHome from './pages/NotesHome/NotesHome'
-import { useEffect, useState } from 'react'
 import GistsPage from './pages/GistsPage/GistsPage'
+import { useEffect } from 'react'
 
 const App = () => {
+
+  useEffect(() => {
+    pingIfNeeded()
+  }, [])
   return (
     <>
       <Title />
