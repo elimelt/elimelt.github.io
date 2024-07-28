@@ -14,18 +14,20 @@ import Content from './pages/Content/Content'
 import Tools from './pages/Tools/Tools'
 import Composer from './components/Composer/Composer'
 import PNGProcessor from './pages/PNGProcessor/PNGProcessor'
+import Gist from 'super-react-gist'
 import './App.css'
 import NotesHome from './pages/NotesHome/NotesHome'
+import { useEffect, useState } from 'react'
+import GistsPage from './pages/GistsPage/GistsPage'
 
 const App = () => {
-  // pingIfNeeded()
-
   return (
     <>
       <Title />
       <Navbar className='navbar' />
       <Routes>
         <Route index path='/' element={<Home />} />
+        <Route path='/gists' element={<GistsPage />} />
         <Route path='/projects' element={<Projects />} />
         <Route path='/info' element={<Info />} />
         <Route path='/blog' element={<Blog />} />
@@ -36,7 +38,7 @@ const App = () => {
         {/* <Route path='/content/*' element={<Content />} /> */}
         <Route path='/notes/*' element={<NotesHome />} />
         <Route path='/tools' element={<Tools />} />
-        <Route path='/image-processor' element={<PNGProcessor/>} />
+        <Route path='/image-processor' element={<PNGProcessor />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
