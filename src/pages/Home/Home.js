@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import image from '../../portrait.JPG';
+// import image from '../../portrait.JPG';
 import GitHubCalendar from 'react-github-calendar';
 
 // Styled components
