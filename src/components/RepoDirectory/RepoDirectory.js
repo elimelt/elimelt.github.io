@@ -50,13 +50,14 @@ const RepoDirectory = props => {
   const filePath = path.split('/').slice(2).join('/') || ''
 
 
-
+  console.log(directories, files)
   useEffect(() => {
     const fetchDirectoryContents = async dir => {
       if (dirCache.has(dir)) {
-        const { directories, files } = dirCache.get(dir)
-        setDirectories(directories)
-        setFiles(files)
+        let { directories, files } = dirCache.get(dir)
+
+        setDirectories(directories.sort((a, b) => a.length - b.length))
+        setFiles(files.sort((a, b) => a.name.length - b.name.length))
         return
       }
 
@@ -69,20 +70,15 @@ const RepoDirectory = props => {
       dirCache.set(dir, {
         directories: contents
           .filter(item => item.type === 'dir' && item.name[0] !== '.')
-          .map(item => item.name),
-        files: contents.filter(
-          item => item.type === 'file' && item.name[0] !== '.'
-        )
+          .map(item => item.name)
+          .sort((a, b) => a.length - b.length),
+        files: contents
+          .filter(item => item.type === 'file' && item.name[0] !== '.')
+          .sort((a, b) => a.name.length - b.name.length)
       })
 
-      setDirectories(
-        contents
-          .filter(item => item.type === 'dir' && item.name[0] !== '.')
-          .map(item => item.name)
-      )
-      setFiles(
-        contents.filter(item => item.type === 'file' && item.name[0] !== '.')
-      )
+      setDirectories(dirCache.get(dir).directories)
+      setFiles(dirCache.get(dir).files)
     }
     fetchDirectoryContents(filePath)
   }, [dirCache, filePath, path, repoName, repoOwner])

@@ -1,4 +1,3 @@
-import './NotesHome.css'
 import GithubRepo from '../../components/GithubRepo/GithubRepo'
 
 const NotesHome = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Blog.css'
-import GithubRepo from '../../components/GithubRepo/GithubRepo'
+import GithubRepo from '../../../components/GithubRepo/GithubRepo'
 
 const Blog = () => {
   return (

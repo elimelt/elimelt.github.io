@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Everything.css'
-import GithubRepo from '../GithubRepo/GithubRepo'
-import Directory from '../Directory/Directory'
+import GithubRepo from '../../GithubRepo/GithubRepo'
+import Directory from '../../Directory/Directory'
 
 const Everything = ({ initialRepo, initialPath }) => {
   const repos = ['notes', 'blog']

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import FileViewer from '../../components/FileViewer/FileViewer'
+import FileViewer from '../FileViewer/FileViewer'
 import './GithubRepo.css'
 import RepoDirectory from '../RepoDirectory/RepoDirectory'
 import PrintButton from '../PrintButton/PrintButton'
@@ -29,7 +29,7 @@ const GithubRepo = props => {
         <div className='dir-heading'>
           <span className='dir-item'>
             <a
-              style={{ textDecoration: 'none', color: 'black' }}
+              style={{ textDecoration: 'none' }}
               href={`https://github.com/${repoOwner}/${repoName}`}
             >
               {repoName}/
