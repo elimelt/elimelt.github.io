@@ -1,5 +1,4 @@
 import GithubRepo from '../../components/GithubRepo/GithubRepo'
-import styled from 'styled-components'
 
 const NotesHome = () => {
 
