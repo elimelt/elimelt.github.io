@@ -1,14 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6ea0b09e.css",
-    "main.js": "/static/js/main.048071c8.js",
-    "static/media/recipe-search-demo.gif": "/static/media/recipe-search-demo.d8e49bc965fa258e57d3.gif",
-    "static/media/life-demo.gif": "/static/media/life-demo.7f433974388a4114811b.gif",
-    "static/media/crypto-list-demo.gif": "/static/media/crypto-list-demo.bfa9ce7a5c8b8866f068.gif",
-    "static/media/syntext-demo.gif": "/static/media/syntext-demo.0482e5e84f3826e085ad.gif",
-    "static/media/meet-together-demo.gif": "/static/media/meet-together-demo.4a80fe017edb511cfa2f.gif",
-    "static/media/hotls-demo.gif": "/static/media/hotls-demo.305874676085fef2dd22.gif",
-    "static/media/portrait.JPG": "/static/media/portrait.ff6e13f527707d228c94.JPG",
+    "main.css": "/static/css/main.ac030022.css",
+    "main.js": "/static/js/main.5928ce74.js",
     "static/media/KaTeX_AMS-Regular.ttf": "/static/media/KaTeX_AMS-Regular.853be92419a6c3766b9a.ttf",
     "static/media/KaTeX_Main-Regular.ttf": "/static/media/KaTeX_Main-Regular.9eba1d77abcf2aa6e94e.ttf",
     "static/media/KaTeX_Main-Bold.ttf": "/static/media/KaTeX_Main-Bold.8169508bf58f8bd92ad8.ttf",
@@ -70,11 +63,11 @@
     "static/media/KaTeX_Size3-Regular.woff": "/static/media/KaTeX_Size3-Regular.7947224e8a9914fa332b.woff",
     "static/media/KaTeX_Size3-Regular.woff2": "/static/media/KaTeX_Size3-Regular.e1951519f6f0596f7356.woff2",
     "index.html": "/index.html",
-    "main.6ea0b09e.css.map": "/static/css/main.6ea0b09e.css.map",
-    "main.048071c8.js.map": "/static/js/main.048071c8.js.map"
+    "main.ac030022.css.map": "/static/css/main.ac030022.css.map",
+    "main.5928ce74.js.map": "/static/js/main.5928ce74.js.map"
   },
   "entrypoints": [
-    "static/css/main.6ea0b09e.css",
-    "static/js/main.048071c8.js"
+    "static/css/main.ac030022.css",
+    "static/js/main.5928ce74.js"
   ]
 }
