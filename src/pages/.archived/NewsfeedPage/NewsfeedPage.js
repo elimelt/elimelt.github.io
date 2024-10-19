@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import PostFeed from '../../components/PostFeed/PostFeed'
+import PostFeed from '../../../components/PostFeed/PostFeed'
 
 const PageContainer = styled.div`
   background-color: #f4f4f4;

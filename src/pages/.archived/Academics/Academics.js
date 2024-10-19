@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import quarters from '../../data/academicData.js'
-import QuarterEntry from '../../components/QuarterEntry/QuarterEntry.js'
+import QuarterEntry from '../../../components/QuarterEntry/QuarterEntry.js'
 import './Academics.css'
 
 const Academics = () => {

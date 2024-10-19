@@ -1,4 +1,4 @@
-import Everything from '../../components/Everything/Everything'
+import Everything from '../../../components/Everything/Everything'
 import './Content.css'
 
 const Content = () => {
