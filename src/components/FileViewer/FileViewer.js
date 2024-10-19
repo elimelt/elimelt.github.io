@@ -1,6 +1,32 @@
+import React, { useState } from 'react'
 import MarkdownFileViewer from '../MarkdownFileViewer/MarkdownFileViewer'
 import './FileViewer.css'
 import Game from '../Game/Game'
+
+const CodeFileViewer = ({ fileName, fileContents }) => {
+  const [isGameActivated, setIsGameActivated] = useState(false)
+
+  const handleGameButtonClick = () => {
+    setIsGameActivated(!isGameActivated)
+  }
+
+  const fileExtension = fileName.split('.').pop()
+  const markdownifiedContents =
+    '```' + fileExtension + '\n' + fileContents + '\n```'
+
+  return (
+    <div className='code-file-viewer'>
+      {isGameActivated ? (
+        <Game defaultSnippet={fileContents.split('\n')} />
+      ) : (
+        <MarkdownFileViewer children={markdownifiedContents} />
+      )}
+      <button onClick={handleGameButtonClick}>
+        {isGameActivated ? 'Hide Game' : 'Show Game'}
+      </button>
+    </div>
+  )
+}
 
 const FileViewer = ({ fileName, fileContents }) => {
   const parts = fileName.split('.')
@@ -36,7 +62,7 @@ const FileViewer = ({ fileName, fileContents }) => {
     return (
       <div className='file-viewer'>
         <h2 style={headingStyle}>{fileName}</h2>
-        <Game defaultSnippet={fileContents.split('\n')} />
+        <CodeFileViewer fileName={fileName} fileContents={fileContents} />
       </div>
     )
 

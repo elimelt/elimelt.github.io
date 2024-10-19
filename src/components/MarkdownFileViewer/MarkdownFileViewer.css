@@ -5,12 +5,13 @@
 
   /* border: 1px solid #ccc;*/
   border-radius: 5px;
-  background-color: #ffffff;
+  /* background-color: none; */
   font-family: 'Arial', sans-serif;
   font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color:#f8f8f8
 }
 
 .md-content {
@@ -21,20 +22,8 @@
   width: 90%;
   padding: 0 5%;
   height: 100%;
+  /* background-color: aliceblue; */
 }
-
-/* .md-content table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.md-content table td,
-.md-content table th {
-  border: 1px solid #ddd;
-  padding: 5px;
-} */
-
-/* github markdown table styling: */
 
 .md-content table {
   border-collapse: collapse;

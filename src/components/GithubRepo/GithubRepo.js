@@ -69,7 +69,7 @@ const GithubRepo = props => {
       <div className='repo-container'>
         <div className='button-container'>
           <button className='close-file' onClick={closeFile}>
-            x
+            Back
           </button>
           <PrintButton id='file-html' documentName={openedFile} />
         </div>

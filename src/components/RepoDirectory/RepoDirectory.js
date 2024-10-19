@@ -48,9 +48,6 @@ const RepoDirectory = props => {
   )
 
   const filePath = path.split('/').slice(2).join('/') || ''
-
-
-  console.log(directories, files)
   useEffect(() => {
     const fetchDirectoryContents = async dir => {
       if (dirCache.has(dir)) {
