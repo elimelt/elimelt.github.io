@@ -260,7 +260,7 @@ const Synth = () => {
       <p>Current octave shift: {octave}</p>
 
       <Keyboard>
-        {Object.valuess(keyMap).map(note => (
+        {Object.values(keyMap).map(note => (
           <Key
             key={note}
             isBlack={note.includes('#')}
