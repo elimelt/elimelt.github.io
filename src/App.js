@@ -7,7 +7,9 @@ import ContactMe from './pages/ContactMe/ContactMe'
 import NotFound from './pages/NotFound/NotFound'
 import NotesHome from './pages/NotesHome/NotesHome'
 import GistsPage from './pages/GistsPage/GistsPage'
+import Synth from './pages/Synth/Synth'
 import Layout from './Layout'
+import Composer from './components/.archived/ContactForm/Composer/Composer'
 
 const pingIfNeeded = () => {
   const flag = localStorage.getItem('visited-elijah-dot-com')
@@ -76,6 +78,8 @@ const App = () => {
         <Route path='/gists' element={<GistsPage />} />
         <Route path='/contact' element={<ContactMe />} />
         <Route path='/notes/*' element={<NotesHome />} />
+        <Route path='/synth' element={<Synth />} />
+        <Route path='/melody' element={<Composer />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Layout>

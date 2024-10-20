@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const LayoutContainer = styled.div`
   font-family: 'Courier New', Courier, monospace;
@@ -8,34 +8,34 @@ const LayoutContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-`;
+`
 
 const Header = styled.header`
   padding: 10px;
   margin-bottom: 20px;
-`;
+`
 
 const Title = styled.h1`
   font-size: 40px;
   margin: 0;
   text-align: center;
-`;
+`
 
 const ExternalLinks = styled.div`
   text-align: center;
   margin-top: 10px;
-`;
+`
 
 const ExternalLink = styled.a`
   margin: 0 10px;
   font-size: 30px;
   font-weight: bold;
-`;
+`
 
 const Nav = styled.nav`
   padding: 10px;
   margin-bottom: 20px;
-`;
+`
 
 const NavList = styled.ul`
   list-style-type: none;
@@ -44,11 +44,11 @@ const NavList = styled.ul`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-`;
+`
 
 const NavItem = styled.li`
   margin: 5px 15px;
-`;
+`
 
 const NavLink = styled(Link)`
   font-weight: bold;
@@ -57,11 +57,11 @@ const NavLink = styled(Link)`
   @media (max-width: 600px) {
     font-size: 16px;
   }
-`;
+`
 
 const Main = styled.main`
   padding: 20px;
-`;
+`
 
 const Layout = ({ children }) => {
   return (
@@ -71,25 +71,42 @@ const Layout = ({ children }) => {
           elimelt.<i>com</i>
         </Title>
         <ExternalLinks>
-          <ExternalLink href="https://linkedin.com/in/elimelt" target="_blank" rel="noreferrer">
+          <ExternalLink
+            href='https://linkedin.com/in/elimelt'
+            target='_blank'
+            rel='noreferrer'
+          >
             LinkedIn
           </ExternalLink>
-          <ExternalLink href="https://github.com/elimelt" target="_blank" rel="noreferrer">
+          <ExternalLink
+            href='https://github.com/elimelt'
+            target='_blank'
+            rel='noreferrer'
+          >
             GitHub
           </ExternalLink>
         </ExternalLinks>
       </Header>
       <Nav>
         <NavList>
-          <NavItem><NavLink to="/">Home</NavLink></NavItem>
+          <NavItem>
+            <NavLink to='/'>Home</NavLink>
+          </NavItem>
           {/* <NavItem><NavLink to="/contact">Contact</NavLink></NavItem> */}
-          <NavItem><NavLink to="/gists">Code Snippets</NavLink></NavItem>
-          <NavItem><NavLink to="/notes">Notes</NavLink></NavItem>
+          <NavItem>
+            <NavLink to='/gists'>Code Snippets</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to='/notes'>Notes</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to='/synth'>Synth</NavLink>
+          </NavItem>
         </NavList>
       </Nav>
       <Main>{children}</Main>
     </LayoutContainer>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
