@@ -125,7 +125,7 @@ const SequenceContainer = styled.div`
   grid-template-columns: repeat(4, 1fr); /* Always 4 columns */
   gap: 5px; /* Adjust gap between buttons */
   margin-left: 20px;
-`;
+`
 
 const TracksContainer = styled.div`
   display: flex;
@@ -134,8 +134,7 @@ const TracksContainer = styled.div`
   width: 100%;
 `
 
-const Title = styled.h1`
-`
+const Title = styled.h1``
 
 const Controls = styled.div`
   width: 100%;
@@ -171,7 +170,7 @@ const StepButton = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 16px;
-`;
+`
 
 const PlayButton = styled.button`
   margin-right: 10px;
@@ -420,9 +419,21 @@ export const DrumKit = () => {
     setSequence(preset.sequence)
   }
 
+  const isOnMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+
+  }
+
   return (
     <Container>
       <Title>Drum Kit</Title>
+      {isOnMobile() && (
+        <div>
+          <h3>For best experience, use a desktop browser</h3>
+        </div>
+      )}
       <PresetContainer>
         <div>
           <h3>Presets:</h3>
@@ -433,32 +444,30 @@ export const DrumKit = () => {
           ))}
           <PresetButton onClick={savePreset}>Save Preset</PresetButton>
           <PresetInput
-            type="text"
+            type='text'
             value={presetName}
-            onChange={(e) => setPresetName(e.target.value)}
-            placeholder="Preset name"
+            onChange={e => setPresetName(e.target.value)}
+            placeholder='Preset name'
           />
         </div>
-
       </PresetContainer>
 
       <Controls>
         <div>
-        <AddTrackButton onClick={addTrack}>Add Track</AddTrackButton>
-        <PlayButton onClick={togglePlay} $isplaying={isPlaying}>
-          {isPlaying ? 'Stop' : 'Play'}
-        </PlayButton>
-        <BpmInput
-          type='number'
-          value={bpm}
-          onChange={e => setBpm(Number(e.target.value))}
-          min='60'
-          max='200'
-        />
-        <span>BPM</span>
+          <AddTrackButton onClick={addTrack}>Add Track</AddTrackButton>
+          <PlayButton onClick={togglePlay} $isplaying={isPlaying}>
+            {isPlaying ? 'Stop' : 'Play'}
+          </PlayButton>
+          <BpmInput
+            type='number'
+            value={bpm}
+            onChange={e => setBpm(Number(e.target.value))}
+            min='60'
+            max='200'
+          />
+          <span>BPM</span>
         </div>
       </Controls>
-
 
       <TracksContainer>
         {tracks.map(track => (
@@ -477,21 +486,31 @@ export const DrumKit = () => {
               ))}
             </SampleSelect>
             <SequenceContainer>
-              {sequence[track.id] && sequence[track.id].map((isActive, step) => (
-                <StepButton
-                  key={step}
-                  onClick={() => toggleStep(track.id, step)}
-                  $isactive={isActive}
-                >
-                  {step + 1}
-                </StepButton>
-              ))}
+              {sequence[track.id] &&
+                sequence[track.id].map((isActive, step) => (
+                  <StepButton
+                    key={step}
+                    onClick={() => toggleStep(track.id, step)}
+                    $isactive={isActive}
+                  >
+                    {step + 1}
+                  </StepButton>
+                ))}
             </SequenceContainer>
           </Track>
         ))}
       </TracksContainer>
+
+      {/* <iframe
+        title="piano"
+        width="560"
+        height="800"
+        src="/#/"
+        frameBorder="0"
+        allowFullScreen
+      ></iframe> */}
     </Container>
-  );
+  )
 }
 
 export default DrumKit

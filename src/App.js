@@ -10,6 +10,8 @@ import GistsPage from './pages/GistsPage/GistsPage'
 import DrumKit from './pages/DrumKit/DrumKit'
 import Layout from './Layout'
 import Composer from './components/.archived/ContactForm/Composer/Composer'
+import Synth from './pages/Synth/Synth'
+import Piano from './pages/Piano/Piano'
 
 const pingIfNeeded = () => {
   const flag = localStorage.getItem('visited-elijah-dot-com')
@@ -80,6 +82,8 @@ const App = () => {
         <Route path='/notes/*' element={<NotesHome />} />
         <Route path='/drums' element={<DrumKit />} />
         <Route path='/melody' element={<Composer />} />
+        <Route path='/synth' element={<Synth />} />
+        <Route path='/piano' element={<Piano />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Layout>
