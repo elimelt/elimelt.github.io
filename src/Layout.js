@@ -100,7 +100,7 @@ const Layout = ({ children }) => {
             <NavLink to='/notes'>Notes</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to='/synth'>Synth</NavLink>
+            <NavLink to='/drums'>Drums</NavLink>
           </NavItem>
         </NavList>
       </Nav>
