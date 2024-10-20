@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import * as Tone from 'tone'
 import styled from 'styled-components'
 
@@ -97,33 +97,64 @@ const samples = {
 }
 
 const Container = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
   padding: 20px;
 `
 
+const PresetContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto;
+`
+
+const PresetInput = styled.input`
+  color: white;
+  padding: 5px;
+  style: none;
+  background-color: transparent;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+`
+
+const SequenceContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Always 4 columns */
+  gap: 5px; /* Adjust gap between buttons */
+  margin-left: 20px;
+`;
+
+const TracksContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+`
+
 const Title = styled.h1`
-  text-align: center;
 `
 
 const Controls = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
+  font-weight: bold;
 `
 
-const PlayButton = styled.button`
-  background-color: ${props => (props.$isplaying ? 'red' : 'lightseagreen')};
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
+const BpmInput = styled.input`
+  margin-right: 5px;
+  padding: 5px;
 `
 
-const BpmInput = styled.input``
-
-const Track = styled.div``
+const Track = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`
 
 const SampleSelect = styled.select`
   margin-right: 10px;
@@ -131,16 +162,32 @@ const SampleSelect = styled.select`
 `
 
 const StepButton = styled.button`
-  width: 30px;
-  height: 30px;
-  margin: 2px;
+  width: 50px;
+  height: 50px;
   background-color: ${props => (props.$isactive ? 'lightseagreen' : '#AAAAAA')};
   border: none;
   cursor: pointer;
-`
-const AddTrackButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+`;
+
+const PlayButton = styled.button`
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: lightgray;
+  border: 1px solid #ccc;
   cursor: pointer;
-  margin-bottom: 20px;
+  background-color: ${props => (props.$isplaying ? 'red' : 'green')};
+`
+
+const AddTrackButton = styled.button`
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: lightgray;
+  border: 1px solid #ccc;
+  cursor: pointer;
 `
 
 const RemoveTrackButton = styled.button`
@@ -150,36 +197,110 @@ const RemoveTrackButton = styled.button`
   color: white;
   border: none;
   padding: 5px 10px;
-  border-radius: 3px;
 `
 
+const PresetButton = styled.button`
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: lightgray;
+  border: 1px solid #ccc;
+`
 
 const STEPS = 16
 
 export const DrumKit = () => {
-  const [$isplaying, set$isplaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [bpm, setBpm] = useState(120)
   const [tracks, setTracks] = useState([
-    {"id":"track1","instrument":"kick1"},
-    {"id":"track2","instrument":"snare1"},
-    {"id":"track3","instrument":"hatClosed1"},
-    {"id":"track4","instrument":"eightOhEight3"},
+    { id: 'track1', instrument: 'kick1' },
+    { id: 'track2', instrument: 'snare1' },
+    { id: 'track3', instrument: 'hatClosed1' },
+    { id: 'track4', instrument: 'eightOhEight3' }
   ])
 
   const [sequence, setSequence] = useState({
-    "track1": [true,false,false,false,false,false,false,false,true,false,false,false,false,false,true,false],
-    "track2": [false,false,false,false,true,false,false,false,false,false,false,false,true,false,false,false],
-    "track3": [true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,true],
-    "track4": [true,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false]
+    track1: [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+    ],
+    track2: [
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ],
+    track3: [
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      true
+    ],
+    track4: [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ]
   })
   const [players, setPlayers] = useState({})
 
   const [presetName, setPresetName] = useState('')
   const [presets, setPresets] = useState([])
 
-  // load presets
   useEffect(() => {
-    const savedPresets = JSON.parse(localStorage.getItem('drumKitPresets') || '[]')
+    const savedPresets = JSON.parse(
+      localStorage.getItem('drumKitPresets') || '[]'
+    )
     setPresets(savedPresets)
   }, [])
 
@@ -192,11 +313,7 @@ export const DrumKit = () => {
     const newPlayers = {}
 
     tracks.forEach(track => {
-      if (sequence[track.id]) {
-        newSequence[track.id] = sequence[track.id]
-      } else {
-        newSequence[track.id] = Array(STEPS).fill(false)
-      }
+      newSequence[track.id] = sequence[track.id] || Array(STEPS).fill(false)
       newPlayers[track.id] = new Tone.Player({
         url: samples[track.instrument],
         autostart: false
@@ -211,8 +328,8 @@ export const DrumKit = () => {
     }
   }, [tracks])
 
-  useEffect(() => {
-    const loop = new Tone.Sequence(
+  const loop = useCallback(() => {
+    return new Tone.Sequence(
       (time, step) => {
         tracks.forEach(track => {
           if (sequence[track.id] && sequence[track.id][step]) {
@@ -223,30 +340,35 @@ export const DrumKit = () => {
       Array.from({ length: STEPS }, (_, i) => i),
       '16n'
     )
+  }, [sequence, players, tracks])
 
-    if ($isplaying) {
+  useEffect(() => {
+    const currentLoop = loop()
+
+    if (isPlaying) {
       Tone.Transport.start()
-      loop.start()
+      currentLoop.start()
     } else {
       Tone.Transport.stop()
-      loop.stop()
+      currentLoop.stop()
     }
 
     return () => {
-      loop.dispose()
+      currentLoop.dispose()
     }
-  }, [$isplaying, sequence, players, tracks])
+  }, [isPlaying, loop])
 
   const togglePlay = async () => {
-    console.log('togglePlay')
     await Tone.start()
-    set$isplaying(!$isplaying)
+    setIsPlaying(!isPlaying)
   }
 
   const handleInstrumentChange = (trackId, instrument) => {
-    setTracks(prev => prev.map(track =>
-      track.id === trackId ? { ...track, instrument } : track
-    ))
+    setTracks(prev =>
+      prev.map(track =>
+        track.id === trackId ? { ...track, instrument } : track
+      )
+    )
   }
 
   const toggleStep = (trackId, step) => {
@@ -257,23 +379,22 @@ export const DrumKit = () => {
   }
 
   const addTrack = () => {
-    if (tracks.length >= 4) {
-      alert('You can only have 4 tracks')
-      return
-    }
+    // if (tracks.length >= 4) {
+    //   alert('You can only have 4 tracks')
+    //   return
+    // }
     const newTrackId = `track${tracks.length + 1}`
     setTracks(prev => [...prev, { id: newTrackId, instrument: 'kick1' }])
   }
 
-  const removeTrack = (trackId) => {
+  const removeTrack = trackId => {
     players[trackId].stop()
     players[trackId].dispose()
-    setTracks(prev => prev.filter(track => track.id !== trackId));
+    setTracks(prev => prev.filter(track => track.id !== trackId))
     setSequence(prev => {
-      const newSequence = { ...prev };
-      delete newSequence[trackId];
-      return newSequence;
-    });
+      const { [trackId]: removed, ...rest } = prev
+      return rest
+    })
   }
 
   const savePreset = () => {
@@ -294,34 +415,38 @@ export const DrumKit = () => {
     setPresetName('')
   }
 
-  const loadPreset = (preset) => {
+  const loadPreset = preset => {
     setTracks(preset.tracks)
     setSequence(preset.sequence)
   }
 
   return (
     <Container>
-      <Title>Buggy Drum Kit</Title>
-      <div>
-        <h3>Presets:</h3>
-        {presets.map((preset, index) => (
-          <div key={index}>
-            <button key={index} onClick={() => loadPreset(preset)}>
+      <Title>Drum Kit</Title>
+      <PresetContainer>
+        <div>
+          <h3>Presets:</h3>
+          {presets.map((preset, index) => (
+            <PresetButton key={index} onClick={() => loadPreset(preset)}>
               {preset.name}
-            </button>
-          </div>
-        ))}
-      </div>
-      <input
-          type="text"
-          value={presetName}
-          onChange={(e) => setPresetName(e.target.value)}
-          placeholder="Preset name"
-        />
-        <button onClick={savePreset}>Save Preset</button>
+            </PresetButton>
+          ))}
+          <PresetButton onClick={savePreset}>Save Preset</PresetButton>
+          <PresetInput
+            type="text"
+            value={presetName}
+            onChange={(e) => setPresetName(e.target.value)}
+            placeholder="Preset name"
+          />
+        </div>
+
+      </PresetContainer>
+
       <Controls>
-        <PlayButton onClick={togglePlay} $isplaying={$isplaying}>
-          {$isplaying ? 'Stop' : 'Play'}
+        <div>
+        <AddTrackButton onClick={addTrack}>Add Track</AddTrackButton>
+        <PlayButton onClick={togglePlay} $isplaying={isPlaying}>
+          {isPlaying ? 'Stop' : 'Play'}
         </PlayButton>
         <BpmInput
           type='number'
@@ -331,9 +456,11 @@ export const DrumKit = () => {
           max='200'
         />
         <span>BPM</span>
+        </div>
       </Controls>
-      <AddTrackButton onClick={addTrack}>Add Track</AddTrackButton>
-      <div>
+
+
+      <TracksContainer>
         {tracks.map(track => (
           <Track key={track.id}>
             <RemoveTrackButton onClick={() => removeTrack(track.id)}>
@@ -349,21 +476,22 @@ export const DrumKit = () => {
                 </option>
               ))}
             </SampleSelect>
-
-            {sequence[track.id] && sequence[track.id].map(($isactive, step) => (
-              <StepButton
-                key={step}
-                onClick={() => toggleStep(track.id, step)}
-                $isactive={$isactive}
-              >
-                {step + 1}
-              </StepButton>
-            ))}
+            <SequenceContainer>
+              {sequence[track.id] && sequence[track.id].map((isActive, step) => (
+                <StepButton
+                  key={step}
+                  onClick={() => toggleStep(track.id, step)}
+                  $isactive={isActive}
+                >
+                  {step + 1}
+                </StepButton>
+              ))}
+            </SequenceContainer>
           </Track>
         ))}
-      </div>
+      </TracksContainer>
     </Container>
-  )
+  );
 }
 
 export default DrumKit
