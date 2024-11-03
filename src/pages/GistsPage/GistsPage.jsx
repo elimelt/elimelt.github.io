@@ -115,39 +115,61 @@ function GistView({ gist, onExpand }) {
   );
 }
 
-const fetchAllGists = () => {
-  return axios
-    .get('https://api.github.com/users/elimelt/gists', {
-      headers: {
-        Accept: 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
-    })
-    .then((response) => response.data)
-    .catch((error) => {
-      console.error(error);
-    });
+const fetchAllGists = async () => {
+  let page = 1;
+  const perPage = 100; // GitHub's max per_page value
+  let allGists = [];
+  let hasMorePages = true;
+
+  try {
+    while (hasMorePages) {
+      const response = await axios.get(
+        `https://api.github.com/users/elimelt/gists?page=${page}&per_page=${perPage}`,
+        {
+          headers: {
+            Accept: 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28',
+          },
+        }
+      );
+
+      const gists = response.data;
+
+      if (gists.length === 0) {
+        hasMorePages = false;
+      } else {
+        allGists = [...allGists, ...gists];
+        page++;
+      }
+    }
+
+    return allGists;
+  } catch (error) {
+    console.error('Error fetching gists:', error);
+    throw error;
+  }
 };
 
 export default function GistsPage() {
-  const [allGists, setAllGists] = useState([]); // Store all gists initially
-  const [filteredGists, setFilteredGists] = useState([]); // Store filtered gists based on search
+  const [allGists, setAllGists] = useState([]);
+  const [filteredGists, setFilteredGists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [perPage] = useState(10); // Items per page
+  const [perPage] = useState(10);
   const [selectedGist, setSelectedGist] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState(null);
 
-  // Fetch all gists once
   useEffect(() => {
     setIsLoading(true);
     fetchAllGists()
       .then((data) => {
         setAllGists(data);
-        setFilteredGists(data); // Initially, all gists are displayed
+        setFilteredGists(data);
       })
       .catch((error) => {
         console.error(error);
+        setError('Failed to fetch gists');
       })
       .finally(() => {
         setIsLoading(false);
