@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 
 import Home from './pages/Home/Home'
+import TBP from './pages/TBP/TBP'
 import ContactMe from './pages/ContactMe/ContactMe'
 import NotFound from './pages/NotFound/NotFound'
 import NotesHome from './pages/NotesHome/NotesHome'
@@ -68,6 +69,7 @@ const gatherUserData = () => {
   return userData
 }
 
+
 const App = () => {
   useEffect(() => {
     pingIfNeeded()
@@ -84,6 +86,7 @@ const App = () => {
         <Route path='/melody' element={<Composer />} />
         <Route path='/synth' element={<Synth />} />
         <Route path='/piano' element={<Piano />} />
+        <Route path='/tbp' element={<TBP />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Layout>

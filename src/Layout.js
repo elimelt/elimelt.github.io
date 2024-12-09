@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const LayoutContainer = styled.div`
@@ -63,7 +63,42 @@ const Main = styled.main`
   padding: 20px;
 `
 
+const funPaths = [
+  "/drums",
+  "/melody",
+  "/synth",
+  "/piano",
+  "/tbp"
+]
+
+export const funPath = () => {
+  let path = ""
+  let currentPath = window.location.pathname
+  do {
+    const randomIndex = Math.floor(Math.random() * funPaths.length)
+    path = funPaths[randomIndex]
+    console.log(path)
+  } while (path === currentPath);
+  console.log(path)
+  return path
+}
+
 const Layout = ({ children }) => {
+  const navigate = useNavigate();
+
+  const handleFunClick = (e) => {
+    e.preventDefault();
+    let currentPath = window.location.pathname;
+    let path;
+
+    do {
+      const randomIndex = Math.floor(Math.random() * funPaths.length);
+      path = funPaths[randomIndex];
+    } while (path === currentPath);
+
+    navigate(path);
+  };
+
   return (
     <LayoutContainer>
       <Header>
@@ -100,7 +135,7 @@ const Layout = ({ children }) => {
             <NavLink to='/notes'>Notes</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to='/drums'>Drums</NavLink>
+            <NavLink to="#" onClick={handleFunClick}>Fun</NavLink>
           </NavItem>
         </NavList>
       </Nav>
