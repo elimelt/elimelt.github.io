@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
 
-function NavBar() {
+function NavBar () {
   return (
     <div className='navbar'>
       <div className='app-bar'>
@@ -19,11 +19,9 @@ function NavBar() {
           <ButtonLink to='/projects' className='nav-link'>
             Projects
           </ButtonLink>
-
           <ButtonLink to='/notes' className='nav-link'>
             Notes
           </ButtonLink>
-
         </div>
       </div>
     </div>

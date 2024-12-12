@@ -63,7 +63,7 @@ const Main = styled.main`
   padding: 20px;
 `
 
-const funPaths = ['/drums', '/melody', '/synth', '/piano', '/tbp']
+const funPaths = ['/drums', '/melody', '/synth', '/piano', '/tbp', '/3d']
 
 export const funPath = () => {
   let path = ''

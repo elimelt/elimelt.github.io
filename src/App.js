@@ -15,6 +15,7 @@ const Composer = lazy(() =>
 )
 const Synth = lazy(() => import('./pages/Synth/Synth'))
 const Piano = lazy(() => import('./pages/Piano/Piano'))
+const GameOfLife3D = lazy(() => import('./components/ThreeDee/ThreeDee'))
 
 const pingIfNeeded = async () => {
   const flag = localStorage.getItem('visited-elijah-dot-com')
@@ -97,6 +98,7 @@ const App = () => {
           <Route path='/synth' element={<Synth />} />
           <Route path='/piano' element={<Piano />} />
           <Route path='/tbp' element={<TBP />} />
+          <Route path='/3d' element={<GameOfLife3D />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
