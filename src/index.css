@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-y: scroll;
   background-color: rgb(44, 44, 44);
-  color:aliceblue
+  color: aliceblue;
 }
 
 a {

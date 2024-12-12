@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 
-import Home from './pages/Home/Home'
-import TBP from './pages/TBP/TBP'
-import ContactMe from './pages/ContactMe/ContactMe'
-import NotFound from './pages/NotFound/NotFound'
-import NotesHome from './pages/NotesHome/NotesHome'
-import GistsPage from './pages/GistsPage/GistsPage'
-import DrumKit from './pages/DrumKit/DrumKit'
-import Layout from './Layout'
-import Composer from './components/.archived/ContactForm/Composer/Composer'
-import Synth from './pages/Synth/Synth'
-import Piano from './pages/Piano/Piano'
+const Home = lazy(() => import('./pages/Home/Home'))
+const TBP = lazy(() => import('./pages/TBP/TBP'))
+const ContactMe = lazy(() => import('./pages/ContactMe/ContactMe'))
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'))
+const NotesHome = lazy(() => import('./pages/NotesHome/NotesHome'))
+const GistsPage = lazy(() => import('./pages/GistsPage/GistsPage'))
+const DrumKit = lazy(() => import('./pages/DrumKit/DrumKit'))
+const Layout = lazy(() => import('./Layout'))
+const Composer = lazy(() =>
+  import('./components/.archived/ContactForm/Composer/Composer')
+)
+const Synth = lazy(() => import('./pages/Synth/Synth'))
+const Piano = lazy(() => import('./pages/Piano/Piano'))
 
-const pingIfNeeded = () => {
+const pingIfNeeded = async () => {
   const flag = localStorage.getItem('visited-elijah-dot-com')
   const currentTime = new Date()
   const hourAgo = new Date(currentTime.getTime() - 60 * 60 * 1000)
@@ -27,12 +29,16 @@ const pingIfNeeded = () => {
   }
 
   if (needToPing) {
-    const userData = gatherUserData()
-    axios.post('https://feedback-server.herokuapp.com/log/write', {
-      logName: 'users',
-      content: userData,
-      secret: 69
-    })
+    try {
+      const userData = await gatherUserData()
+      await axios.post('https://feedback-server.herokuapp.com/log/write', {
+        logName: 'users',
+        content: userData,
+        secret: 69
+      })
+    } catch (error) {
+      console.error('Failed to ping server:', error)
+    }
   }
 
   localStorage.setItem(
@@ -41,7 +47,7 @@ const pingIfNeeded = () => {
   )
 }
 
-const gatherUserData = () => {
+const gatherUserData = async () => {
   const userData = {
     userAgent: navigator.userAgent,
     language: navigator.language,
@@ -59,16 +65,19 @@ const gatherUserData = () => {
   }
 
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
+    const position = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject)
+    }).catch(err => console.warn('Geolocation error:', err))
+
+    if (position) {
       const { latitude, longitude } = position.coords
       userData.latitude = latitude
       userData.longitude = longitude
-    })
+    }
   }
 
   return userData
 }
-
 
 const App = () => {
   useEffect(() => {
@@ -77,18 +86,20 @@ const App = () => {
 
   return (
     <Layout>
-      <Routes>
-        <Route index path='/' element={<Home />} />
-        <Route path='/gists' element={<GistsPage />} />
-        <Route path='/contact' element={<ContactMe />} />
-        <Route path='/notes/*' element={<NotesHome />} />
-        <Route path='/drums' element={<DrumKit />} />
-        <Route path='/melody' element={<Composer />} />
-        <Route path='/synth' element={<Synth />} />
-        <Route path='/piano' element={<Piano />} />
-        <Route path='/tbp' element={<TBP />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/gists' element={<GistsPage />} />
+          <Route path='/contact' element={<ContactMe />} />
+          <Route path='/notes/*' element={<NotesHome />} />
+          <Route path='/drums' element={<DrumKit />} />
+          <Route path='/melody' element={<Composer />} />
+          <Route path='/synth' element={<Synth />} />
+          <Route path='/piano' element={<Piano />} />
+          <Route path='/tbp' element={<TBP />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </Layout>
   )
 }

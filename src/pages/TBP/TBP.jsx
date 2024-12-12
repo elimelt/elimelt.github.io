@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './TBP.css'
-const ConstantsInputGroup = ({ constants, setConstants }) => {
+
+const ConstantsModal = ({ constants, setConstants, isOpen, onClose }) => {
   const sliderConfig = [
     {
       label: 'Gravitational Constant (G)',
@@ -46,34 +47,41 @@ const ConstantsInputGroup = ({ constants, setConstants }) => {
     }
   ]
 
+  if (!isOpen) return null
+
   return (
-    <div className='constants-panel'>
-      <div className='constants-header'>
-        <h2>Constants</h2>
-      </div>
-      <div className='constants-body'>
-        {sliderConfig.map(config => (
-          <div key={config.name} className='slider-container'>
-            <div className='slider-header'>
-              <span>{config.label}</span>
-              <span>{constants[config.name]}</span>
+    <div className='modal-overlay' onClick={onClose}>
+      <div className='modal-content' onClick={e => e.stopPropagation()}>
+        <div className='modal-header'>
+          <h2>Constants</h2>
+          <button className='close-button' onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <div className='modal-body'>
+          {sliderConfig.map(config => (
+            <div key={config.name} className='slider-container'>
+              <div className='slider-header'>
+                <span>{config.label}</span>
+                <span>{constants[config.name]}</span>
+              </div>
+              <input
+                type='range'
+                min={config.min}
+                max={config.max}
+                step={config.step}
+                value={constants[config.name]}
+                onChange={e =>
+                  setConstants(prev => ({
+                    ...prev,
+                    [config.name]: parseFloat(e.target.value)
+                  }))
+                }
+                className='slider'
+              />
             </div>
-            <input
-              type='range'
-              min={config.min}
-              max={config.max}
-              step={config.step}
-              value={constants[config.name]}
-              onChange={e =>
-                setConstants(prev => ({
-                  ...prev,
-                  [config.name]: parseFloat(e.target.value)
-                }))
-              }
-              className='slider'
-            />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -81,6 +89,7 @@ const ConstantsInputGroup = ({ constants, setConstants }) => {
 
 const TBP = () => {
   const canvasRef = useRef(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [constants, setConstants] = useState({
     G: 1000,
     PI: Math.PI,
@@ -401,6 +410,78 @@ const TBP = () => {
     }
   }
 
+  const handlePointerStart = (x, y) => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const rect = canvas.getBoundingClientRect()
+    const pos = {
+      x: x - rect.left,
+      y: y - rect.top
+    }
+
+    let bodyFound = false
+    bodies.forEach((body, index) => {
+      const dx = pos.x - body.position.x
+      const dy = pos.y - body.position.y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      if (distance < body.radius) {
+        setDragState({
+          isDragging: true,
+          bodyIndex: index,
+          startPos: { ...body.position },
+          currentPos: pos
+        })
+        bodyFound = true
+      }
+    })
+
+    if (!bodyFound && !dragState.isDragging) {
+      addBody(pos)
+    }
+  }
+
+  const handlePointerMove = (x, y) => {
+    if (dragState.isDragging) {
+      const canvas = canvasRef.current
+      const rect = canvas.getBoundingClientRect()
+      setDragState(prev => ({
+        ...prev,
+        currentPos: {
+          x: x - rect.left,
+          y: y - rect.top
+        }
+      }))
+    }
+  }
+
+  const handlePointerEnd = () => {
+    if (dragState.isDragging) {
+      const dx = dragState.startPos.x - dragState.currentPos.x
+      const dy = dragState.startPos.y - dragState.currentPos.y
+
+      setBodies(prevBodies => {
+        const newBodies = [...prevBodies]
+        newBodies[dragState.bodyIndex] = {
+          ...newBodies[dragState.bodyIndex],
+          velocity: {
+            x: dx * 2,
+            y: dy * 2
+          }
+        }
+        return newBodies
+      })
+
+      setDragState({
+        isDragging: false,
+        bodyIndex: -1,
+        startPos: { x: 0, y: 0 },
+        currentPos: { x: 0, y: 0 }
+      })
+    }
+  }
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas || !dimensions.width || !dimensions.height) return
@@ -434,137 +515,54 @@ const TBP = () => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const handleClick = e => {
-      if (!dragState.isDragging) {
-        const rect = canvas.getBoundingClientRect()
-        const pos = {
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        }
-        addBody(pos)
-      }
-    }
-
+    // Mouse event handlers
     const handleMouseDown = e => {
-      const rect = canvas.getBoundingClientRect()
-      const mousePos = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      }
-
-      bodies.forEach((body, index) => {
-        const dx = mousePos.x - body.position.x
-        const dy = mousePos.y - body.position.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-
-        if (distance < body.radius) {
-          setDragState({
-            isDragging: true,
-            bodyIndex: index,
-            startPos: { ...body.position },
-            currentPos: mousePos
-          })
-        }
-      })
-    }
-
-    const handleTouchStart = e => {
-      e.preventDefault()
-      const rect = canvas.getBoundingClientRect()
-      const touch = e.touches[0]
-      const mousePos = {
-        x: touch.clientX - rect.left,
-        y: touch.clientY - rect.top
-      }
-
-      bodies.forEach((body, index) => {
-        const dx = mousePos.x - body.position.x
-        const dy = mousePos.y - body.position.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-
-        if (distance < body.radius) {
-          setDragState({
-            isDragging: true,
-            bodyIndex: index,
-            startPos: { ...body.position },
-            currentPos: mousePos
-          })
-        }
-      })
+      handlePointerStart(e.clientX, e.clientY)
     }
 
     const handleMouseMove = e => {
-      if (dragState.isDragging) {
-        const rect = canvas.getBoundingClientRect()
-        setDragState(prev => ({
-          ...prev,
-          currentPos: {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-          }
-        }))
-      }
-    }
-
-    const handleTouchMove = e => {
-      if (dragState.isDragging) {
-        e.preventDefault()
-        const rect = canvas.getBoundingClientRect()
-        const touch = e.touches[0]
-        setDragState(prev => ({
-          ...prev,
-          currentPos: {
-            x: touch.clientX - rect.left,
-            y: touch.clientY - rect.top
-          }
-        }))
-      }
+      handlePointerMove(e.clientX, e.clientY)
     }
 
     const handleMouseUp = () => {
-      if (dragState.isDragging) {
-        const dx = dragState.startPos.x - dragState.currentPos.x
-        const dy = dragState.startPos.y - dragState.currentPos.y
-
-        setBodies(prevBodies => {
-          const newBodies = [...prevBodies]
-          newBodies[dragState.bodyIndex] = {
-            ...newBodies[dragState.bodyIndex],
-            velocity: {
-              x: dx * 2,
-              y: dy * 2
-            }
-          }
-          return newBodies
-        })
-
-        setDragState({
-          isDragging: false,
-          bodyIndex: -1,
-          startPos: { x: 0, y: 0 },
-          currentPos: { x: 0, y: 0 }
-        })
-      }
+      handlePointerEnd()
     }
 
-    canvas.addEventListener('click', handleClick)
+    // Touch event handlers
+    const handleTouchStart = e => {
+      e.preventDefault()
+      const touch = e.touches[0]
+      handlePointerStart(touch.clientX, touch.clientY)
+    }
+
+    const handleTouchMove = e => {
+      e.preventDefault()
+      const touch = e.touches[0]
+      handlePointerMove(touch.clientX, touch.clientY)
+    }
+
+    const handleTouchEnd = e => {
+      e.preventDefault()
+      handlePointerEnd()
+    }
+
+    // Event listeners
     canvas.addEventListener('mousedown', handleMouseDown)
     canvas.addEventListener('mousemove', handleMouseMove)
     canvas.addEventListener('mouseup', handleMouseUp)
     canvas.addEventListener('mouseleave', handleMouseUp)
-    canvas.addEventListener('touchstart', handleTouchStart)
-    canvas.addEventListener('touchmove', handleTouchMove)
-    canvas.addEventListener('touchend', handleMouseUp)
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false })
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false })
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: false })
 
     return () => {
-      canvas.removeEventListener('click', handleClick)
       canvas.removeEventListener('mousedown', handleMouseDown)
       canvas.removeEventListener('mousemove', handleMouseMove)
       canvas.removeEventListener('mouseup', handleMouseUp)
       canvas.removeEventListener('mouseleave', handleMouseUp)
       canvas.removeEventListener('touchstart', handleTouchStart)
       canvas.removeEventListener('touchmove', handleTouchMove)
-      canvas.removeEventListener('touchend', handleMouseUp)
+      canvas.removeEventListener('touchend', handleTouchEnd)
     }
   }, [bodies, dragState])
 
@@ -576,7 +574,18 @@ const TBP = () => {
         height={dimensions.height}
         className='simulation-canvas'
       />
-      <ConstantsInputGroup constants={constants} setConstants={setConstants} />
+      <button
+        className='constants-button'
+        onClick={() => setIsModalOpen(true)}
+      >
+        Constants
+      </button>
+      <ConstantsModal
+        constants={constants}
+        setConstants={setConstants}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   )
 }
