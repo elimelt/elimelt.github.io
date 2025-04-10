@@ -1,0 +1,29 @@
+.friends-list {
+  margin-top: var(--spacing-unit);
+}
+
+.friends-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.friends-list li {
+  margin-bottom: calc(var(--spacing-unit) * 0.75);
+  padding-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.friends-list li:last-child {
+  border-bottom: none;
+}
+
+.friends-list a {
+  display: block;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+  padding: calc(var(--spacing-unit) * 0.25) 0;
+}
+
+.friends-list a:hover {
+  color: var(--link-hover);
+}

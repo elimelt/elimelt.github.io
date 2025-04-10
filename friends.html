@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elijah Melton | Friends</title>
+    <meta name="description" content="Elijah Melton - Links to friends' personal websites">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/friends.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="apple-touch.png">
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>Elijah Melton</h1>
+                <button id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <span id="theme-icon">☀️</span>
+                </button>
+            </div>
+            <p class="tagline">Software Engineer, Builder, Student</p>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#links">Links</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#skills">Skills</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="friends.html">Friends</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="friends">
+                <h2>Friends & Connections</h2>
+                <p>A collection of personal websites from friends and colleagues.</p>
+                
+                <div class="friends-list">
+                    <ul id="friends-links"></ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Elijah Melton • Built with <span class="heart">♥</span> in Seattle</p>
+        </footer>
+    </div>
+
+    <button id="back-to-top" aria-label="Back to top">
+        <span class="arrow">↑</span>
+    </button>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const friendsList = document.getElementById('friends-links');
+            
+            try {
+                const response = await fetch('data/friends.json');
+                const friendUrls = await response.json();
+                
+                if (friendUrls.length === 0) {
+                    friendsList.innerHTML = '<li>No friends added yet. Check back later!</li>';
+                    return;
+                }
+                
+                friendUrls.forEach(url => {
+                    const listItem = document.createElement('li');
+                    const domain = getDomainFromUrl(url);
+
+                    listItem.innerHTML = `<a href="${url}" target="_blank" rel="noopener">${domain}</a>`;
+                    friendsList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error loading friends data:', error);
+                friendsList.innerHTML = '<li>Unable to load friends data. Please try again later.</li>';
+            }
+        });
+
+        function getDomainFromUrl(url) {
+            try {
+                const urlObj = new URL(url);
+                return urlObj.hostname;
+            } catch (e) {
+                return url;
+            }
+        }
+    </script>
+</body>
+
+</html>
