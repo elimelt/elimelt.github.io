@@ -1,3 +1,32 @@
+async function fetchNotesHtml() {
+  const remoteUrl = 'https://notes.elimelt.com'
+  const response = await fetch(remoteUrl);
+  if (!response.ok) {
+    console.error('Failed to fetch notes HTML:', response.statusText);
+    return '';
+  }
+  const text = await response.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'text/html');
+  const notesContainer = doc.querySelector('.recent-posts');
+  if (!notesContainer) {
+    console.error('Failed to find notes container in fetched HTML');
+    return '';
+  }
+
+  // update links to point to remote domain
+  const links = notesContainer.querySelectorAll('a');
+  links.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('http')) {
+      link.setAttribute('href', remoteUrl + href);
+    }
+  });
+
+  const notesHtml = notesContainer.innerHTML;
+  return notesHtml;
+}
+
 function ensureImageMode() {
   const logoImgeDivs = document.querySelectorAll('.company-logo');
 
@@ -17,6 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Theme toggle
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
+
+  const notesContainer = document.getElementById('notes-content');
+  fetchNotesHtml().then(html => {
+    if (notesContainer) {
+      notesContainer.innerHTML = html;
+    } else {
+      console.error('Failed to find notes container in the document');
+    }
+  });
+
+
 
   // Check for saved theme preference
   const savedTheme = localStorage.getItem('theme');
