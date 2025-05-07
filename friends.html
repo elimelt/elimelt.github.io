@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="apple-touch.png">
+    <link rel="icon" type="image/svg+xml" href="assets/pple-touch.png">
 
 </head>
 
@@ -41,7 +41,7 @@
             <section id="friends">
                 <h2>Friends & Connections</h2>
                 <p>A collection of personal websites from friends and colleagues.</p>
-                
+
                 <div class="friends-list">
                     <ul id="friends-links"></ul>
                 </div>
@@ -61,16 +61,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const friendsList = document.getElementById('friends-links');
-            
+
             try {
                 const response = await fetch('data/friends.json');
                 const friendUrls = await response.json();
-                
+
                 if (friendUrls.length === 0) {
                     friendsList.innerHTML = '<li>No friends added yet. Check back later!</li>';
                     return;
                 }
-                
+
                 friendUrls.forEach(url => {
                     const listItem = document.createElement('li');
                     const domain = getDomainFromUrl(url);
