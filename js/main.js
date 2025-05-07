@@ -46,15 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Theme toggle
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
-
-  const notesContainer = document.getElementById('notes-content');
-  fetchNotesHtml().then(html => {
-    if (notesContainer) {
-      notesContainer.innerHTML = html;
-    } else {
-      console.error('Failed to find notes container in the document');
-    }
-  });
+  const isIndexPage = window.location.pathname === '/index.html' || window.location.pathname === '/';
+  if (isIndexPage) {
+    const notesContainer = document.getElementById('notes-content');
+    fetchNotesHtml().then(html => {
+      if (notesContainer) {
+        notesContainer.innerHTML = html;
+      } else {
+        console.error('Failed to find notes container in the document');
+      }
+    });
+  }
 
 
 
