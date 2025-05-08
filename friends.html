@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="assets/apple-touch.png">
-
 </head>
 
 <body>
@@ -58,41 +57,6 @@
     </button>
 
     <script src="js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const friendsList = document.getElementById('friends-links');
-
-            try {
-                const response = await fetch('data/friends.json');
-                const friendUrls = await response.json();
-
-                if (friendUrls.length === 0) {
-                    friendsList.innerHTML = '<li>No friends added yet. Check back later!</li>';
-                    return;
-                }
-
-                friendUrls.forEach(url => {
-                    const listItem = document.createElement('li');
-                    const domain = getDomainFromUrl(url);
-
-                    listItem.innerHTML = `<a href="${url}" target="_blank" rel="noopener">${domain}</a>`;
-                    friendsList.appendChild(listItem);
-                });
-            } catch (error) {
-                console.error('Error loading friends data:', error);
-                friendsList.innerHTML = '<li>Unable to load friends data. Please try again later.</li>';
-            }
-        });
-
-        function getDomainFromUrl(url) {
-            try {
-                const urlObj = new URL(url);
-                return urlObj.hostname;
-            } catch (e) {
-                return url;
-            }
-        }
-    </script>
 </body>
 
 </html>
