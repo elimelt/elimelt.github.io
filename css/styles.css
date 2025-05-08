@@ -556,6 +556,10 @@ body {
   .contact-links {
     display: none;
   }
+
+  .footer {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
