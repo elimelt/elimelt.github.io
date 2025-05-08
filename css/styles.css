@@ -8,6 +8,7 @@
   --color-text-secondary: #666;
   --color-background: #fff;
   --color-accent: #0062ff;
+  --color-accent-hover: #5493fe;
   --color-accent-subtle: #e6f0ff;
   --color-border: #eaeaea;
 
@@ -62,6 +63,16 @@
   --color-accent: #4d8eff;
   --color-accent-subtle: #1a2840;
   --color-border: #333333;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: color var(--transition-standard);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
 }
 
 /* Global Reset */
@@ -488,15 +499,17 @@ body {
 /* Footer */
 .footer {
   text-align: center;
-  padding: var(--spacing-8) 0;
+  padding: var(--spacing-4) 0;
   color: var(--color-text-secondary);
   font-size: var(--text-xs);
-}
-
-.heart {
-  color: #e74c3c;
-  display: inline-block;
-  transition: transform 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-accent-subtle);
+  border-top: var(--border-thin);
+  width: 100%;
+  ;
 }
 
 .footer:hover .heart {
