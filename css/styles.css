@@ -445,32 +445,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Friends List */
-.friends-list {
-  list-style-type: none;
-}
-
-.friend-item {
-  padding: var(--spacing-4) 0;
-  border-bottom: var(--border-thin);
-}
-
-.friend-item:last-child {
-  border-bottom: none;
-}
-
-.friend-link {
-  font-size: var(--text-base);
-  color: var(--color-text);
-  text-decoration: none;
-  display: block;
-  transition: color var(--transition-standard);
-}
-
-.friend-link:hover {
-  color: var(--color-accent);
-}
-
 /* Theme Toggle */
 .theme-toggle {
   background: var(--color-accent);

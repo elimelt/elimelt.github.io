@@ -76,8 +76,7 @@ const NavigationManager = {
         window.addEventListener('scroll', () => {
           this.highlightNavOnScroll();
         });
-      } else if (link.getAttribute('href') === currentLocation ||
-        (link.getAttribute('href') === 'friends.html' && currentLocation.includes('friends.html'))) {
+      } else if (link.getAttribute('href') === currentLocation) {
         link.classList.add('active');
       }
     });
@@ -209,73 +208,9 @@ const NotesManager = {
   }
 };
 
-const FriendsManager = {
-  init() {
-    if (!this.isFriendsPage()) return;
-
-    this.friendsList = document.getElementById('friends-links');
-    if (this.friendsList) {
-      this.loadFriendsList();
-    }
-  },
-
-  isFriendsPage() {
-    return window.location.pathname.includes('friends.html');
-  },
-
-  async loadFriendsList() {
-    try {
-      const friendUrls = await this.fetchFriendsData();
-      this.displayFriends(friendUrls);
-    } catch (error) {
-      console.error('Error loading friends data:', error);
-      this.friendsList.innerHTML = '<li class="friend-item">Unable to load friends data. Please try again later.</li>';
-    }
-  },
-
-  async fetchFriendsData() {
-    const response = await fetch('data/friends.json');
-    if (!response.ok) {
-      throw new Error(`Failed to fetch friends data: ${response.statusText}`);
-    }
-    return await response.json();
-  },
-
-  displayFriends(friendUrls) {
-    if (friendUrls.length === 0) {
-      this.friendsList.innerHTML = '<li class="friend-item">No friends added yet. Check back later!</li>';
-      return;
-    }
-
-    const fragment = document.createDocumentFragment();
-
-    friendUrls.forEach(url => {
-      const listItem = document.createElement('li');
-      listItem.classList.add('friend-item');
-
-      const domain = this.getDomainFromUrl(url);
-
-      listItem.innerHTML = `<a href="${url}" target="_blank" rel="noopener" class="friend-link">${domain}</a>`;
-      fragment.appendChild(listItem);
-    });
-
-    this.friendsList.appendChild(fragment);
-  },
-
-  getDomainFromUrl(url) {
-    try {
-      const urlObj = new URL(url);
-      return urlObj.hostname;
-    } catch (e) {
-      return url;
-    }
-  }
-};
-
 document.addEventListener('DOMContentLoaded', () => {
   ThemeManager.init();
   LogoManager.init();
   NavigationManager.init();
   NotesManager.init();
-  FriendsManager.init();
 });
