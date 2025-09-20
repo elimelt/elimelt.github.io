@@ -5,8 +5,8 @@ const ThemeManager = {
   },
   STORAGE_KEY: 'theme',
   ICON_MAPPING: {
-    ['light']: '🌙',
-    ['dark']: '☀️'
+    ['light']: 'Dark',
+    ['dark']: 'Light'
   },
 
   init() {
@@ -23,7 +23,7 @@ const ThemeManager = {
     const savedTheme = localStorage.getItem(this.STORAGE_KEY);
     if (savedTheme === this.THEMES.DARK) {
       document.body.classList.add('dark-mode');
-      this.themeIcon.textContent = '☀️';
+      this.themeIcon.textContent = 'Light';
     }
   },
 
@@ -34,7 +34,7 @@ const ThemeManager = {
   toggleTheme() {
     const isDarkMode = document.body.classList.toggle('dark-mode');
     localStorage.setItem(this.STORAGE_KEY, isDarkMode ? this.THEMES.DARK : this.THEMES.LIGHT);
-    this.themeIcon.textContent = isDarkMode ? '☀️' : '🌙';
+    this.themeIcon.textContent = isDarkMode ? 'Light' : 'Dark';
     LogoManager.updateLogos();
   }
 };
