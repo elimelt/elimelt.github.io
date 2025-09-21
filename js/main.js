@@ -5,8 +5,8 @@ const ThemeManager = {
   },
   STORAGE_KEY: 'theme',
   ICON_MAPPING: {
-    ['light']: 'Dark',
-    ['dark']: 'Light'
+    ['light']: '#icon-moon',
+    ['dark']: '#icon-sun'
   },
 
   init() {
@@ -23,7 +23,9 @@ const ThemeManager = {
     const savedTheme = localStorage.getItem(this.STORAGE_KEY);
     if (savedTheme === this.THEMES.DARK) {
       document.body.classList.add('dark-mode');
-      this.themeIcon.textContent = 'Light';
+      this.themeIcon.querySelector('use').setAttribute('href', this.ICON_MAPPING[this.THEMES.DARK]);
+    } else {
+      this.themeIcon.querySelector('use').setAttribute('href', this.ICON_MAPPING[this.THEMES.LIGHT]);
     }
   },
 
@@ -33,8 +35,9 @@ const ThemeManager = {
 
   toggleTheme() {
     const isDarkMode = document.body.classList.toggle('dark-mode');
-    localStorage.setItem(this.STORAGE_KEY, isDarkMode ? this.THEMES.DARK : this.THEMES.LIGHT);
-    this.themeIcon.textContent = isDarkMode ? 'Light' : 'Dark';
+    const currentTheme = isDarkMode ? this.THEMES.DARK : this.THEMES.LIGHT;
+    localStorage.setItem(this.STORAGE_KEY, currentTheme);
+    this.themeIcon.querySelector('use').setAttribute('href', this.ICON_MAPPING[currentTheme]);
     LogoManager.updateLogos();
   }
 };
@@ -89,7 +92,8 @@ const NavigationManager = {
     let currentSectionId = '';
 
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
+      const offset = 120;
+      const sectionTop = section.offsetTop - offset;
       if (window.scrollY >= sectionTop) {
         currentSectionId = section.getAttribute('id');
       }
@@ -113,8 +117,9 @@ const NavigationManager = {
         const targetElement = document.querySelector(targetId);
 
         if (targetElement) {
+          const offset = 60;
           window.scrollTo({
-            top: targetElement.offsetTop - 40,
+            top: targetElement.offsetTop - offset,
             behavior: 'smooth'
           });
         }
@@ -208,9 +213,93 @@ const NotesManager = {
   }
 };
 
+const MobileMenuManager = {
+  init() {
+    this.mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    this.sidebar = document.getElementById('sidebar');
+    this.overlay = null;
+
+    if (!this.mobileMenuToggle || !this.sidebar) return;
+
+    this.setupEventListeners();
+  },
+
+  setupEventListeners() {
+    this.mobileMenuToggle.addEventListener('click', () => this.toggleMobileMenu());
+    
+    // Close menu when clicking on nav links (with delay to allow scroll)
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(() => this.closeMobileMenu(), 100);
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!this.sidebar.contains(e.target) && !this.mobileMenuToggle.contains(e.target)) {
+        this.closeMobileMenu();
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeMobileMenu();
+      }
+    });
+  },
+
+  toggleMobileMenu() {
+    if (this.sidebar.classList.contains('mobile-open')) {
+      this.closeMobileMenu();
+    } else {
+      this.openMobileMenu();
+    }
+  },
+
+  openMobileMenu() {
+    this.sidebar.classList.add('mobile-open');
+    this.mobileMenuToggle.classList.add('active');
+    
+    // Create overlay
+    this.overlay = document.createElement('div');
+    this.overlay.className = 'mobile-overlay';
+    document.body.appendChild(this.overlay);
+    
+    // Show overlay with animation
+    setTimeout(() => {
+      this.overlay.classList.add('show');
+    }, 10);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  },
+
+  closeMobileMenu() {
+    this.sidebar.classList.remove('mobile-open');
+    this.mobileMenuToggle.classList.remove('active');
+    
+    // Hide overlay with animation
+    if (this.overlay) {
+      this.overlay.classList.remove('show');
+      setTimeout(() => {
+        if (this.overlay) {
+          this.overlay.remove();
+          this.overlay = null;
+        }
+      }, 300);
+    }
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   ThemeManager.init();
   LogoManager.init();
   NavigationManager.init();
   NotesManager.init();
+  MobileMenuManager.init();
 });
