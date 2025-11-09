@@ -12,7 +12,7 @@
   
   /* Typography */
   --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', monospace;
+  --font-accent: 'Crimson Pro', Georgia, 'Times New Roman', serif;
   
   /* Spacing */
   --space-1: 0.25rem;
@@ -253,7 +253,7 @@ a:hover {
 
 .timeline-period,
 .timeline-location {
-  font-family: var(--font-mono);
+  font-family: var(--font-accent);
   font-size: 0.75rem;
   color: var(--text-secondary);
   margin-bottom: var(--space-1);
@@ -268,37 +268,31 @@ a:hover {
 .skills-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-8);
+  gap: var(--space-6);
 }
 
 .skill-category {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 
 .skill-category-name {
-  font-family: var(--font-mono);
+  font-family: var(--font-accent);
   font-size: 0.875rem;
   font-weight: 600;
-  text-transform: uppercase;
-  color: var(--accent);
+  color: var(--text);
   margin-bottom: var(--space-3);
-  letter-spacing: 0.05em;
+  letter-spacing: -0.01em;
 }
 
 .skills-list {
   list-style: none;
+  line-height: 1.8;
 }
 
 .skill-item {
-  display: inline-block;
-  margin-right: var(--space-2);
-  margin-bottom: var(--space-2);
-  padding: var(--space-1) var(--space-3);
-  font-size: 0.75rem;
-  background: var(--accent-subtle);
-  color: var(--text);
-  border-radius: 2px;
-  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
 }
 
 /* Education */
@@ -324,7 +318,7 @@ a:hover {
 }
 
 .education-dates {
-  font-family: var(--font-mono);
+  font-family: var(--font-accent);
   font-size: 0.75rem;
   color: var(--text-secondary);
   margin-bottom: var(--space-3);
@@ -393,14 +387,13 @@ a:hover {
 
 .note-date {
   margin-right: var(--space-3);
-  font-family: var(--font-mono);
+  font-family: var(--font-accent);
 }
 
 .note-category {
   display: inline-block;
   padding: 0 var(--space-2);
   background: var(--accent-subtle);
-  border-radius: 2px;
 }
 
 /* GitHub Stats */
@@ -430,7 +423,6 @@ a:hover {
   position: fixed;
   width: 44px;
   height: 44px;
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
