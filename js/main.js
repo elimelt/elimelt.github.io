@@ -25,8 +25,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Update logos for dark/light mode
   function updateLogos() {
     const isDark = document.body.classList.contains('dark-mode');
+    const toDark = (src) => {
+      return src
+        .replace('.png', '-dark.png')
+        .replace('.svg', '-dark.svg')
+    }
+    const toLight = (src) => {
+      return src
+        .replace('-dark.png', '.png')
+        .replace('-dark.svg', '.svg')
+    }
     document.querySelectorAll('.timeline-logo').forEach(logo => {
-      logo.src = isDark ? logo.src.replace('.png', '-dark.png') : logo.src.replace('-dark.png', '.png');
+      logo.src = isDark ? toDark(logo.src) : toLight(logo.src);
     });
   }
   

@@ -10,8 +10,8 @@
   --border: #1a1a1a;
   
   /* Typography */
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-accent: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+  --font: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-accent: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   
   /* Spacing */
   --space-1: 0.25rem;
