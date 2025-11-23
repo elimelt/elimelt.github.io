@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       imgSrc: 'assets/grep-top.png',
       size: 100,
       anchor: { x: 0, y: 0 },
-      stiffness: 100,
+      stiffness: 50,
       damping: 22,
       mass: 1,
       rotate: true,
@@ -72,9 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let vx = 0;
     let vy = 0;
     let lastTime = performance.now();
-    
-    const anchorOffsetX = config.anchor.x * config.size;
-    const anchorOffsetY = config.anchor.y * config.size;
+    // Dynamic size that grows as meat is eaten
+    let currentSize = config.size;
     
     let debugSvg, debugLine, debugAnchorDot, debugTargetDot;
     if (config.debug) {
@@ -132,6 +131,54 @@ document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('touchmove', updateTargetFromEvent, { passive: true });
     }
     
+    // Meat spawn + eat
+    const meats = [];
+    const maxMeats = 8;
+    function spawnMeat() {
+      const size = 22 + Math.random() * 22; // 22..44
+      const radius = size / 2;
+      const margin = 20 + radius;
+      const posX = margin + Math.random() * (window.innerWidth - margin * 2);
+      const posY = margin + Math.random() * (window.innerHeight - margin * 2);
+      
+      const el = document.createElement('div');
+      el.className = 'meat';
+      el.textContent = '🍖';
+      el.style.position = 'fixed';
+      el.style.left = `${posX - radius}px`;
+      el.style.top = `${posY - radius}px`;
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+      el.style.display = 'flex';
+      el.style.alignItems = 'center';
+      el.style.justifyContent = 'center';
+      el.style.fontSize = `${size * 0.85}px`;
+      el.style.lineHeight = '1';
+      el.style.pointerEvents = 'none';
+      el.style.zIndex = '9999';
+      el.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))';
+      document.body.appendChild(el);
+      
+      meats.push({
+        el,
+        x: posX,
+        y: posY,
+        r: radius,
+        createdAt: performance.now(),
+        ttl: 15000 + Math.random() * 15000, // 15-30s before uneaten despawn
+        state: 'meat',
+        eatenAt: 0
+      });
+    }
+    function scheduleNextSpawn() {
+      const delay = 600 + Math.random() * 1400; // 0.6..2.0s
+      setTimeout(() => {
+        if (meats.length < maxMeats) spawnMeat();
+        scheduleNextSpawn();
+      }, delay);
+    }
+    scheduleNextSpawn();
+    
     function tick(now) {
       const dt = Math.min((now - lastTime) / 1000, 0.032);
       lastTime = now;
@@ -151,6 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
       x += vx * dt;
       y += vy * dt;
       
+      const anchorOffsetX = config.anchor.x * currentSize;
+      const anchorOffsetY = config.anchor.y * currentSize;
       const left = x - anchorOffsetX;
       const top = y - anchorOffsetY;
       
@@ -159,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
         angle = Math.atan2(targetY - y, targetX - x) + config.angleOffset;
       }
       
+      img.style.width = `${currentSize}px`;
       img.style.transform = `translate(${left}px, ${top}px) rotate(${angle}rad)`;
       
       if (config.debug && debugSvg) {
@@ -170,6 +220,40 @@ document.addEventListener('DOMContentLoaded', () => {
         debugAnchorDot.setAttribute('cy', String(y));
         debugTargetDot.setAttribute('cx', String(targetX));
         debugTargetDot.setAttribute('cy', String(targetY));
+      }
+      
+      // Eat or expire meats
+      for (let i = meats.length - 1; i >= 0; i--) {
+        const m = meats[i];
+        // Despawn logic
+        if (m.state === 'meat') {
+          if (now - m.createdAt > m.ttl) {
+            m.el.remove();
+            meats.splice(i, 1);
+            continue;
+          }
+          // Collision: use anchor point vs meat center
+          const dx = x - m.x;
+          const dy = y - m.y;
+          const eatRadius = 6;
+          if (dx * dx + dy * dy <= (m.r + eatRadius) * (m.r + eatRadius)) {
+            // Convert to bone and start 5s despawn timer
+            m.state = 'bone';
+            m.eatenAt = now;
+            m.el.textContent = '🦴';
+            m.el.style.opacity = '0.95';
+            // Prevent re-eating by shrinking collision radius
+            m.r = 0;
+            // Grow follower when eating meat
+            const growth = Math.max(3, Math.round((currentSize * 0.06)));
+            currentSize = Math.min(currentSize + growth, 260);
+          }
+        } else if (m.state === 'bone') {
+          if (now - m.eatenAt > 5000) {
+            m.el.remove();
+            meats.splice(i, 1);
+          }
+        }
       }
       
       requestAnimationFrame(tick);
