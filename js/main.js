@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const el = document.createElement('div');
       el.className = 'meat';
-      el.textContent = '🍖';
+      el.textContent = '🥩';
       el.style.position = 'fixed';
       el.style.left = `${posX - radius}px`;
       el.style.top = `${posY - radius}px`;
