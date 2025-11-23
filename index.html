@@ -277,62 +277,49 @@
                 </div>
             </section>
 
-            <!-- Skills Section -->
-            <section id="skills" class="section">
-                <h2 class="section-title">Technical Skills</h2>
-
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h3 class="skill-category-name">Languages</h3>
-                        <ul class="skills-list">
-                            <li class="skill-item">Java</li>
-                            <li class="skill-item">Python</li>
-                            <li class="skill-item">C++</li>
-                            <li class="skill-item">Kotlin</li>
-                            <li class="skill-item">TypeScript</li>
-                            <li class="skill-item">SQL</li>
-                            <li class="skill-item">Bash</li>
-                        </ul>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3 class="skill-category-name">Tools</h3>
-                        <ul class="skills-list">
-                            <li class="skill-item">Linux</li>
-                            <li class="skill-item">Git</li>
-                            <li class="skill-item">Docker</li>
-                            <li class="skill-item">Kubernetes</li>
-                            <li class="skill-item">AWS</li>
-                            <li class="skill-item">GitHub Actions</li>
-                        </ul>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3 class="skill-category-name">Domains</h3>
-                        <ul class="skills-list">
-                            <li class="skill-item">Distributed Systems</li>
-                            <li class="skill-item">Operating Systems</li>
-                            <li class="skill-item">Computer Networks</li>
-                            <li class="skill-item">NLP</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
 
             <!-- Education Section -->
             <section id="education" class="section">
                 <h2 class="section-title">Education</h2>
 
+<!-- <article class="education-item">
+    <h3 class="education-degree">M.S. in Computer Science and Engineering</h3>
+    <p class="education-school">University of Washington, Seattle, WA</p>
+    <p class="education-dates">Sept 2026 - June 2027</p>
+    <p class="education-focus">Focus: Systems for Machine Learning</p>
+    <p class="education-courses">Relevant Coursework: System Design, LLM Serving Systems</p>
+</article> -->
                 <article class="education-item">
                     <h3 class="education-degree">B.S. in Computer Engineering</h3>
                     <p class="education-school">University of Washington, Seattle, WA</p>
-                    <p class="education-gpa">GPA: 3.96</p>
-                    <p class="education-dates">Sept 2021 - June 2025</p>
+                    <p class="education-gpa">GPA: 3.9, Graduated  Magna Cum Laude</p>
+                    <p class="education-dates">Sept 2021 - Spring 2025 (June 2025)</p>
                     <p class="education-focus">Focus: Distributed Systems</p>
                     <p class="education-courses">Relevant Coursework: Distributed Systems, Operating Systems, Computer
                         Networks, Systems Programming, Database Systems, Data Structures & Algorithms, Advanced
                         Algorithms, Security, System Design, Natural Language Processing</p>
                 </article>
+
+                <h3 class="areas-of-study-title">Areas of Study</h3>
+                <p class="section-description">Topics I write about and explore in my <a href="https://notes.elimelt.com" target="_blank" rel="noopener">notes</a>:</p>
+
+                <ul class="areas-list">
+                    <li><a href="https://notes.elimelt.com/categories/networks.html" target="_blank" rel="noopener">Networks</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/operating%20systems.html" target="_blank" rel="noopener">Operating Systems</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/distributed%20systems.html" target="_blank" rel="noopener">Distributed Systems</a></li>
+                    <li><a href="https://notes.elimelt.com/tags/systems.html" target="_blank" rel="noopener">Systems</a></li>
+                    <li><a href="https://notes.elimelt.com/tags/performance.html" target="_blank" rel="noopener">Performance Engineering</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/algorithms.html" target="_blank" rel="noopener">Algorithms</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/algorithm%20analysis.html" target="_blank" rel="noopener">Algorithm Analysis</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/linear%20algebra.html" target="_blank" rel="noopener">Linear Algebra</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/computer%20science.html" target="_blank" rel="noopener">Computer Science</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/machine%20learning%20systems.html" target="_blank" rel="noopener">Machine Learning Systems</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/natural%20language%20processing.html" target="_blank" rel="noopener">Natural Language Processing</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/database%20systems.html" target="_blank" rel="noopener">Database Systems</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/hardware.html" target="_blank" rel="noopener">Hardware</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/software%20engineering.html" target="_blank" rel="noopener">Software Engineering</a></li>
+                    <li><a href="https://notes.elimelt.com/categories/research.html" target="_blank" rel="noopener">Research</a></li>
+                </ul>
             </section>
 
             <!-- Notes Section -->
@@ -348,11 +335,23 @@
             <!-- GitHub Stats Section -->
             <section id="github-stats" class="section">
                 <h2 class="section-title">GitHub Stats</h2>
-                <div class="github-stats">
-                    <img id="github-stats-card" alt="GitHub Stats Card"
-                        src="https://github-readme-stats.vercel.app/api?username=elimelt&amp;hide_rank=true&amp;theme=transparent&amp;hide_border=true">
-                    <img id="github-languages-card" alt="GitHub Languages Card"
-                        src="https://github-readme-stats.vercel.app/api/top-langs/?username=elimelt&amp;langs_count=20&amp;hide=HTML,CSS&amp;hide_progress=true&amp;theme=transparent&amp;hide_border=true">
+                <div class="github-stats-grid">
+                    <div class="github-card">
+                        <img alt="GitHub Stats" 
+                             src="https://github-readme-stats.vercel.app/api?username=elimelt&hide_rank=true&theme=transparent&hide_border=true&show_icons=true&include_all_commits=true&count_private=true">
+                    </div>
+                    <div class="github-card">
+                        <img alt="Top Languages" 
+                             src="https://github-readme-stats.vercel.app/api/top-langs/?username=elimelt&langs_count=8&hide=HTML,CSS&hide_progress=true&theme=transparent&hide_border=true&layout=compact">
+                    </div>
+                    <div class="github-card">
+                        <img alt="GitHub Streak" 
+                             src="https://github-readme-stats.vercel.app/api?username=elimelt&theme=transparent&hide_border=true&show_icons=true&custom_title=GitHub%20Streak&hide=stars,commits,prs,issues,contribs&include_all_commits=true&count_private=true&line_height=28">
+                    </div>
+                    <div class="github-card">
+                        <img alt="GitHub Profile Summary" 
+                             src="https://github-readme-stats.vercel.app/api/profile-summary-cards/profile-details?username=elimelt&theme=transparent&hide_border=true">
+                    </div>
                 </div>
             </section>
         </main>

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('theme') === 'dark') {
       document.body.classList.add('dark-mode');
       themeIcon.querySelector('use').setAttribute('href', '#icon-sun');
+      updateLogos();
     }
     
     // Toggle theme
