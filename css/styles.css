@@ -248,6 +248,8 @@ a:hover {
 }
 
 .timeline-company {
+  font-family: var(--font-accent);
+  font-size: 0.875rem;
   color: var(--text-secondary);
   margin-bottom: 0.25rem;
 }
@@ -257,7 +259,18 @@ a:hover {
   font-family: var(--font-accent);
   font-size: 0.75rem;
   color: var(--text-secondary);
-  margin-bottom: 0.25rem;
+  display: inline;
+  margin: 0;
+}
+
+.timeline-period {
+  margin-right: var(--space-2);
+}
+
+.timeline-period::before {
+  content: "•";
+  margin: 0 var(--space-2);
+  opacity: 0.6;
 }
 
 .timeline-description {
