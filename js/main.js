@@ -74,6 +74,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastTime = performance.now();
     // Dynamic size that grows as meat is eaten
     let currentSize = config.size;
+    // Idle detection and sprite switching
+    const idleThresholdMs = 3000;
+    let lastMoveAt = performance.now();
+    let isIdle = false;
+    let currentSprite = 'top'; // 'top' -> grep-top.png, 'full' -> grep.png
+    const baseSize = config.size;
+    let lastEatAt = performance.now();
+    const hungerDelayMs = 1200;
+    const shrinkPerSecond = 10;
     
     let debugSvg, debugLine, debugAnchorDot, debugTargetDot;
     if (config.debug) {
@@ -121,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
         setTarget(e.clientX, e.clientY);
       }
+      lastMoveAt = performance.now();
     }
     if ('onpointermove' in window) {
       window.addEventListener('pointerdown', updateTargetFromEvent, { passive: true });
@@ -198,13 +208,31 @@ document.addEventListener('DOMContentLoaded', () => {
       x += vx * dt;
       y += vy * dt;
       
+      // Shrink over time if not eating (not below base size)
+      if (currentSize > baseSize && (now - lastEatAt) > hungerDelayMs) {
+        currentSize = Math.max(baseSize, currentSize - shrinkPerSecond * dt);
+      }
+      
       const anchorOffsetX = config.anchor.x * currentSize;
       const anchorOffsetY = config.anchor.y * currentSize;
       const left = x - anchorOffsetX;
       const top = y - anchorOffsetY;
       
+      // Determine idle state and swap sprites if needed
+      const nowIdle = (now - lastMoveAt) > idleThresholdMs;
+      if (nowIdle !== isIdle) {
+        isIdle = nowIdle;
+        if (isIdle && currentSprite !== 'full') {
+          img.src = 'assets/grep.png';
+          currentSprite = 'full';
+        } else if (!isIdle && currentSprite !== 'top') {
+          img.src = config.imgSrc; // 'assets/grep-top.png'
+          currentSprite = 'top';
+        }
+      }
+      
       let angle = 0;
-      if (config.rotate) {
+      if (config.rotate && !isIdle) {
         angle = Math.atan2(targetY - y, targetX - x) + config.angleOffset;
       }
       
@@ -245,8 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Prevent re-eating by shrinking collision radius
             m.r = 0;
             // Grow follower when eating meat
-            const growth = Math.max(3, Math.round((currentSize * 0.06)));
-            currentSize = Math.min(currentSize + growth, 260);
+          const growth = Math.max(3, Math.round((currentSize * 0.06)));
+          currentSize = currentSize + growth;
+          lastEatAt = now;
           }
         } else if (m.state === 'bone') {
           if (now - m.eatenAt > 5000) {
