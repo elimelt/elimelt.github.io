@@ -1,14 +1,13 @@
-/* Optimized CSS - Minimal and Efficient */
+/* Minimal CSS - Maximum Browser Defaults */
 
 :root {
-  /* Colors */
   --text: #1a1a1a;
   --text-secondary: #666;
-  --bg: #fff;
+  --bg: #00ffff;
   --accent: #0062ff;
   --accent-hover: #5493fe;
   --accent-subtle: #e6f0ff;
-  --border: #eaeaea;
+  --border: #1a1a1a;
   
   /* Typography */
   --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -25,52 +24,47 @@
   --space-16: 4rem;
   
   /* Layout */
+  --space: 1rem;
   --sidebar-width: 280px;
-  --content-max: 720px;
 }
 
 .dark-mode {
   --text: #f1f1f1;
   --text-secondary: #b3b3b3;
-  --bg: #121212;
+  --bg: #004242;
   --accent: #4d8eff;
   --accent-subtle: #1a2840;
-  --border: #333333;
+  --border: #f1f1f1;
 }
 
-/* Reset & Base */
-*, *::before, *::after {
+/* Essential only */
+* {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
-  height: 100%;
-  overflow-x: hidden;
 }
 
 body {
-  font-family: var(--font);
-  font-size: 1rem;
-  line-height: 1.5;
   color: var(--text);
   background: var(--bg);
   transition: background-color 0.3s, color 0.3s;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  line-height: 1.6;
 }
 
 /* Links */
 a {
   color: var(--accent);
-  text-decoration: none;
-  transition: color 180ms ease-out;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: color 0.2s, text-decoration-color 0.2s;
 }
 
 a:hover {
   color: var(--accent-hover);
+  text-decoration-color: var(--accent-hover);
 }
 
 /* Layout */
@@ -82,7 +76,7 @@ a:hover {
 /* Sidebar */
 .sidebar {
   width: var(--sidebar-width);
-  padding: var(--space-8);
+  padding: 2rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -93,40 +87,34 @@ a:hover {
   z-index: 100;
 }
 
-.sidebar-header {
-  margin-bottom: var(--space-8);
-}
-
 .sidebar-name {
   font-size: 1.75rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-2);
+  margin-bottom: 0.5rem;
 }
 
 .sidebar-tagline {
   color: var(--text-secondary);
-  margin-bottom: var(--space-6);
+  margin-bottom: 1.5rem;
 }
 
 /* Navigation */
-.main-nav {
-  margin-bottom: var(--space-8);
-}
-
 .nav-list {
   list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
 }
 
 .nav-item {
-  margin-bottom: var(--space-2);
+  margin-bottom: 0.5rem;
 }
 
 .nav-link {
   display: block;
-  padding: var(--space-2) 0;
+  padding: 0.5rem 0;
   color: var(--text);
-  transition: color 180ms ease-out;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
 .nav-link:hover,
@@ -143,7 +131,7 @@ a:hover {
 
 /* Contact Links */
 .contact-links {
-  margin-top: var(--space-8);
+  margin-top: 2rem;
 }
 
 .contact-links-title {
@@ -151,15 +139,16 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-secondary);
-  margin-bottom: var(--space-4);
+  margin-bottom: 1rem;
 }
 
 .contact-link {
   display: flex;
   align-items: center;
-  margin-bottom: var(--space-3);
+  margin-bottom: 0.75rem;
   color: var(--text);
-  transition: color 180ms ease-out;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
 .contact-link:hover {
@@ -169,9 +158,9 @@ a:hover {
 .contact-icon {
   width: 20px;
   height: 20px;
-  margin-right: var(--space-3);
+  margin-right: 0.75rem;
   opacity: 0.7;
-  transition: opacity 180ms ease-out;
+  transition: opacity 0.2s;
 }
 
 .contact-link:hover .contact-icon {
@@ -182,21 +171,20 @@ a:hover {
 .main-content {
   flex: 1;
   margin-left: var(--sidebar-width);
-  padding: var(--space-8);
-  max-width: var(--content-max);
+  padding: 2rem;
+  max-width: 720px;
   min-height: 100vh;
 }
 
 /* Sections */
 .section {
-  margin-bottom: var(--space-12);
+  margin-bottom: 3rem;
 }
 
 .section-title {
   font-size: 1.25rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  margin-bottom: var(--space-6);
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
 }
@@ -206,13 +194,26 @@ a:hover {
   height: 1px;
   background: var(--border);
   flex-grow: 1;
-  margin-left: var(--space-4);
+  margin-left: 1rem;
+}
+
+.section-description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.areas-of-study-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem 0;
+  color: var(--text);
 }
 
 /* Timeline */
 .timeline-item {
   position: relative;
-  padding-bottom: var(--space-6);
+  padding-bottom: 1.5rem;
 }
 
 .timeline-item:not(:last-child)::before {
@@ -227,13 +228,13 @@ a:hover {
 .timeline-header {
   display: flex;
   align-items: flex-start;
-  margin-bottom: var(--space-3);
+  margin-bottom: 0.75rem;
 }
 
 .timeline-logo {
   width: 70px;
   object-fit: contain;
-  margin-right: var(--space-4);
+  margin-right: 1rem;
 }
 
 .timeline-details {
@@ -243,12 +244,12 @@ a:hover {
 .timeline-position {
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: var(--space-1);
+  margin-bottom: 0.25rem;
 }
 
 .timeline-company {
   color: var(--text-secondary);
-  margin-bottom: var(--space-1);
+  margin-bottom: 0.25rem;
 }
 
 .timeline-period,
@@ -256,7 +257,7 @@ a:hover {
   font-family: var(--font-accent);
   font-size: 0.75rem;
   color: var(--text-secondary);
-  margin-bottom: var(--space-1);
+  margin-bottom: 0.25rem;
 }
 
 .timeline-description {
@@ -295,10 +296,16 @@ a:hover {
   margin-bottom: var(--space-1);
 }
 
+/* Areas of Study */
+.areas-list {
+  list-style: none;
+  padding: 0;
+}
+
 /* Education */
 .education-item {
-  margin-bottom: var(--space-6);
-  padding-bottom: var(--space-4);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -309,31 +316,31 @@ a:hover {
 .education-degree {
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: var(--space-2);
+  margin-bottom: 0.5rem;
 }
 
 .education-school {
   color: var(--text-secondary);
-  margin-bottom: var(--space-2);
+  margin-bottom: 0.5rem;
 }
 
 .education-dates {
   font-family: var(--font-accent);
   font-size: 0.75rem;
   color: var(--text-secondary);
-  margin-bottom: var(--space-3);
+  margin-bottom: 0.75rem;
 }
 
 .education-gpa {
   font-weight: 600;
   font-size: 0.875rem;
-  margin-bottom: var(--space-3);
+  margin-bottom: 0.75rem;
 }
 
 .education-focus {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  margin-bottom: var(--space-3);
+  margin-bottom: 0.75rem;
   font-style: italic;
 }
 
@@ -345,21 +352,22 @@ a:hover {
 
 /* About */
 #about {
-  margin-bottom: var(--space-6);
+  margin-bottom: 1.5rem;
 }
 
 .about-text {
-  line-height: 1.5;
-  margin-bottom: var(--space-6);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 /* Notes */
 .notes-list {
   list-style: none;
+  padding: 0;
 }
 
 .note-item {
-  padding: var(--space-4) 0;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -370,9 +378,10 @@ a:hover {
 .note-link {
   font-weight: 500;
   color: var(--text);
+  text-decoration: none;
   display: block;
-  margin-bottom: var(--space-2);
-  transition: color 180ms ease-out;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s;
 }
 
 .note-link:hover {
@@ -392,26 +401,40 @@ a:hover {
 
 .note-category {
   display: inline-block;
-  padding: 0 var(--space-2);
+  padding: 0 0.5rem;
   background: var(--accent-subtle);
+  border-radius: 4px;
 }
 
 /* GitHub Stats */
-.github-stats {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-6);
+.github-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
-.github-stats img {
-  max-width: 100%;
-  height: auto;
-  transition: transform 0.2s ease;
+.github-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
-.github-stats img:hover {
+.github-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
+}
+
+.github-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.dark-mode .github-card:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 /* Buttons */
@@ -427,18 +450,18 @@ a:hover {
   align-items: center;
   justify-content: center;
   color: white;
-  transition: background-color 180ms ease-out;
+  transition: background-color 0.2s;
   z-index: 1000;
 }
 
 .theme-toggle {
-  bottom: var(--space-4);
-  right: var(--space-4);
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .mobile-menu-toggle {
-  bottom: var(--space-4);
-  left: var(--space-4);
+  bottom: 1rem;
+  left: 1rem;
   display: none;
   z-index: 1001;
 }
@@ -469,7 +492,7 @@ a:hover {
   z-index: 99;
   display: block;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s;
 }
 
 .mobile-overlay.show {
@@ -497,7 +520,7 @@ a:hover {
 @media (max-width: 1200px) {
   .main-content {
     max-width: none;
-    padding-right: var(--space-12);
+    padding-right: 3rem;
   }
 }
 
@@ -512,7 +535,7 @@ a:hover {
     left: -100%;
     width: 280px;
     height: 100vh;
-    transition: left 0.3s ease;
+    transition: left 0.3s;
     z-index: 100;
     border-right: 1px solid var(--border);
     overflow-y: auto;
@@ -534,7 +557,7 @@ a:hover {
   }
 
   .main-content {
-    padding: var(--space-6);
+    padding: 1.5rem;
   }
 
   .timeline-logo {
@@ -553,17 +576,17 @@ a:hover {
   }
 
   .main-content {
-    padding: var(--space-4);
-    padding-bottom: calc(var(--space-4) + 60px);
+    padding: 1rem;
+    padding-bottom: calc(1rem + 60px);
   }
 
   .section-title {
     font-size: 1.125rem;
-    margin-bottom: var(--space-6);
+    margin-bottom: 1.5rem;
   }
 
   .section {
-    margin-bottom: var(--space-12);
+    margin-bottom: 3rem;
   }
 
   .timeline-logo {
@@ -573,7 +596,7 @@ a:hover {
 
   .timeline-description {
     margin-left: 0;
-    margin-top: var(--space-2);
+    margin-top: 0.5rem;
   }
 
   .timeline-header {
@@ -582,21 +605,17 @@ a:hover {
   }
 
   .timeline-details {
-    margin-top: var(--space-2);
+    margin-top: 0.5rem;
   }
 
   .skills-container {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
+    gap: 1.5rem;
   }
 
-  .github-stats {
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .github-stats img {
-    width: 100%;
+  .github-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .about-text {
@@ -605,12 +624,12 @@ a:hover {
   }
 
   .nav-link {
-    padding: var(--space-3) 0;
+    padding: 0.75rem 0;
     font-size: 1.125rem;
   }
 
   .contact-link {
-    padding: var(--space-2) 0;
+    padding: 0.5rem 0;
   }
 
   .contact-link span {
