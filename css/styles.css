@@ -524,6 +524,26 @@ a:hover {
   transition: opacity 0.3s ease;
 }
 
+/* Cursor-following rat */
+.rat-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: auto;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  will-change: transform;
+  z-index: 10000;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .rat-follower {
+    display: none;
+  }
+}
 /* Hidden */
 .svg-sprite {
   display: none;

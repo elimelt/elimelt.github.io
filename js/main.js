@@ -1,6 +1,4 @@
-// Simplified JavaScript - minimal functionality
-
-// Theme toggle
+// Theme + UX
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
@@ -22,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Update logos for dark/light mode
   function updateLogos() {
     const isDark = document.body.classList.contains('dark-mode');
     const toDark = (src) => {
@@ -40,7 +37,154 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Smooth scrolling navigation
+  function initRatFollower(options = {}) {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+    
+    const config = Object.assign({
+      imgSrc: 'assets/grep-top.png',
+      size: 100,
+      anchor: { x: 0, y: 0 },
+      stiffness: 100,
+      damping: 22,
+      mass: 1,
+      rotate: true,
+      debug: false,
+      angleOffset: 0
+    }, options);
+    
+    const img = document.createElement('img');
+    img.src = config.imgSrc;
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
+    img.decoding = 'async';
+    img.loading = 'lazy';
+    img.className = 'rat-follower';
+    img.style.width = `${config.size}px`;
+    img.style.transformOrigin = `${config.anchor.x * 100}% ${config.anchor.y * 100}%`;
+    img.style.display = 'block';
+    document.body.appendChild(img);
+    
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let x = targetX;
+    let y = targetY;
+    let vx = 0;
+    let vy = 0;
+    let lastTime = performance.now();
+    
+    const anchorOffsetX = config.anchor.x * config.size;
+    const anchorOffsetY = config.anchor.y * config.size;
+    
+    let debugSvg, debugLine, debugAnchorDot, debugTargetDot;
+    if (config.debug) {
+      debugSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      debugSvg.classList.add('rat-debug-overlay');
+      debugSvg.style.position = 'fixed';
+      debugSvg.style.top = '0';
+      debugSvg.style.left = '0';
+      debugSvg.style.width = '100vw';
+      debugSvg.style.height = '100vh';
+      debugSvg.style.pointerEvents = 'none';
+      debugSvg.style.zIndex = '10001';
+      
+      debugLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      debugLine.setAttribute('stroke', '#ff3b6b');
+      debugLine.setAttribute('stroke-width', '2');
+      debugLine.setAttribute('stroke-linecap', 'round');
+      debugLine.setAttribute('stroke-dasharray', '6 6');
+      
+      debugAnchorDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      debugAnchorDot.setAttribute('r', '4');
+      debugAnchorDot.setAttribute('fill', '#35e06f');
+      debugAnchorDot.setAttribute('stroke', '#0f8a3b');
+      debugAnchorDot.setAttribute('stroke-width', '1.5');
+      
+      debugTargetDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      debugTargetDot.setAttribute('r', '3.5');
+      debugTargetDot.setAttribute('fill', '#3aa0ff');
+      debugTargetDot.setAttribute('stroke', '#1e6fd3');
+      debugTargetDot.setAttribute('stroke-width', '1.5');
+      
+      debugSvg.appendChild(debugLine);
+      debugSvg.appendChild(debugAnchorDot);
+      debugSvg.appendChild(debugTargetDot);
+      document.body.appendChild(debugSvg);
+    }
+    
+    function setTarget(clientX, clientY) {
+      targetX = clientX;
+      targetY = clientY;
+    }
+    function updateTargetFromEvent(e) {
+      if (e.touches && e.touches.length > 0) {
+        setTarget(e.touches[0].clientX, e.touches[0].clientY);
+      } else if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
+        setTarget(e.clientX, e.clientY);
+      }
+    }
+    if ('onpointermove' in window) {
+      window.addEventListener('pointerdown', updateTargetFromEvent, { passive: true });
+      window.addEventListener('pointermove', updateTargetFromEvent, { passive: true });
+    } else {
+      window.addEventListener('mousemove', updateTargetFromEvent, { passive: true });
+      window.addEventListener('touchstart', updateTargetFromEvent, { passive: true });
+      window.addEventListener('touchmove', updateTargetFromEvent, { passive: true });
+    }
+    
+    function tick(now) {
+      const dt = Math.min((now - lastTime) / 1000, 0.032);
+      lastTime = now;
+      
+      const k = config.stiffness;
+      const c = config.damping;
+      const m = config.mass;
+      
+      const fx = -k * (x - targetX) - c * vx;
+      const fy = -k * (y - targetY) - c * vy;
+      
+      const ax = fx / m;
+      const ay = fy / m;
+      
+      vx += ax * dt;
+      vy += ay * dt;
+      x += vx * dt;
+      y += vy * dt;
+      
+      const left = x - anchorOffsetX;
+      const top = y - anchorOffsetY;
+      
+      let angle = 0;
+      if (config.rotate) {
+        angle = Math.atan2(targetY - y, targetX - x) + config.angleOffset;
+      }
+      
+      img.style.transform = `translate(${left}px, ${top}px) rotate(${angle}rad)`;
+      
+      if (config.debug && debugSvg) {
+        debugLine.setAttribute('x1', String(x));
+        debugLine.setAttribute('y1', String(y));
+        debugLine.setAttribute('x2', String(targetX));
+        debugLine.setAttribute('y2', String(targetY));
+        debugAnchorDot.setAttribute('cx', String(x));
+        debugAnchorDot.setAttribute('cy', String(y));
+        debugTargetDot.setAttribute('cx', String(targetX));
+        debugTargetDot.setAttribute('cy', String(targetY));
+      }
+      
+      requestAnimationFrame(tick);
+    }
+    
+    requestAnimationFrame(tick);
+    
+    window.addEventListener('blur', () => {
+      x = targetX;
+      y = targetY;
+      vx = 0;
+      vy = 0;
+    });
+  }
+  
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -48,8 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         history.pushState(null, null, link.getAttribute('href'));
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-        // Close mobile menu if open
         const sidebar = document.getElementById('sidebar');
         if (sidebar && sidebar.classList.contains('mobile-open')) {
           closeMobileMenu();
@@ -58,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
-  // Mobile menu
   const mobileToggle = document.getElementById('mobile-menu-toggle');
   const sidebar = document.getElementById('sidebar');
   
@@ -76,7 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
-  // Load notes from external site (restored original functionality)
   const notesContainer = document.getElementById('notes-content');
   if (notesContainer) {
     async function fetchAndDisplayNotes() {
@@ -95,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error('Notes container not found in fetched HTML');
         }
 
-        // Update links to be absolute
         const links = notesContainer.querySelectorAll('a');
         links.forEach(link => {
           const href = link.getAttribute('href');
@@ -104,10 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Insert the notes HTML
         document.getElementById('notes-content').innerHTML = notesContainer.innerHTML;
 
-        // Format the notes with proper classes
         const noteItems = document.querySelectorAll('#notes-content li');
         noteItems.forEach(item => {
           item.classList.add('note-item');
@@ -138,4 +275,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchAndDisplayNotes();
   }
+  
+  initRatFollower({
+    anchor: { x: 0.5, y: 0.0 },
+    size: 76,
+    angleOffset: Math.PI / 2
+  });
 });
