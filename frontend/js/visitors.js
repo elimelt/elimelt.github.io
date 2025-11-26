@@ -1,6 +1,7 @@
 import { getVisitors, getWsVisitors } from './api.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const DEBUG = true;
   const statsEl = document.getElementById('visitor-stats');
   const listEl = document.getElementById('visitor-list');
   if (!statsEl || !listEl) return;
@@ -13,12 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (Array.isArray(data)) return data;
     // visitors array directly
     if (Array.isArray(data.visitors)) return data.visitors;
+    if (Array.isArray(data.active_visitors)) return data.active_visitors;
     if (Array.isArray(data.activeVisitors)) return data.activeVisitors;
     if (Array.isArray(data.active)) return data.active;
     if (Array.isArray(data.current)) return data.current;
     if (Array.isArray(data.list)) return data.list;
     // visitors as object map
-    const candidates = [data.visitors, data.activeVisitors, data.active, data.current, data.list];
+    const candidates = [data.visitors, data.active_visitors, data.activeVisitors, data.active, data.current, data.list];
     for (const candidate of candidates) {
       if (candidate && typeof candidate === 'object') {
         const values = Object.values(candidate);
@@ -33,6 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+    // As a last resort, synthesize from recent_visits unique IPs
+    if (Array.isArray(data.recent_visits)) {
+      const uniq = Array.from(new Set(data.recent_visits.map(v => v.ip || v.address || v.id))).filter(Boolean);
+      return uniq.map(ip => ({ ip }));
+    }
     return [];
   }
 
@@ -43,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'activeCount',
       'activeVisitorsCount',
       'count',
+      'active_count',
       'active',
     ];
     for (const field of countFields) {
@@ -99,9 +107,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function refreshVisitors() {
     try {
+      if (DEBUG) console.log('[visitors] Fetching /visitors …');
       const data = await getVisitors();
+      if (DEBUG) console.log('[visitors] Raw /visitors response:', data);
       const visitors = normalizeVisitors(data);
       const count = deriveCount(data, visitors);
+      if (DEBUG) {
+        console.log('[visitors] Normalized list:', visitors);
+        console.log('[visitors] Derived count:', count, 'List length:', visitors.length);
+        if (count !== visitors.length) {
+          console.log('[visitors] Count/list mismatch — API may be count-only or filtered');
+        }
+      }
       render(visitors, count);
     } catch (err) {
       console.error('Failed to load visitors:', err);
@@ -114,16 +131,20 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       wsTracker = getWsVisitors({
         onConnect: () => {
+          if (DEBUG) console.log('[visitors] WS connected');
           statsEl.textContent = 'Connected — updating…';
           refreshVisitors();
         },
-        onVisitorJoin: () => {
+        onVisitorJoin: (visitor) => {
+          if (DEBUG) console.log('[visitors] WS join:', visitor);
           refreshVisitors();
         },
-        onVisitorLeave: () => {
+        onVisitorLeave: (ip) => {
+          if (DEBUG) console.log('[visitors] WS leave:', ip);
           refreshVisitors();
         },
-        onUpdate: () => {
+        onUpdate: (msg) => {
+          if (DEBUG) console.log('[visitors] WS update:', msg);
           // For other update types, just refresh the list
           refreshVisitors();
         },
@@ -133,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
           reconnectTimer = setTimeout(initRealtime, 5000);
         },
         onDisconnect: () => {
+          if (DEBUG) console.log('[visitors] WS disconnected');
           statsEl.textContent = 'Disconnected — retrying…';
           reconnectTimer = setTimeout(initRealtime, 3000);
         }
