@@ -1,41 +1,20 @@
 import { getVisitors, getWsVisitors } from './api.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const DEBUG = true;
   const statsEl = document.getElementById('visitor-stats');
   const listEl = document.getElementById('visitor-list');
   if (!statsEl || !listEl) return;
 
-  let wsTracker = null;
   let reconnectTimer = null;
 
   function normalizeVisitors(data) {
     if (!data) return [];
     if (Array.isArray(data)) return data;
-    // visitors array directly
     if (Array.isArray(data.visitors)) return data.visitors;
     if (Array.isArray(data.active_visitors)) return data.active_visitors;
-    if (Array.isArray(data.activeVisitors)) return data.activeVisitors;
-    if (Array.isArray(data.active)) return data.active;
-    if (Array.isArray(data.current)) return data.current;
-    if (Array.isArray(data.list)) return data.list;
-    // visitors as object map
-    const candidates = [data.visitors, data.active_visitors, data.activeVisitors, data.active, data.current, data.list];
-    for (const candidate of candidates) {
-      if (candidate && typeof candidate === 'object') {
-        const values = Object.values(candidate);
-        // If values look like visitor objects already
-        if (values.length && typeof values[0] === 'object') {
-          return values;
-        }
-        // If it's a map of ip -> primitive/timestamp, use keys as IPs
-        const keys = Object.keys(candidate);
-        if (keys.length && typeof candidate[keys[0]] !== 'object') {
-          return keys.map(ip => ({ ip }));
-        }
-      }
+    if (data.visitors && typeof data.visitors === 'object') {
+      return Object.values(data.visitors);
     }
-    // As a last resort, synthesize from recent_visits unique IPs
     if (Array.isArray(data.recent_visits)) {
       const uniq = Array.from(new Set(data.recent_visits.map(v => v.ip || v.address || v.id))).filter(Boolean);
       return uniq.map(ip => ({ ip }));
@@ -45,21 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function deriveCount(data, normalizedList) {
     if (!data) return normalizedList.length;
-    // common count fields
-    const countFields = [
-      'activeCount',
-      'activeVisitorsCount',
-      'count',
-      'active_count',
-      'active',
-    ];
-    for (const field of countFields) {
-      const v = data[field];
-      if (typeof v === 'number') return v;
-    }
-    // nested counts
-    if (data.stats && typeof data.stats.active === 'number') return data.stats.active;
-    if (data.active && typeof data.active.count === 'number') return data.active.count;
+    if (typeof data.active_count === 'number') return data.active_count;
     return normalizedList.length;
   }
 
@@ -107,18 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function refreshVisitors() {
     try {
-      if (DEBUG) console.log('[visitors] Fetching /visitors …');
       const data = await getVisitors();
-      if (DEBUG) console.log('[visitors] Raw /visitors response:', data);
       const visitors = normalizeVisitors(data);
       const count = deriveCount(data, visitors);
-      if (DEBUG) {
-        console.log('[visitors] Normalized list:', visitors);
-        console.log('[visitors] Derived count:', count, 'List length:', visitors.length);
-        if (count !== visitors.length) {
-          console.log('[visitors] Count/list mismatch — API may be count-only or filtered');
-        }
-      }
       render(visitors, count);
     } catch (err) {
       console.error('Failed to load visitors:', err);
@@ -129,23 +85,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function initRealtime() {
     clearTimeout(reconnectTimer);
     try {
-      wsTracker = getWsVisitors({
+      getWsVisitors({
         onConnect: () => {
-          if (DEBUG) console.log('[visitors] WS connected');
           statsEl.textContent = 'Connected — updating…';
           refreshVisitors();
         },
-        onVisitorJoin: (visitor) => {
-          if (DEBUG) console.log('[visitors] WS join:', visitor);
+        onVisitorJoin: () => {
           refreshVisitors();
         },
-        onVisitorLeave: (ip) => {
-          if (DEBUG) console.log('[visitors] WS leave:', ip);
+        onVisitorLeave: () => {
           refreshVisitors();
         },
-        onUpdate: (msg) => {
-          if (DEBUG) console.log('[visitors] WS update:', msg);
-          // For other update types, just refresh the list
+        onUpdate: () => {
           refreshVisitors();
         },
         onError: (error) => {
@@ -154,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
           reconnectTimer = setTimeout(initRealtime, 5000);
         },
         onDisconnect: () => {
-          if (DEBUG) console.log('[visitors] WS disconnected');
           statsEl.textContent = 'Disconnected — retrying…';
           reconnectTimer = setTimeout(initRealtime, 3000);
         }

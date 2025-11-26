@@ -7,6 +7,21 @@ const BASE_URL = 'https://blink.tail8ab50a.ts.net:8443';
 
 /*
 example:
+{"total_containers":1,"services":[{"name":"api","status":"running","image":"blink.tail8ab50a.ts.net:8443/api","cpu_percent":0.000000,"memory_mb":1.000000,"memory_percent":0.000000}]}
+*/
+const getSystem = () =>
+  fetch(`${BASE_URL}/system`)
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error('Error fetching api system:', error);
+      return error;
+    });
+
+/*
+example:
 {"name":"DevStack Public API","version":"1.0.0","description":"Public API endpoints for DevStack","endpoints":[{"path":"/","method":"GET","description":"API info"},{"path":"/health","method":"GET","description":"Health check"},{"path":"/example","method":"GET","description":"Example endpoint"},{"path":"/cache/{key}","method":"GET","description":"Get cached value"},{"path":"/cache/{key}","method":"POST","description":"Set cached value"},{"path":"/visitors","method":"GET","description":"Get active visitors and visit log"},{"path":"/ws/visitors","method":"WS","description":"Real-time visitor updates via WebSocket"}]}
 */
 const getIndex = () =>
@@ -179,4 +194,4 @@ const visitorTracker = getWsVisitors({
 visitorTracker.close();
 */
 
-export { getIndex, getHealth, getExample, getCache, postCache, getVisitors, getWsVisitors };
+export { getSystem, getIndex, getHealth, getExample, getCache, postCache, getVisitors, getWsVisitors };
