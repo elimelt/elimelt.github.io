@@ -78,7 +78,7 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <h1 class="sidebar-name">Elijah Melton</h1>
-                <p class="sidebar-tagline">Software Engineer/Builder</p>
+                <p class="sidebar-tagline">Software Engineer/Builder <span id="meat-toggle" aria-label="Toggle rat meat game" title="Enable rat meat game"><img src="assets/grep.png" alt="" class="meat-toggle-icon"></span></p>
             </div>
 
             <nav class="main-nav">
@@ -366,9 +366,15 @@
                 <h2 class="section-title">API Info</h2>
                 <div id="api-info-content">Loading...</div>
             </section>
+            <section id="visitors" class="section">
+                <h2 class="section-title">Live Visitors</h2>
+                <div id="visitor-stats">Connecting…</div>
+                <ul id="visitor-list" class="visitor-list"></ul>
+            </section>
         </main>
     </div>
 
+    <script type="module" src="js/visitors.js"></script>
     <script src="js/main.js"></script>
 </body>
 

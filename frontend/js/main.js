@@ -144,7 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Meat spawn + eat
     const meats = [];
     const maxMeats = 8;
+    let destroyed = false;
+    let spawnTimerId = null;
+    let rafId = null;
     function spawnMeat() {
+      if (destroyed) return;
       const size = 22 + Math.random() * 22; // 22..44
       const radius = size / 2;
       const margin = 20 + radius;
@@ -182,7 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function scheduleNextSpawn() {
       const delay = 600 + Math.random() * 1400; // 0.6..2.0s
-      setTimeout(() => {
+      spawnTimerId = setTimeout(() => {
+        if (destroyed) return;
         if (meats.length < maxMeats) spawnMeat();
         scheduleNextSpawn();
       }, delay);
@@ -190,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scheduleNextSpawn();
     
     function tick(now) {
+      if (destroyed) return;
       const dt = Math.min((now - lastTime) / 1000, 0.032);
       lastTime = now;
       
@@ -285,17 +291,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
       
-      requestAnimationFrame(tick);
+      rafId = requestAnimationFrame(tick);
     }
     
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
     
-    window.addEventListener('blur', () => {
+    const onBlur = () => {
       x = targetX;
       y = targetY;
       vx = 0;
       vy = 0;
-    });
+    };
+    window.addEventListener('blur', onBlur);
+
+    function destroy() {
+      destroyed = true;
+      if (spawnTimerId) {
+        clearTimeout(spawnTimerId);
+        spawnTimerId = null;
+      }
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      // Remove event listeners
+      if ('onpointermove' in window) {
+        window.removeEventListener('pointerdown', updateTargetFromEvent);
+        window.removeEventListener('pointermove', updateTargetFromEvent);
+      } else {
+        window.removeEventListener('mousemove', updateTargetFromEvent);
+        window.removeEventListener('touchstart', updateTargetFromEvent);
+        window.removeEventListener('touchmove', updateTargetFromEvent);
+      }
+      window.removeEventListener('blur', onBlur);
+      // Remove DOM elements
+      meats.forEach(m => {
+        if (m.el && m.el.parentNode) m.el.parentNode.removeChild(m.el);
+      });
+      meats.length = 0;
+      if (img && img.parentNode) img.parentNode.removeChild(img);
+      if (debugSvg && debugSvg.parentNode) debugSvg.parentNode.removeChild(debugSvg);
+    }
+
+    return { destroy };
   }
   
   document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -389,11 +427,42 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAndDisplayNotes();
   }
   
-  initRatFollower({
-    anchor: { x: 0.5, y: 0.0 },
-    size: 76,
-    angleOffset: Math.PI / 2
-  });
+  const meatToggle = document.getElementById('meat-toggle');
+  let ratController = null;
+  function updateMeatToggleUi(enabled) {
+    if (!meatToggle) return;
+    meatToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    meatToggle.title = enabled ? 'Disable rat meat game' : 'Enable rat meat game';
+    meatToggle.classList.toggle('meat-active', !!enabled);
+  }
+  if (meatToggle) {
+    const enabledByDefault = localStorage.getItem('meatGame') === 'true';
+    if (enabledByDefault) {
+      ratController = initRatFollower({
+        anchor: { x: 0.5, y: 0.0 },
+        size: 76,
+        angleOffset: Math.PI / 2
+      }) || null;
+    }
+    updateMeatToggleUi(!!ratController);
+    meatToggle.addEventListener('click', () => {
+      const isEnabled = !!ratController;
+      if (isEnabled) {
+        ratController.destroy();
+        ratController = null;
+        localStorage.setItem('meatGame', 'false');
+        updateMeatToggleUi(false);
+      } else {
+        ratController = initRatFollower({
+          anchor: { x: 0.5, y: 0.0 },
+          size: 76,
+          angleOffset: Math.PI / 2
+        }) || null;
+        localStorage.setItem('meatGame', 'true');
+        updateMeatToggleUi(!!ratController);
+      }
+    });
+  }
 });
 
 // load api info
