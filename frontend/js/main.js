@@ -395,3 +395,18 @@ document.addEventListener('DOMContentLoaded', () => {
     angleOffset: Math.PI / 2
   });
 });
+
+// load api info
+document.addEventListener('DOMContentLoaded', () => {
+  const apiInfoContent = document.getElementById('api-info-content');
+  fetch('https://blink.tail8ab50a.ts.net:8443/')
+    .then(response => response.json())
+    .then(data => {
+      apiInfoContent.innerHTML = JSON.stringify(data, null, 2);
+    })
+    .catch(error => {
+      console.error('Error fetching api info:', error);
+      apiInfoContent.innerHTML = 'Error fetching api info: ' + error;
+    });
+});
+
