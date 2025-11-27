@@ -9,17 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function normalizeVisitors(data) {
     if (!data) return [];
-    if (Array.isArray(data)) return data;
-    if (Array.isArray(data.visitors)) return data.visitors;
-    if (Array.isArray(data.active_visitors)) return data.active_visitors;
-    if (data.visitors && typeof data.visitors === 'object') {
-      return Object.values(data.visitors);
+    let visitors = [];
+    if (Array.isArray(data)) {
+      visitors = data;
+    } else if (Array.isArray(data.visitors)) {
+      visitors = data.visitors;
+    } else if (Array.isArray(data.active_visitors)) {
+      visitors = data.active_visitors;
+    } else if (data.visitors && typeof data.visitors === "object") {
+      visitors = Object.values(data.visitors);
+    } else if (Array.isArray(data.recent_visits)) {
+      visitors = data.recent_visits;
     }
-    if (Array.isArray(data.recent_visits)) {
-      const uniq = Array.from(new Set(data.recent_visits.map(v => v.ip || v.address || v.id))).filter(Boolean);
-      return uniq.map(ip => ({ ip }));
-    }
-    return [];
+    // Deduplicate by IP
+    const seen = new Set();
+    return visitors.filter((v) => {
+      const ip = v?.ip || v?.address || v?.id;
+      if (!ip || seen.has(ip)) return false;
+      seen.add(ip);
+      return true;
+    });
   }
 
   function deriveCount(data, normalizedList) {
