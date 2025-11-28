@@ -1,17 +1,27 @@
 const BASE_URL = 'https://blink.tail8ab50a.ts.net:8443';
 const PAGE_SIZE = 50;
 
+function getUserColor(id) {
+  if (!id) return "var(--text-secondary)";
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash = ((hash << 5) - hash + id.charCodeAt(i)) | 0;
+  }
+  const hue = Math.abs(hash) % 360;
+  return `hsl(${hue}, 65%, 55%)`;
+}
+
 const state = {
-  connection: 'closed',
-  channel: 'general',
+  connection: "closed",
+  channel: "general",
   messages: [],
-  inputText: '',
+  inputText: "",
   unsentQueue: [],
   reconnectAttempts: 0,
   nextBefore: null,
   isLoadingHistory: false,
   hasMoreHistory: true,
-  seenKeys: new Set()
+  seenKeys: new Set(),
 };
 
 let ws = null;
@@ -75,11 +85,16 @@ function createMessageElement(msg) {
     const time = new Date(
       msg.timestamp || msg.visitor?.connected_at || Date.now()
     ).toLocaleTimeString();
-    item.textContent = `${ip} ${action} • ${time}`;
+    item.innerHTML = `<span style="color:${getUserColor(
+      ip
+    )}">${ip}</span> ${action} • ${time}`;
   } else {
+    const sender = msg.sender ?? "unknown";
     const meta = document.createElement("div");
     meta.className = "chat-meta";
-    meta.textContent = `${msg.sender ?? "unknown"} • ${new Date(
+    meta.innerHTML = `<span style="color:${getUserColor(
+      sender
+    )}">${sender}</span> • ${new Date(
       msg.timestamp ?? Date.now()
     ).toLocaleTimeString()}`;
     const text = document.createElement("div");
