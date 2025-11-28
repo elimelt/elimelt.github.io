@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!statsEl || !listEl) return;
 
   let reconnectTimer = null;
+  let currentWs = null;
+  let retries = 0;
+  let stopped = false;
+  const maxRetries = 5;
+  const minDelay = 2000;
 
   function normalizeVisitors(data) {
     if (!data) return [];
@@ -92,37 +97,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function stopRetrying() {
+    stopped = true;
+    if (reconnectTimer) {
+      clearTimeout(reconnectTimer);
+      reconnectTimer = null;
+    }
+    if (currentWs) {
+      currentWs.ws.onclose = null;
+      currentWs.ws.onerror = null;
+      currentWs.close();
+      currentWs = null;
+    }
+    statsEl.textContent = "Connection failed — refresh page to retry";
+  }
+
+  function scheduleReconnect() {
+    if (stopped) return;
+    if (reconnectTimer) return;
+    retries++;
+    if (retries >= maxRetries) {
+      stopRetrying();
+      return;
+    }
+    statsEl.textContent = `Disconnected — retry ${retries}/${maxRetries}…`;
+    reconnectTimer = setTimeout(initRealtime, minDelay);
+  }
+
   function initRealtime() {
-    clearTimeout(reconnectTimer);
+    if (stopped) return;
+
+    if (reconnectTimer) {
+      clearTimeout(reconnectTimer);
+      reconnectTimer = null;
+    }
+
+    if (currentWs) {
+      currentWs.ws.onclose = null;
+      currentWs.ws.onerror = null;
+      currentWs.close();
+      currentWs = null;
+    }
+
     try {
-      getWsVisitors({
+      currentWs = getWsVisitors({
         onConnect: () => {
-          statsEl.textContent = 'Connected — updating…';
+          if (stopped) return;
+          retries = 0;
+          statsEl.textContent = "Connected — updating…";
           refreshVisitors();
         },
         onVisitorJoin: () => {
+          if (stopped) return;
           refreshVisitors();
         },
         onVisitorLeave: () => {
+          if (stopped) return;
           refreshVisitors();
         },
         onUpdate: () => {
+          if (stopped) return;
           refreshVisitors();
         },
-        onError: (error) => {
-          console.error('WebSocket error:', error);
-          statsEl.textContent = 'Connection error — retrying…';
-          reconnectTimer = setTimeout(initRealtime, 5000);
+        onError: () => {
+          if (stopped) return;
+          scheduleReconnect();
         },
         onDisconnect: () => {
-          statsEl.textContent = 'Disconnected — retrying…';
-          reconnectTimer = setTimeout(initRealtime, 3000);
-        }
+          if (stopped) return;
+          scheduleReconnect();
+        },
       });
     } catch (e) {
-      console.error('Failed to start realtime tracking:', e);
-      statsEl.textContent = 'Failed to connect — retrying…';
-      reconnectTimer = setTimeout(initRealtime, 5000);
+      console.error("Failed to start realtime tracking:", e);
+      scheduleReconnect();
     }
   }
 

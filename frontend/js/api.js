@@ -127,23 +127,27 @@ const getWsVisitors = (callbacks = {}) => {
     onConnect();
   };
 
-  ws.onmessage = (event) => {
+  ws.onmessage = async (event) => {
     try {
-      const data = JSON.parse(event.data);
+      let text = event.data;
+      if (event.data instanceof Blob) {
+        text = await event.data.text();
+      }
+      const data = JSON.parse(text);
 
-      if (data.type === 'ping') {
-        ws.send('pong');
-      } else if (data.type === 'join') {
+      if (data.type === "ping") {
+        ws.send("pong");
+      } else if (data.type === "join") {
         onVisitorJoin(data.visitor);
         onUpdate(data);
-      } else if (data.type === 'leave') {
+      } else if (data.type === "leave") {
         onVisitorLeave(data.ip);
         onUpdate(data);
       } else {
         onUpdate(data);
       }
     } catch (error) {
-      console.error('Error parsing message:', error);
+      console.error("Error parsing message:", error);
     }
   };
 

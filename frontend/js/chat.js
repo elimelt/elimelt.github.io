@@ -25,6 +25,8 @@ let chatRetries = 0;
 let visitorRetries = 0;
 let chatReconnectTimer = null;
 let visitorReconnectTimer = null;
+let chatStopped = false;
+let visitorStopped = false;
 
 function getMessageKey(msg) {
   const id = msg.visitor?.ip || msg.ip || msg.sender || "";
@@ -176,19 +178,42 @@ function handleScroll() {
   }
 }
 
+function stopChat() {
+  chatStopped = true;
+  if (chatReconnectTimer) {
+    clearTimeout(chatReconnectTimer);
+    chatReconnectTimer = null;
+  }
+  if (ws) {
+    ws.onopen = null;
+    ws.onmessage = null;
+    ws.onerror = null;
+    ws.onclose = null;
+    ws.close();
+    ws = null;
+  }
+  setConnection("failed - click retry", true);
+}
+
 function connectChat() {
+  if (chatStopped) return;
+
   if (chatReconnectTimer) {
     clearTimeout(chatReconnectTimer);
     chatReconnectTimer = null;
   }
 
   if (ws) {
+    ws.onopen = null;
+    ws.onmessage = null;
+    ws.onerror = null;
     ws.onclose = null;
     ws.close();
+    ws = null;
   }
 
   if (chatRetries >= maxRetries) {
-    setConnection("failed - click retry", true);
+    stopChat();
     return;
   }
 
@@ -197,6 +222,7 @@ function connectChat() {
   ws = new WebSocket(url);
 
   ws.onopen = () => {
+    if (chatStopped) return;
     setConnection("open");
     chatRetries = 0;
     chatReconnectDelay = minDelay;
@@ -205,10 +231,15 @@ function connectChat() {
     }
   };
 
-  ws.onmessage = (evt) => {
+  ws.onmessage = async (evt) => {
+    if (chatStopped) return;
     let data;
     try {
-      data = JSON.parse(evt.data);
+      let text = evt.data;
+      if (evt.data instanceof Blob) {
+        text = await evt.data.text();
+      }
+      data = JSON.parse(text);
     } catch {
       return;
     }
@@ -221,11 +252,16 @@ function connectChat() {
     }
   };
 
-  ws.onerror = () => setConnection("error");
+  ws.onerror = () => {
+    if (chatStopped) return;
+    setConnection("error");
+  };
+
   ws.onclose = () => {
+    if (chatStopped) return;
     chatRetries++;
     if (chatRetries >= maxRetries) {
-      setConnection("failed - click retry", true);
+      stopChat();
       return;
     }
     setConnection(`closed (retry ${chatRetries}/${maxRetries})`);
@@ -234,32 +270,60 @@ function connectChat() {
   };
 }
 
+function stopVisitors() {
+  visitorStopped = true;
+  if (visitorReconnectTimer) {
+    clearTimeout(visitorReconnectTimer);
+    visitorReconnectTimer = null;
+  }
+  if (visitorWs) {
+    visitorWs.onopen = null;
+    visitorWs.onmessage = null;
+    visitorWs.onerror = null;
+    visitorWs.onclose = null;
+    visitorWs.close();
+    visitorWs = null;
+  }
+}
+
 function connectVisitors() {
+  if (visitorStopped) return;
+
   if (visitorReconnectTimer) {
     clearTimeout(visitorReconnectTimer);
     visitorReconnectTimer = null;
   }
 
   if (visitorWs) {
+    visitorWs.onopen = null;
+    visitorWs.onmessage = null;
+    visitorWs.onerror = null;
     visitorWs.onclose = null;
     visitorWs.close();
+    visitorWs = null;
   }
 
   if (visitorRetries >= maxRetries) {
-    console.warn("Visitors WebSocket: max retries reached");
+    stopVisitors();
     return;
   }
 
   visitorWs = new WebSocket("wss://blink.tail8ab50a.ts.net:8443/ws/visitors");
 
   visitorWs.onopen = () => {
+    if (visitorStopped) return;
     visitorRetries = 0;
   };
 
-  visitorWs.onmessage = (evt) => {
+  visitorWs.onmessage = async (evt) => {
+    if (visitorStopped) return;
     let data;
     try {
-      data = JSON.parse(evt.data);
+      let text = evt.data;
+      if (evt.data instanceof Blob) {
+        text = await evt.data.text();
+      }
+      data = JSON.parse(text);
     } catch {
       return;
     }
@@ -280,11 +344,18 @@ function connectVisitors() {
     }
   };
 
+  visitorWs.onerror = () => {
+    if (visitorStopped) return;
+  };
+
   visitorWs.onclose = () => {
+    if (visitorStopped) return;
     visitorRetries++;
-    if (visitorRetries < maxRetries) {
-      visitorReconnectTimer = setTimeout(connectVisitors, minDelay);
+    if (visitorRetries >= maxRetries) {
+      stopVisitors();
+      return;
     }
+    visitorReconnectTimer = setTimeout(connectVisitors, minDelay);
   };
 }
 
@@ -299,6 +370,8 @@ function sendMessage(text) {
 }
 
 function retryConnections() {
+  chatStopped = false;
+  visitorStopped = false;
   chatRetries = 0;
   chatReconnectDelay = minDelay;
   visitorRetries = 0;
