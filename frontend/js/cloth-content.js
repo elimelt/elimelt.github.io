@@ -255,6 +255,12 @@ class ClothContent extends HTMLElement {
   }
 
   setupToggle() {
+    const isMobile =
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+      (navigator.maxTouchPoints > 1 &&
+        !window.matchMedia("(pointer: fine)").matches);
+    if (isMobile) return;
+
     const label = document.createElement("label");
     label.className = "toggle";
     label.innerHTML = `<input type="checkbox" ${
