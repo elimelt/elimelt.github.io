@@ -842,6 +842,22 @@ body:has(.right-sidebar.mobile-open) .main-content {
   to { transform: rotate(360deg); }
 }
 
+.chat-retry-btn {
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.chat-retry-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
   .main-content {
