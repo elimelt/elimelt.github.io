@@ -26,6 +26,7 @@
   /* Layout */
   --space: 1rem;
   --left-sidebar-width: 280px;
+  --right-sidebar-width: 280px;
 }
 
 .dark-mode {
@@ -93,6 +94,42 @@ a:hover {
 
 .left-sidebar.mobile-open {
   transform: translateX(0);
+}
+
+.sidebar-resize-handle {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 101;
+}
+
+.sidebar-resize-handle:hover,
+.sidebar-resize-handle.dragging {
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+#left-resize-handle {
+  left: calc(var(--left-sidebar-width) - 3px);
+  display: none;
+}
+
+.left-sidebar.mobile-open ~ #left-resize-handle,
+body:has(.left-sidebar.mobile-open) #left-resize-handle {
+  display: block;
+}
+
+#right-resize-handle {
+  right: calc(var(--right-sidebar-width) - 3px);
+  display: none;
+}
+
+.right-sidebar.mobile-open ~ #right-resize-handle,
+body:has(.right-sidebar.mobile-open) #right-resize-handle {
+  display: block;
 }
 
 .left-sidebar-name {
@@ -190,12 +227,12 @@ body:has(.left-sidebar.mobile-open) .main-content {
 }
 
 body:has(.right-sidebar.mobile-open) .main-content {
-  margin-right: 280px;
+  margin-right: var(--right-sidebar-width);
 }
 
 /* Right Sidebar */
 .right-sidebar {
-  width: 280px;
+  width: var(--right-sidebar-width);
   padding: 2rem;
   position: fixed;
   top: 0;
@@ -702,7 +739,7 @@ body:has(.right-sidebar.mobile-open) .main-content {
 
   .right-sidebar.mobile-open ~ .main-content,
   body:has(.right-sidebar.mobile-open) .main-content {
-    margin-right: 280px;
+    margin-right: var(--right-sidebar-width);
   }
 }
 
@@ -735,7 +772,7 @@ body:has(.right-sidebar.mobile-open) .main-content {
   }
 
   body:has(.right-sidebar.mobile-open) .main-content {
-    margin-right: 280px;
+    margin-right: var(--right-sidebar-width);
   }
 }
 
