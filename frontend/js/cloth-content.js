@@ -306,6 +306,11 @@ class ClothContent extends HTMLElement {
       this.animate();
       setTimeout(() => this.recapture(), 2000);
     } catch (e) {
+      console.error("Cloth failed:", e, {
+        width: this.width,
+        contentWidth: this.contentWidth,
+        contentHeight: this.contentHeight,
+      });
       this.showHTML();
     }
   }
