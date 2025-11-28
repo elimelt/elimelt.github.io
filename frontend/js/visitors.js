@@ -1,9 +1,17 @@
 import { getVisitors, getWsVisitors } from './api.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const statsEl = document.getElementById('visitor-stats');
-  const listEl = document.getElementById('visitor-list');
-  if (!statsEl || !listEl) return;
+let visitorsInitialized = false;
+
+function initVisitors() {
+  if (visitorsInitialized) return;
+  visitorsInitialized = true;
+
+  const statsEl = document.getElementById("visitor-stats");
+  const listEl = document.getElementById("visitor-list");
+  if (!statsEl || !listEl) {
+    visitorsInitialized = false;
+    return;
+  }
 
   let reconnectTimer = null;
   let currentWs = null;
@@ -174,9 +182,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function cleanup() {
+    stopRetrying();
+  }
+
+  window.addEventListener("beforeunload", cleanup);
+  window.addEventListener("pagehide", cleanup);
+
   // Initial load + subscribe
   refreshVisitors();
   initRealtime();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initVisitors);
+} else {
+  initVisitors();
+}
 
 

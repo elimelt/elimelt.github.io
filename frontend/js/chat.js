@@ -27,6 +27,7 @@ let chatReconnectTimer = null;
 let visitorReconnectTimer = null;
 let chatStopped = false;
 let visitorStopped = false;
+let chatInitialized = false;
 
 function getMessageKey(msg) {
   const id = msg.visitor?.ip || msg.ip || msg.sender || "";
@@ -379,22 +380,36 @@ function retryConnections() {
   connectVisitors();
 }
 
+function cleanup() {
+  stopChat();
+  stopVisitors();
+}
+
 async function initChat() {
-  const formEl = document.getElementById('chat-form');
-  const inputEl = document.getElementById('chat-input');
-  const msgsEl = document.getElementById('chat-messages');
+  if (chatInitialized) return;
+  chatInitialized = true;
+
+  const formEl = document.getElementById("chat-form");
+  const inputEl = document.getElementById("chat-input");
+  const msgsEl = document.getElementById("chat-messages");
   const retryBtn = document.getElementById("chat-retry-btn");
 
-  if (!formEl || !inputEl || !msgsEl) return;
+  if (!formEl || !inputEl || !msgsEl) {
+    chatInitialized = false;
+    return;
+  }
 
-  formEl.addEventListener('submit', (e) => {
+  window.addEventListener("beforeunload", cleanup);
+  window.addEventListener("pagehide", cleanup);
+
+  formEl.addEventListener("submit", (e) => {
     e.preventDefault();
     sendMessage(inputEl.value);
-    inputEl.value = '';
-    state.inputText = '';
+    inputEl.value = "";
+    state.inputText = "";
   });
 
-  inputEl.addEventListener('input', (e) => {
+  inputEl.addEventListener("input", (e) => {
     state.inputText = e.target.value;
   });
 
@@ -402,18 +417,22 @@ async function initChat() {
     retryBtn.addEventListener("click", retryConnections);
   }
 
-  msgsEl.addEventListener('scroll', handleScroll);
+  msgsEl.addEventListener("scroll", handleScroll);
 
   await fetchHistory(true);
   const presenceEvents = await fetchPresenceEvents();
-  presenceEvents.forEach(e => renderMessageAtBottom(e, false));
+  presenceEvents.forEach((e) => renderMessageAtBottom(e, false));
   msgsEl.scrollTop = msgsEl.scrollHeight;
 
   connectChat();
   connectVisitors();
 }
 
-document.addEventListener('DOMContentLoaded', initChat);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initChat);
+} else {
+  initChat();
+}
 
 export { state, sendMessage, connectChat as connect };
 

@@ -265,12 +265,7 @@ body:has(.right-sidebar.mobile-open) .main-content {
   transform: translateX(0);
 }
 
-.right-sidebar-title {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: var(--text-secondary);
-}
+
 
 .photo-grid {
   display: grid;
@@ -402,36 +397,7 @@ body:has(.right-sidebar.mobile-open) .main-content {
   line-height: 1.7;
 }
 
-/* Skills */
-.skills-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-6);
-}
 
-.skill-category {
-  margin-bottom: var(--space-4);
-}
-
-.skill-category-name {
-  font-family: var(--font-accent);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: var(--space-3);
-  letter-spacing: -0.01em;
-}
-
-.skills-list {
-  list-style: none;
-  line-height: 1.8;
-}
-
-.skill-item {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-1);
-}
 
 /* Areas of Study */
 .areas-list {
@@ -543,36 +509,7 @@ body:has(.right-sidebar.mobile-open) .main-content {
   border-radius: 4px;
 }
 
-/* GitHub Stats */
-.github-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
 
-.github-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1rem;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.github-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-}
-
-.github-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.dark-mode .github-card:hover {
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-}
 
 /* Buttons */
 .theme-toggle,
@@ -624,23 +561,7 @@ body:has(.right-sidebar.mobile-open) .main-content {
   height: 20px;
 }
 
-/* Mobile Overlay */
-.mobile-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 99;
-  display: block;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
 
-.mobile-overlay.show {
-  opacity: 1;
-}
 
 #bg-animation {
   position: fixed;
@@ -831,11 +752,6 @@ body:has(.right-sidebar.mobile-open) .main-content {
   color: var(--text-secondary);
 }
 
-.chat-loader::after {
-  content: '⏳';
-  animation: spin 1s linear infinite;
-  display: inline-block;
-}
 
 @keyframes spin {
   from { transform: rotate(0deg); }
@@ -955,9 +871,6 @@ body:has(.right-sidebar.mobile-open) .main-content {
     height: 50px;
   }
 
-  .skills-container {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 640px) {
@@ -992,16 +905,6 @@ body:has(.right-sidebar.mobile-open) .main-content {
 
   .timeline-details {
     margin-top: 0.5rem;
-  }
-
-  .skills-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .github-stats-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
   }
 
   .about-text {
