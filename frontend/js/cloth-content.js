@@ -1,16 +1,6 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
 import html2canvas from "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/+esm";
 
-const STYLES = `
-  :host { display: block; width: 100%; }
-  .toggle { display: flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; opacity: 0.6; cursor: pointer; user-select: none; margin-bottom: 0.5rem; }
-  .toggle:hover { opacity: 1; }
-  .toggle input { cursor: pointer; }
-  .content { display: block; }
-  .content a { color: var(--accent); }
-  canvas { display: block; width: 100%; height: auto; }
-`;
-
 class ClothPhysics {
   constructor(width, height, segmentsX = 20) {
     this.width = width;
@@ -249,9 +239,22 @@ class ClothContent extends HTMLElement {
   }
 
   setupStyles() {
-    const style = document.createElement("style");
-    style.textContent = STYLES;
-    this.shadowRoot.appendChild(style);
+    for (const sheet of document.styleSheets) {
+      try {
+        if (sheet.href) {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = sheet.href;
+          this.shadowRoot.appendChild(link);
+        } else if (sheet.cssRules) {
+          const style = document.createElement("style");
+          style.textContent = Array.from(sheet.cssRules)
+            .map((r) => r.cssText)
+            .join("\n");
+          this.shadowRoot.appendChild(style);
+        }
+      } catch (e) {}
+    }
   }
 
   setupToggle() {
